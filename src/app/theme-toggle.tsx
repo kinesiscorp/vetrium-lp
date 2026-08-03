@@ -13,11 +13,11 @@ export function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label="Alternar entre tema claro e escuro"
-      className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink transition-colors hover:border-accent-solid"
+      className="flex h-8 w-8 items-center justify-center rounded-full text-ink/70 transition-colors hover:bg-white/10 hover:text-ink"
     >
       <svg
-        width="16"
-        height="16"
+        width="15"
+        height="15"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -30,8 +30,8 @@ export function ThemeToggle() {
         <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
       </svg>
       <svg
-        width="16"
-        height="16"
+        width="15"
+        height="15"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"

@@ -3,49 +3,75 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --bg: #f1f0f8;
+  --bg: #f4f3fa;
   --bg-elevated: #ffffff;
-  --bg-elevated-2: #e7e4f4;
-  --ink: #16151f;
-  --muted: #635f78;
-  --accent-from: #4c3fe0;
-  --accent-to: #7b4fe0;
-  --accent-solid: #4c3fe0;
+  --bg-sunken: #e9e7f5;
+  --ink: #0b0b12;
+  --ink-dim: #3a3850;
+  --muted: #615f7a;
+  --accent-from: #5b3fe0;
+  --accent-to: #8b4fe6;
+  --accent-solid: #5b3fe0;
   --accent-ink: #ffffff;
-  --line: #dbd8ec;
+  --line: rgba(11, 11, 18, 0.12);
+  --line-strong: rgba(11, 11, 18, 0.22);
+  --card: rgba(255, 255, 255, 0.72);
+  --star: rgba(70, 60, 120, 0.55);
+  --halo: rgba(120, 90, 240, 0.22);
 }
 
 .dark {
-  --bg: #0a0b12;
-  --bg-elevated: #14151f;
-  --bg-elevated-2: #1b1c29;
-  --ink: #ededf5;
-  --muted: #9291a8;
-  --accent-from: #6c7bff;
-  --accent-to: #9b6bff;
-  --accent-solid: #8b7bff;
-  --accent-ink: #0a0b12;
-  --line: #24263a;
+  --bg: #050509;
+  --bg-elevated: #0c0c14;
+  --bg-sunken: #030305;
+  --ink: #f4f3fa;
+  --ink-dim: #c9c7db;
+  --muted: #8b8a9e;
+  --accent-from: #7c6cff;
+  --accent-to: #b47cff;
+  --accent-solid: #9a86ff;
+  --accent-ink: #07070c;
+  --line: rgba(255, 255, 255, 0.12);
+  --line-strong: rgba(255, 255, 255, 0.24);
+  --card: rgba(255, 255, 255, 0.045);
+  --star: rgba(255, 255, 255, 0.85);
+  --halo: rgba(124, 108, 255, 0.3);
 }
 
 @theme inline {
   --color-bg: var(--bg);
   --color-bg-elevated: var(--bg-elevated);
-  --color-bg-elevated-2: var(--bg-elevated-2);
+  --color-bg-sunken: var(--bg-sunken);
   --color-ink: var(--ink);
+  --color-ink-dim: var(--ink-dim);
   --color-muted: var(--muted);
   --color-accent-solid: var(--accent-solid);
   --color-accent-ink: var(--accent-ink);
   --color-line: var(--line);
-  --font-sans: var(--font-manrope);
+  --color-line-strong: var(--line-strong);
+  --color-card: var(--card);
+  --font-sans: var(--font-instrument-sans);
+  --font-serif: var(--font-instrument-serif);
+}
+
+html {
+  background: var(--bg);
 }
 
 body {
   background: var(--bg);
   color: var(--ink);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
+
+::selection {
+  background: var(--accent-solid);
+  color: var(--accent-ink);
+}
+
+/* ---------- Brand primitives ---------- */
 
 .text-metal {
   background: linear-gradient(135deg, var(--accent-from), var(--accent-to));
@@ -58,48 +84,63 @@ body {
   background: linear-gradient(135deg, var(--accent-from), var(--accent-to));
 }
 
-.ore-glow {
-  background: radial-gradient(
-    closest-side,
-    color-mix(in srgb, var(--accent-from) 35%, transparent),
-    transparent
+.serif-accent {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Giant blurred "ghost" copy of the wordmark sitting behind the real one */
+.wordmark-ghost {
+  filter: blur(28px);
+  opacity: 0.5;
+}
+
+/* Halo bloom used behind hero + section anchors */
+.halo {
+  background: radial-gradient(closest-side, var(--halo), transparent 72%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+/* Gradient hairline border used on the showcase cards */
+.gradient-frame {
+  position: relative;
+  isolation: isolate;
+}
+.gradient-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    140deg,
+    color-mix(in srgb, var(--accent-from) 85%, transparent),
+    transparent 38%,
+    transparent 62%,
+    color-mix(in srgb, var(--accent-to) 70%, transparent)
   );
-  filter: blur(60px);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  z-index: 1;
 }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+/* Glass surface for floating cards + nav */
+.glass {
+  background: var(--card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--line);
 }
 
-.reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+/* ---------- Animation ---------- */
 
-@media (prefers-reduced-motion: reduce) {
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-}
-
-@keyframes drift {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(-4%, 6%) scale(1.08);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .ore-glow {
-    animation: drift 16s ease-in-out infinite;
-  }
+.marquee-track {
+  animation: marquee 34s linear infinite;
 }
 
 @keyframes marquee {
@@ -111,12 +152,52 @@ body {
   }
 }
 
-.marquee-track {
-  animation: marquee 28s linear infinite;
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.float-soft {
+  animation: float-soft 7s ease-in-out infinite;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-slow {
+  animation: spin-slow 26s linear infinite;
+}
+
+/* Elements the scroll engine drives start hidden, but ONLY once the boot
+   script has proven scripts run (.js-ok). If the engine never reports in, the
+   boot script adds .anim-fallback and everything is revealed — content must
+   never end up permanently invisible. */
+.js-ok .js-anim {
+  opacity: 0;
+}
+.anim-fallback .js-anim {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track {
+  .marquee-track,
+  .float-soft,
+  .spin-slow {
     animation: none;
+  }
+  .js-anim {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
   }
 }

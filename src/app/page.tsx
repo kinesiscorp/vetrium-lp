@@ -1,53 +1,26 @@
+import Image from "next/image";
 import { ThemeToggle } from "./theme-toggle";
-import { Reveal } from "./reveal";
+import { ScrollEngine } from "./scroll-engine";
+import { Starfield } from "./starfield";
 import { ProjectsSection } from "./projects-section";
+import { Mandala, OrbDiscs, OrbLens, OrbSphere } from "./orbs";
 
 const SERVICES = [
   {
-    n: "01",
     title: "Redesign",
-    body: "Seu site já existe, mas não converte ou já não representa o que você construiu. A gente refaz com estratégia, não só com um visual novo.",
-    icon: (
-      <path d="M21 12a9 9 0 1 1-3-6.7M21 4v5h-5" />
-    ),
+    body: "Seu site existe, mas não converte. A gente refaz com estratégia — não só com um visual novo.",
   },
   {
-    n: "02",
     title: "Branding",
-    body: "Nome, identidade visual, tom de voz. A base pra tudo que vem depois — do cartão de visita ao produto.",
-    icon: (
-      <>
-        <circle cx="13.5" cy="6.5" r=".5" />
-        <circle cx="17.5" cy="10.5" r=".5" />
-        <circle cx="8.5" cy="7.5" r=".5" />
-        <circle cx="6.5" cy="12.5" r=".5" />
-        <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z" />
-      </>
-    ),
+    body: "Nome, identidade e tom de voz. A base de tudo que vem depois, do cartão ao produto.",
   },
   {
-    n: "03",
-    title: "Landing pages & sites",
-    body: "Páginas focadas em um objetivo: vender, captar lead ou apresentar um produto. Rápidas, claras, sem enfeite que atrapalha.",
-    icon: (
-      <>
-        <rect x="3" y="4" width="18" height="16" rx="2" />
-        <path d="M3 9h18M7 4v0" />
-      </>
-    ),
+    title: "Landing pages",
+    body: "Páginas com um objetivo só: vender, captar ou apresentar. Rápidas e sem enfeite.",
   },
   {
-    n: "04",
-    title: "Wireframes & produtos",
-    body: "Da estrutura de tela ao produto completo — apps e plataformas desenhados antes de escrever a primeira linha de código.",
-    icon: (
-      <>
-        <rect x="3" y="3" width="7" height="9" rx="1" />
-        <rect x="14" y="3" width="7" height="5" rx="1" />
-        <rect x="14" y="12" width="7" height="9" rx="1" />
-        <rect x="3" y="16" width="7" height="5" rx="1" />
-      </>
-    ),
+    title: "Produtos digitais",
+    body: "Do wireframe ao app completo — desenhados antes da primeira linha de código.",
   },
 ];
 
@@ -55,17 +28,17 @@ const STEPS = [
   {
     n: "01",
     title: "Diagnóstico",
-    body: "Entendemos o que existe hoje, o que não está funcionando e por quê — antes de propor qualquer mudança.",
+    body: "Entendemos o que existe, o que trava e por quê — antes de propor qualquer mudança.",
   },
   {
     n: "02",
     title: "Direção",
-    body: "Definimos a estratégia visual e de conteúdo com base no diagnóstico, não em gosto pessoal.",
+    body: "A estratégia visual nasce do diagnóstico, não de gosto pessoal.",
   },
   {
     n: "03",
     title: "Execução",
-    body: "Design e desenvolvimento com o mesmo time do início ao fim, documentado em cada etapa.",
+    body: "Design e desenvolvimento com o mesmo time do início ao fim.",
   },
 ];
 
@@ -73,280 +46,425 @@ const STACK = [
   "Figma",
   "Next.js",
   "TypeScript",
-  "Tailwind CSS",
+  "Tailwind",
   "React",
   "Vercel",
   "Design Systems",
   "UI/UX",
 ];
 
-const STATS = [
-  { n: "6+", label: "produtos digitais entregues" },
-  { n: "3", label: "etapas em todo projeto" },
-  { n: "1", label: "time do início ao fim" },
-];
+const PARAGRAPH =
+  "Tudo que sua marca precisa já existe dentro do seu negócio — a Vetrium torna isso visível. Diagnóstico primeiro, design depois: cada decisão visual responde a um problema real de conversão.";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 bg-bg text-ink">
-      <header className="fixed top-0 inset-x-0 z-50 border-b border-line bg-bg/80 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <a href="#top" className="text-lg font-extrabold tracking-tight text-metal">
-            Vetrium
+    <div className="flex flex-1 flex-col bg-bg text-ink">
+      <ScrollEngine />
+
+      {/* ---------------- Nav ---------------- */}
+      <header className="fixed inset-x-0 top-5 z-50 flex justify-center px-4">
+        <nav className="glass flex items-center gap-1 rounded-full py-2 pl-3 pr-2 shadow-2xl shadow-black/20">
+          <a href="#top" aria-label="Vetrium — início" className="px-1.5">
+            <Mandala className="h-6 w-6 text-ink" />
           </a>
-          <nav className="hidden gap-8 text-sm font-medium text-muted sm:flex">
-            <a href="#servicos" className="hover:text-ink">
-              Serviços
-            </a>
-            <a href="#projetos" className="hover:text-ink">
-              Projetos
-            </a>
-            <a href="#processo" className="hover:text-ink">
-              Como trabalhamos
-            </a>
-            <a href="#contato" className="hover:text-ink">
-              Contato
-            </a>
-          </nav>
-          <div className="flex items-center gap-3">
-            <ThemeToggle />
-            <a
-              href="#contato"
-              className="rounded-full bg-metal px-5 py-2 text-sm font-semibold text-accent-ink transition-opacity hover:opacity-90"
-            >
-              Começar um projeto
-            </a>
+          <div className="mx-1 hidden items-center gap-1 sm:flex">
+            {[
+              ["Serviços", "#servicos"],
+              ["Projetos", "#projetos"],
+              ["Processo", "#processo"],
+            ].map(([label, href]) => (
+              <a
+                key={href}
+                href={href}
+                className="rounded-full px-3.5 py-1.5 text-[13px] font-medium text-ink-dim transition-colors hover:bg-white/10 hover:text-ink"
+              >
+                {label}
+              </a>
+            ))}
           </div>
-        </div>
+          <ThemeToggle />
+          <a
+            href="#contato"
+            className="ml-1 rounded-full bg-metal px-4 py-2 text-[13px] font-semibold text-accent-ink transition-opacity hover:opacity-90"
+          >
+            Começar
+          </a>
+        </nav>
       </header>
 
       <main id="top" className="flex-1">
-        {/* Hero */}
-        <section className="relative isolate overflow-hidden px-6 pt-40 pb-32">
-          <div className="ore-glow pointer-events-none absolute -top-32 right-[-6rem] h-[32rem] w-[32rem] rounded-full sm:right-8" />
-          <div
-            className="ore-glow pointer-events-none absolute bottom-[-8rem] left-[-8rem] h-[24rem] w-[24rem] rounded-full opacity-60"
-            style={{ animationDelay: "-8s" }}
-          />
-          <div className="relative mx-auto max-w-6xl">
-            <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-line px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-metal">
+        {/* ---------------- Hero ---------------- */}
+        <section className="relative isolate min-h-[100svh] overflow-hidden">
+          <Starfield />
+          <div className="halo absolute -top-40 left-1/2 h-[42rem] w-[42rem] -translate-x-1/2 rounded-full" />
+
+          <div data-anim="hero" className="relative flex min-h-[100svh] flex-col items-center pt-36">
+            {/* Blurred ghost of the wordmark, sitting behind the real one */}
+            <span
+              aria-hidden
+              className="wordmark-ghost pointer-events-none absolute top-[15%] select-none whitespace-nowrap text-[19vw] font-semibold leading-none tracking-tighter text-ink"
+            >
+              vetrium
+            </span>
+
+            <p className="relative z-10 text-sm font-medium tracking-tight text-ink-dim">
               Design &amp; Technology
             </p>
-            <h1 className="max-w-3xl text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
-              Sites e produtos com{" "}
-              <span className="text-metal">acabamento raro</span> e
-              estratégia por trás.
+
+            <h1 className="relative z-10 mt-2 select-none text-[15vw] font-semibold leading-[0.9] tracking-tighter">
+              vetrium
             </h1>
-            <p className="mt-8 max-w-xl text-lg text-muted">
-              Redesign, branding, landing pages e produtos digitais para
-              negócios que já existem e querem crescer — com diagnóstico
-              antes de qualquer decisão visual.
-            </p>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <a
-                href="#contato"
-                className="rounded-full bg-metal px-6 py-3 text-sm font-semibold text-accent-ink transition-opacity hover:opacity-90"
-              >
-                Diagnosticar meu projeto
-              </a>
-              <a
-                href="#projetos"
-                className="rounded-full border border-line px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-accent-solid"
-              >
-                Ver projetos
-              </a>
-            </div>
-            <dl className="mt-20 grid max-w-xl grid-cols-3 gap-8 border-t border-line pt-8">
-              {STATS.map((s) => (
-                <div key={s.label}>
-                  <dt className="text-3xl font-extrabold text-metal">{s.n}</dt>
-                  <dd className="mt-1 text-sm text-muted">{s.label}</dd>
+
+            {/* Tilted device showing real work. Each transform gets its own
+                element — a CSS animation on the same node would override the
+                static 3D tilt. */}
+            <div
+              data-parallax="0.12"
+              className="relative z-0 mt-[-7vw] w-[min(54rem,88vw)]"
+            >
+              <div className="float-soft">
+                <div className="[transform:perspective(1600px)_rotateX(15deg)_rotateZ(-2.5deg)]">
+                  <div className="gradient-frame overflow-hidden rounded-[1.75rem] shadow-[0_50px_140px_-25px_rgba(90,70,220,0.6)]">
+                    <Image
+                      src="/portfolio/master-crypto-cover.png"
+                      alt="Master Crypto — projeto desenvolvido pela Vetrium"
+                      width={1354}
+                      height={726}
+                      priority
+                      className="h-auto w-full"
+                    />
+                  </div>
                 </div>
-              ))}
-            </dl>
+              </div>
+            </div>
+          </div>
+
+          {/* Floating waitlist-style card */}
+          <div className="glass absolute bottom-8 right-4 z-20 flex items-center gap-5 rounded-2xl px-5 py-4 sm:right-10">
+            <div>
+              <p className="text-sm font-semibold">Aceitando projetos</p>
+              <p className="text-xs text-muted">Diagnóstico sem compromisso</p>
+            </div>
+            <a
+              href="#contato"
+              className="rounded-xl bg-ink px-4 py-2.5 text-[13px] font-semibold text-bg transition-opacity hover:opacity-85"
+            >
+              Falar agora
+            </a>
           </div>
         </section>
 
-        {/* Stack marquee */}
-        <div className="overflow-hidden border-y border-line bg-bg-elevated py-5">
-          <div className="flex w-max gap-12 marquee-track">
-            {[...STACK, ...STACK].map((tool, i) => (
+        {/* ---------------- Mandala ---------------- */}
+        <section className="relative flex min-h-[70svh] items-center justify-center overflow-hidden px-6">
+          <div className="halo absolute left-1/2 top-1/2 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-70" />
+          <div data-anim="draw" className="js-anim relative">
+            <Mandala
+              className="h-[min(30rem,72vw)] w-[min(30rem,72vw)] text-ink"
+              pathClass="draw-path"
+            />
+          </div>
+        </section>
+
+        {/* ---------------- Assembling headline (pinned) ---------------- */}
+        <section
+          data-anim="assemble"
+          className="js-anim relative flex min-h-[100svh] items-center justify-center overflow-hidden px-6"
+        >
+          <div className="halo absolute left-1/2 top-1/2 h-[40rem] w-[40rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-60" />
+          <h2 className="relative mx-auto max-w-5xl text-center text-[clamp(2.5rem,7.5vw,5.75rem)] font-semibold leading-[1.08] tracking-tighter">
+            <span className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1">
+              <span data-piece>Damos</span>
+              <span
+                data-piece
+                className="gradient-frame inline-flex h-[0.95em] w-[1.5em] items-center justify-center rounded-[0.42em]"
+              >
+                <OrbSphere className="h-[0.8em] w-[0.8em] text-ink" />
+              </span>
+              <span data-piece>forma</span>
+            </span>
+            <span className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1">
+              <span data-piece>à</span>
+              <span
+                data-piece
+                className="gradient-frame inline-flex h-[0.95em] w-[1.5em] items-center justify-center rounded-[0.42em]"
+              >
+                <OrbDiscs className="h-[0.8em] w-[0.8em] text-ink" />
+              </span>
+              <span data-piece className="serif-accent">
+                ambição
+              </span>
+            </span>
+            <span className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1">
+              <span data-piece>do seu</span>
+              <span
+                data-piece
+                className="gradient-frame inline-flex h-[0.95em] w-[1.5em] items-center justify-center rounded-[0.42em]"
+              >
+                <OrbLens className="h-[0.8em] w-[0.8em] text-ink" />
+              </span>
+              <span data-piece>negócio</span>
+            </span>
+          </h2>
+        </section>
+
+        {/* ---------------- Word-by-word paragraph ---------------- */}
+        <section className="relative px-6 py-32">
+          <p
+            data-anim="words"
+            className="js-anim mx-auto max-w-4xl text-[clamp(1.4rem,3.2vw,2.4rem)] font-medium leading-[1.35] tracking-tight"
+          >
+            {PARAGRAPH.split(" ").map((word, i) => (
+              <span key={`${word}-${i}`} data-word className="inline-block">
+                {word}
+                {" "}
+              </span>
+            ))}
+          </p>
+        </section>
+
+        {/* ---------------- Stack marquee ---------------- */}
+        <div className="overflow-hidden border-y border-line py-5">
+          <div className="marquee-track flex w-max items-center gap-10">
+            {[...STACK, ...STACK, ...STACK].map((tool, i) => (
               <span
                 key={`${tool}-${i}`}
-                className="whitespace-nowrap text-sm font-semibold uppercase tracking-widest text-muted"
+                className="flex items-center gap-10 whitespace-nowrap text-[13px] font-medium uppercase tracking-[0.22em] text-muted"
               >
                 {tool}
+                <span className="text-accent-solid/60">✦</span>
               </span>
             ))}
           </div>
         </div>
 
-        {/* Serviços */}
-        <section id="servicos" className="px-6 py-28">
+        {/* ---------------- Services over ghost word ---------------- */}
+        <section
+          id="servicos"
+          className="relative isolate overflow-hidden px-6 py-32"
+        >
+          <span
+            aria-hidden
+            data-parallax="0.3"
+            className="pointer-events-none absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 select-none whitespace-nowrap text-[20vw] font-semibold leading-none tracking-tighter text-ink opacity-[0.05]"
+          >
+            serviços
+          </span>
+
           <div className="mx-auto max-w-6xl">
-            <Reveal>
-              <div className="mb-16 flex items-end justify-between gap-6">
-                <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
-                  Serviços<span className="text-metal">.</span>
-                </h2>
-                <span className="pb-1 text-sm font-medium text-muted">
-                  ({SERVICES.length})
-                </span>
-              </div>
-            </Reveal>
-            <div className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
+            <div data-anim="fade" className="js-anim mb-16 max-w-xl">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-accent-solid">
+                O que fazemos
+              </p>
+              <h2 className="text-[clamp(2rem,4.5vw,3.25rem)] font-semibold leading-tight tracking-tighter">
+                Quatro frentes,{" "}
+                <span className="serif-accent">um time só</span>
+              </h2>
+            </div>
+
+            <div className="grid gap-5 sm:grid-cols-2">
               {SERVICES.map((s, i) => (
-                <Reveal key={s.n} delay={i * 80}>
-                  <div className="h-full bg-bg-elevated p-8">
-                    <svg
-                      width="28"
-                      height="28"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.6"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="text-accent-solid"
-                    >
-                      {s.icon}
-                    </svg>
-                    <h3 className="mt-5 text-xl font-bold tracking-tight">
+                <div
+                  key={s.title}
+                  data-anim="fade"
+                  data-delay={i * 90}
+                  className="js-anim gradient-frame glass rounded-3xl p-8 sm:odd:translate-y-6"
+                >
+                  <div className="relative z-10">
+                    <h3 className="text-xl font-semibold tracking-tight">
                       {s.title}
                     </h3>
-                    <p className="mt-3 text-base leading-relaxed text-muted">
+                    <p className="mt-3 text-[15px] leading-relaxed text-muted">
                       {s.body}
                     </p>
                   </div>
-                </Reveal>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Projetos */}
-        <section id="projetos" className="bg-bg-elevated px-6 py-28">
+        {/* ---------------- Projects ---------------- */}
+        <section id="projetos" className="relative px-6 py-32">
           <div className="mx-auto max-w-6xl">
-            <Reveal>
-              <div className="mb-4 flex items-end justify-between gap-6">
-                <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
-                  Projetos<span className="text-metal">.</span>
-                </h2>
-              </div>
-              <p className="mb-12 max-w-xl text-muted">
-                Um recorte do trabalho do time da Vetrium em produtos
-                digitais reais — de app a landing page.
+            <div data-anim="fade" className="js-anim mb-12 max-w-xl">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-accent-solid">
+                Portfólio
               </p>
-            </Reveal>
-            <Reveal delay={120}>
+              <h2 className="text-[clamp(2rem,4.5vw,3.25rem)] font-semibold leading-tight tracking-tighter">
+                Trabalho que já{" "}
+                <span className="serif-accent">está no ar</span>
+              </h2>
+            </div>
+            <div data-anim="fade" className="js-anim">
               <ProjectsSection />
-            </Reveal>
+            </div>
           </div>
         </section>
 
-        {/* Como trabalhamos */}
-        <section id="processo" className="px-6 py-28">
+        {/* ---------------- Two audiences ---------------- */}
+        <section className="relative px-6 py-20">
+          <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-2">
+            {[
+              {
+                tag: "Para quem está começando",
+                title: "Nasça com cara de marca grande",
+                body: "Identidade, site e presença digital desde o primeiro dia — sem parecer amador enquanto você cresce.",
+                img: "/portfolio/cycleit.png",
+              },
+              {
+                tag: "Para quem já tem tração",
+                title: "Pare de perder venda no site",
+                body: "Diagnosticamos onde sua página trava a conversão e reconstruímos o caminho até o clique que importa.",
+                img: "/portfolio/achievo-app.png",
+              },
+            ].map((card, i) => (
+              <div
+                key={card.tag}
+                data-anim="fade"
+                data-delay={i * 120}
+                className="js-anim gradient-frame relative overflow-hidden rounded-[2rem] glass p-9"
+              >
+                <div className="relative z-10">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-solid">
+                    {card.tag}
+                  </p>
+                  <h3 className="mt-5 max-w-[16ch] text-[clamp(1.6rem,3vw,2.3rem)] font-semibold leading-tight tracking-tight">
+                    {card.title}
+                  </h3>
+                  <p className="mt-4 max-w-sm text-[15px] leading-relaxed text-muted">
+                    {card.body}
+                  </p>
+                </div>
+                <div className="relative z-0 mt-10 overflow-hidden rounded-2xl border border-line">
+                  <Image
+                    src={card.img}
+                    alt=""
+                    width={1200}
+                    height={800}
+                    className="h-52 w-full object-cover object-top"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ---------------- Process ---------------- */}
+        <section id="processo" className="relative px-6 py-32">
           <div className="mx-auto max-w-6xl">
-            <Reveal>
-              <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
-                Como trabalhamos<span className="text-metal">.</span>
-              </h2>
-            </Reveal>
-            <div className="relative mt-16 grid gap-12 sm:grid-cols-3">
+            <h2
+              data-anim="fade"
+              className="js-anim max-w-lg text-[clamp(2rem,4.5vw,3.25rem)] font-semibold leading-tight tracking-tighter"
+            >
+              Como <span className="serif-accent">trabalhamos</span>
+            </h2>
+            <div className="relative mt-16 grid gap-10 sm:grid-cols-3">
               <div
                 aria-hidden
-                className="absolute top-5 hidden h-px w-full bg-line sm:block"
+                className="absolute left-0 right-0 top-5 hidden h-px bg-line sm:block"
               />
               {STEPS.map((s, i) => (
-                <Reveal key={s.n} delay={i * 100}>
-                  <div className="relative">
-                    <span className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full bg-metal text-sm font-bold text-accent-ink">
-                      {s.n}
-                    </span>
-                    <h3 className="mt-5 text-xl font-bold tracking-tight">
-                      {s.title}
-                    </h3>
-                    <p className="mt-3 text-base leading-relaxed text-muted">
-                      {s.body}
-                    </p>
-                  </div>
-                </Reveal>
+                <div
+                  key={s.n}
+                  data-anim="fade"
+                  data-delay={i * 110}
+                  className="js-anim relative"
+                >
+                  <span className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full bg-metal text-[13px] font-bold text-accent-ink">
+                    {s.n}
+                  </span>
+                  <h3 className="mt-5 text-lg font-semibold tracking-tight">
+                    {s.title}
+                  </h3>
+                  <p className="mt-2.5 text-[15px] leading-relaxed text-muted">
+                    {s.body}
+                  </p>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* CTA final */}
-        <section id="contato" className="bg-bg-elevated px-6 py-28">
-          <div className="mx-auto max-w-6xl">
-            <Reveal>
-              <div className="relative isolate overflow-hidden rounded-3xl bg-bg-elevated-2 px-8 py-16 text-center sm:px-16">
-                <div className="ore-glow pointer-events-none absolute -top-20 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full" />
-                <h2 className="relative mx-auto max-w-2xl text-3xl font-extrabold tracking-tight sm:text-4xl">
-                  Tem um site ou produto que não está entregando o que deveria?
+        {/* ---------------- Final CTA ---------------- */}
+        <section id="contato" className="relative px-6 pb-32">
+          <div
+            data-anim="fade"
+            className="js-anim gradient-frame relative mx-auto max-w-6xl overflow-hidden rounded-[2.5rem]"
+          >
+            <div className="relative isolate overflow-hidden bg-bg-elevated px-8 py-24 text-center sm:px-16">
+              <Starfield density={0.00011} />
+              <div className="halo absolute left-1/2 top-0 h-[28rem] w-[28rem] -translate-x-1/2 -translate-y-1/3 rounded-full" />
+              <div className="relative z-10">
+                <h2 className="mx-auto max-w-3xl text-[clamp(2rem,5vw,3.5rem)] font-semibold leading-[1.08] tracking-tighter">
+                  Seu próximo site{" "}
+                  <span className="serif-accent">começa aqui</span>
                 </h2>
-                <p className="relative mx-auto mt-6 max-w-lg text-base text-muted">
+                <p className="mx-auto mt-6 max-w-md text-[15px] leading-relaxed text-muted">
                   Manda uma mensagem e a gente te diz, sem compromisso, o que
                   daria pra melhorar primeiro.
                 </p>
                 <a
                   href="mailto:contato@vetrium.com.br"
-                  className="relative mt-10 inline-block rounded-full bg-metal px-8 py-3 text-sm font-semibold text-accent-ink transition-opacity hover:opacity-90"
+                  className="mt-10 inline-block rounded-full bg-metal px-8 py-3.5 text-sm font-semibold text-accent-ink transition-opacity hover:opacity-90"
                 >
                   Falar com a Vetrium
                 </a>
               </div>
-            </Reveal>
+            </div>
           </div>
         </section>
       </main>
 
-      <footer className="border-t border-line px-6 py-16">
+      {/* ---------------- Footer ---------------- */}
+      <footer className="relative overflow-hidden border-t border-line px-6 pt-20">
         <div className="mx-auto max-w-6xl">
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="flex flex-wrap items-end justify-between gap-10">
             <div>
-              <span className="text-lg font-extrabold tracking-tight text-metal">
-                Vetrium
-              </span>
-              <p className="mt-3 max-w-[22ch] text-sm text-muted">
-                Design & Technology.
+              <p className="text-sm text-muted">Vamos conversar</p>
+              <a
+                href="mailto:contato@vetrium.com.br"
+                className="mt-2 block text-[clamp(1.5rem,4vw,2.75rem)] font-medium tracking-tight transition-colors hover:text-accent-solid"
+              >
+                contato@vetrium.com.br
+              </a>
+            </div>
+            <div className="text-right">
+              <p className="text-sm font-semibold">Comece um projeto</p>
+              <p className="mt-1 text-sm text-muted">
+                Resposta em até 24 horas
               </p>
-            </div>
-            <div>
-              <h4 className="text-sm font-semibold uppercase tracking-wide text-muted">
-                Navegação
-              </h4>
-              <ul className="mt-4 space-y-2 text-sm">
-                <li><a href="#servicos" className="hover:text-metal">Serviços</a></li>
-                <li><a href="#projetos" className="hover:text-metal">Projetos</a></li>
-                <li><a href="#processo" className="hover:text-metal">Como trabalhamos</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-sm font-semibold uppercase tracking-wide text-muted">
-                Contato
-              </h4>
-              <ul className="mt-4 space-y-2 text-sm">
-                <li>
-                  <a href="mailto:contato@vetrium.com.br" className="hover:text-metal">
-                    contato@vetrium.com.br
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-sm font-semibold uppercase tracking-wide text-muted">
-                Redes
-              </h4>
-              <ul className="mt-4 space-y-2 text-sm">
-                <li><a href="#" className="hover:text-metal">Instagram</a></li>
-                <li><a href="#" className="hover:text-metal">LinkedIn</a></li>
-              </ul>
+              <a
+                href="mailto:contato@vetrium.com.br"
+                className="mt-4 inline-block rounded-full bg-ink px-6 py-2.5 text-[13px] font-semibold text-bg transition-opacity hover:opacity-85"
+              >
+                Enviar briefing
+              </a>
             </div>
           </div>
-          <div className="mt-14 flex flex-col gap-2 border-t border-line pt-8 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
+
+          <div className="mt-14 flex flex-wrap justify-between gap-6 border-b border-line pb-8 text-sm text-muted">
+            {["Instagram", "LinkedIn", "Behance", "Dribbble"].map((s) => (
+              <a key={s} href="#" className="transition-colors hover:text-ink">
+                {s}
+              </a>
+            ))}
+          </div>
+
+          <div className="flex flex-wrap items-center justify-between gap-3 py-6 text-xs text-muted">
             <span>© {new Date().getFullYear()} Vetrium. Todos os direitos reservados.</span>
+            <span>Design &amp; Technology</span>
           </div>
+        </div>
+
+        {/* Giant wordmark bleeding off the bottom */}
+        <div className="relative">
+          <div className="halo absolute left-1/2 top-1/2 h-[26rem] w-[70rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-80" />
+          <span
+            aria-hidden
+            className="relative block select-none text-center text-[19vw] font-semibold leading-[0.78] tracking-tighter text-ink opacity-90"
+          >
+            vetrium
+          </span>
         </div>
       </footer>
     </div>
