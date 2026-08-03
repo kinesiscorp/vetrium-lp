@@ -85,9 +85,13 @@ export function ScrollEngine() {
           scrollTrigger: {
             trigger: section,
             start: "top top",
-            end: "+=125%",
+            // Shorter than it looks like it should be: with pin+scrub, this
+            // is how many scroll pixels the whole sequence consumes. 125%
+            // needed ~12 mouse-wheel notches (or many more trackpad ticks)
+            // to complete, which reads as "scroll stopped working."
+            end: "+=60%",
             pin: true,
-            scrub: 0.7,
+            scrub: 0.6,
             anticipatePin: 1,
           },
         });
@@ -120,7 +124,7 @@ export function ScrollEngine() {
           },
         );
         // Hold the assembled headline on screen for the rest of the pin.
-        tl.to({}, { duration: 0.7 });
+        tl.to({}, { duration: 0.35 });
       });
 
       /* ---------- word-by-word brighten ---------- */
