@@ -1,29 +1,42 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --bg: #ffffff;
-  --bg-dark: #0b0b0c;
-  --ink: #14140f;
-  --ink-onDark: #f5f4f1;
-  --muted: #6f6c64;
-  --muted-onDark: #9a978d;
-  --accent: #e8a94a;
-  --accent-ink: #241a06;
-  --line: #e5e2da;
-  --line-onDark: #2a2a27;
+  --bg: #f1f0f8;
+  --bg-elevated: #ffffff;
+  --bg-elevated-2: #e7e4f4;
+  --ink: #16151f;
+  --muted: #635f78;
+  --accent-from: #4c3fe0;
+  --accent-to: #7b4fe0;
+  --accent-solid: #4c3fe0;
+  --accent-ink: #ffffff;
+  --line: #dbd8ec;
+}
+
+.dark {
+  --bg: #0a0b12;
+  --bg-elevated: #14151f;
+  --bg-elevated-2: #1b1c29;
+  --ink: #ededf5;
+  --muted: #9291a8;
+  --accent-from: #6c7bff;
+  --accent-to: #9b6bff;
+  --accent-solid: #8b7bff;
+  --accent-ink: #0a0b12;
+  --line: #24263a;
 }
 
 @theme inline {
   --color-bg: var(--bg);
-  --color-bg-dark: var(--bg-dark);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-bg-elevated-2: var(--bg-elevated-2);
   --color-ink: var(--ink);
-  --color-ink-onDark: var(--ink-onDark);
   --color-muted: var(--muted);
-  --color-muted-onDark: var(--muted-onDark);
-  --color-accent: var(--accent);
+  --color-accent-solid: var(--accent-solid);
   --color-accent-ink: var(--accent-ink);
   --color-line: var(--line);
-  --color-line-onDark: var(--line-onDark);
   --font-sans: var(--font-manrope);
 }
 
@@ -31,4 +44,25 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.text-metal {
+  background: linear-gradient(135deg, var(--accent-from), var(--accent-to));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-metal {
+  background: linear-gradient(135deg, var(--accent-from), var(--accent-to));
+}
+
+.ore-glow {
+  background: radial-gradient(
+    closest-side,
+    color-mix(in srgb, var(--accent-from) 35%, transparent),
+    transparent
+  );
+  filter: blur(60px);
 }

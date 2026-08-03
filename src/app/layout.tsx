@@ -8,10 +8,20 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Achievo — Design e produto digital",
+  title: "Vetrium — Design & Technology",
   description:
     "Redesign, branding, landing pages e produtos digitais para negócios que querem crescer.",
 };
+
+const THEME_INIT_SCRIPT = `
+(function () {
+  try {
+    var stored = localStorage.getItem("theme");
+    var isDark = stored !== "light";
+    document.documentElement.classList.toggle("dark", isDark);
+  } catch (e) {}
+})();
+`;
 
 export default function RootLayout({
   children,
@@ -19,7 +29,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${manrope.variable} h-full antialiased`}>
+    <html
+      lang="pt-BR"
+      suppressHydrationWarning
+      className={`${manrope.variable} h-full antialiased`}
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+      </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
