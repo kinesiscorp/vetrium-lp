@@ -56,6 +56,30 @@ export const PROJECTS: Project[] = [
     year: "2024",
     image: "/portfolio/kabra-layerio.png",
   },
+  {
+    slug: "respawn-paintball",
+    name: "Respawn",
+    description: "App de agendamento para arena de paintball, do primeiro clique à reserva.",
+    category: "App",
+    year: "2025",
+    image: "/portfolio/respawn-paintball.jpg",
+  },
+  {
+    slug: "bbrflow",
+    name: "Bbr Flow",
+    description: "Landing page de SaaS de gestão para barbearias — agendamento e financeiro num só lugar.",
+    category: "Landing Page",
+    year: "2025",
+    image: "/portfolio/bbrflow.jpg",
+  },
+  {
+    slug: "flow-pedidos",
+    name: "Flow Pedidos",
+    description: "App white-label de pedidos online para pequenos negócios de alimentação.",
+    category: "App",
+    year: "2025",
+    image: "/portfolio/salgados-flow.jpg",
+  },
 ];
 
 export const CATEGORIES = ["Todos", "App", "Web", "Landing Page"] as const;
