@@ -117,9 +117,9 @@ export const CASES = [
     img: "/brand-frog/case-drawincad.jpg",
   },
   {
-    name: "Bbr Flow",
-    kicker: "Landing page de SaaS",
-    img: "/brand-frog/case-bbrflow.jpg",
+    name: "Startruck",
+    kicker: "App e landing page de logística para mudanças",
+    img: "/brand-frog/case-startruck.jpg",
   },
 ];
 
