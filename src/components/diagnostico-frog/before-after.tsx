@@ -53,7 +53,7 @@ export function BeforeAfter({
       >
         <Image
           src={after.img}
-          alt={`Depois — ${after.label}`}
+          alt={`Depois, ${after.label}`}
           fill
           sizes="(min-width: 1160px) 1100px, 100vw"
           className="pointer-events-none object-cover"
@@ -61,7 +61,7 @@ export function BeforeAfter({
 
         <Image
           src={before.img}
-          alt={`Antes — ${before.label}`}
+          alt={`Antes, ${before.label}`}
           fill
           sizes="(min-width: 1160px) 1100px, 100vw"
           className="pointer-events-none object-cover"

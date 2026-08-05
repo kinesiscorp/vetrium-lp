@@ -8,7 +8,7 @@ export function BrandSubstrate() {
       <SectionHead
         tag="Fora do site"
         title="O que já funciona"
-        lead="Sua marca já tem peso fora do site. A gente não mexe nisso — só traz esse mesmo padrão pra dentro da página."
+        lead="Sua marca já tem peso fora do site. A gente não mexe nisso, só traz esse mesmo padrão pra dentro da página."
         maxWidth="60ch"
       />
 

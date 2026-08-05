@@ -8,7 +8,7 @@ export function NextSteps() {
       <SectionHead
         tag="Com você"
         title="O que falta vir do seu lado"
-        lead="O design tá fechado. O que falta agora é conteúdo real — sem isso a gente não troca os exemplos por dados de verdade."
+        lead="O design tá fechado. O que falta agora é conteúdo real, sem isso a gente não troca os exemplos por dados de verdade."
         strat
       />
 

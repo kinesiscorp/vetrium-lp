@@ -28,7 +28,7 @@ export function Diagnosis() {
 
       <Reveal delay={0.1} className="mt-7">
         <p className="mb-4 text-[15px] leading-relaxed text-ink-dim">
-          Isso é o problema. O que você recebe não é o ajuste desses pontos — é o site
+          Isso é o problema. O que você recebe não é o ajuste desses pontos, é o site
           inteiro reconstruído:
         </p>
         <dl className="grid grid-cols-2 gap-px border border-line bg-line sm:grid-cols-4">

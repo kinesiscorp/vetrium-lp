@@ -19,7 +19,7 @@ export function Pricing() {
       <SectionHead
         num="07"
         title="Investimento"
-        lead="Os dois valores abaixo são condição de primeiro projeto. A tabela riscada é o que a Vetrium pratica normalmente. Escolha a forma de pagamento e o pacote — a escolha segue com você até o fechamento."
+        lead="Os dois valores abaixo são condição de primeiro projeto. A tabela riscada é o que a Vetrium pratica normalmente. Escolha a forma de pagamento e o pacote, a escolha segue com você até o fechamento."
         maxWidth="60ch"
       />
 

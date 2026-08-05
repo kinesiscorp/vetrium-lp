@@ -34,7 +34,7 @@ export function Demo() {
 
       <Reveal delay={0.08}>
         <p className="mt-5 text-[13.5px] text-muted">
-          É comparação real, com prints do site atual lado a lado com o que já construímos —
+          É comparação real, com prints do site atual lado a lado com o que já construímos,
           não é maquete. Falta o seu conteúdo pra trocar os exemplos por dados reais: casos de
           aluno, depoimento e os links de checkout.
         </p>

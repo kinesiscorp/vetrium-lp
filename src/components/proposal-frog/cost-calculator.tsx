@@ -90,7 +90,7 @@ export function CostCalculator() {
       <Reveal delay={0.14}>
         <p className="mt-5 text-[13.5px] text-muted">
           Os 350 ativos e os 80% no Recruta são números que você mesmo passou. A migração é
-          hipótese sua — arraste o controle para o cenário que parecer realista.
+          hipótese sua, arraste o controle para o cenário que parecer realista.
         </p>
       </Reveal>
     </Section>

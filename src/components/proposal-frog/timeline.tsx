@@ -40,7 +40,7 @@ export function Timeline() {
                 {step.who}
               </span>
               <h3 className="mb-1 text-[17px] font-semibold tracking-tight">
-                {step.n === 4 ? `Entrega — ${plan.name} em ${plan.deadline}` : step.title}
+                {step.n === 4 ? `Entrega, ${plan.name} em ${plan.deadline}` : step.title}
               </h3>
               <p className="text-[14px] text-ink-dim">
                 {step.n === 4
