@@ -1,4 +1,4 @@
-import { FINDINGS } from "@/lib/proposal-frog/content";
+import { DEMO_URL, FINDINGS } from "@/lib/proposal-frog/content";
 import { Reveal } from "./reveal";
 import { Section, SectionHead } from "./section";
 
@@ -27,7 +27,16 @@ export function Diagnosis() {
       </div>
 
       <p className="mt-5 text-[13.5px] text-muted">
-        Diagnóstico completo com nove achados, disponível à parte.
+        Diagnóstico completo com nove achados,{" "}
+        <a
+          href={DEMO_URL}
+          target="_blank"
+          rel="noreferrer noopener"
+          className="text-accent-solid underline decoration-accent-solid/40 underline-offset-2 hover:text-ink"
+        >
+          disponível à parte
+        </a>
+        .
       </p>
     </Section>
   );

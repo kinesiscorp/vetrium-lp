@@ -8,7 +8,7 @@ export const META = {
 /** wa.me só aceita dígitos (código do país + DDD + número). */
 export const WHATSAPP_NUMBER = "5511941889077";
 
-export const DEMO_URL = "https://esquadrao-do-frog.vercel.app/";
+export const DEMO_URL = "/diagnostico/frogman";
 
 export type SectionId =
   | "capa"
