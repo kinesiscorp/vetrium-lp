@@ -173,7 +173,7 @@ export const COMPARISONS: Comparison[] = [
 
 export const NEXT_STEPS = [
   "Manda 2 ou 3 casos de aluno com rank antes/depois — é o que falta pra trocar o exemplo de formato por dados reais na prova social.",
-  "Confirma se topa manter a paleta verde/roxo (recomendamos, é o que seus 158 mil no YouTube já reconhecem) ou se quer um segundo elemento visual só seu.",
+  "Confirma se topa manter a paleta verde/roxo (recomendamos).",
   "Diz pra gente onde o lead capturado deve cair — e-mail, CRM ou até uma planilha — pra ligar o formulário a um destino de verdade.",
   "Confirma as respostas do FAQ sobre cancelamento e prazo de acesso, pra bater com o que já está configurado na Kiwify.",
 ];
