@@ -60,7 +60,7 @@ export function Diagnosis() {
       </Reveal>
 
       <p className="mt-5 text-[13.5px] text-muted">
-        Diagnóstico completo com nove achados,{" "}
+        Diagnóstico completo com oito achados,{" "}
         <a
           href={DEMO_URL}
           target="_blank"

@@ -45,7 +45,7 @@ export function Hero() {
 
         <Reveal delay={0.2} className="mt-11 grid grid-cols-2 gap-px border border-frog-edge bg-frog-edge sm:grid-cols-4">
           {[
-            { value: "9", label: "achados no total" },
+            { value: `${FINDINGS.length}`, label: "achados no total" },
             { value: `${resolved}`, label: "já resolvidos" },
             { value: "158 mil", label: "inscritos no YouTube" },
             { value: "103 mil", label: "seguidores no Instagram" },

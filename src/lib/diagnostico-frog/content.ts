@@ -83,15 +83,6 @@ export const FINDINGS: Finding[] = [
   {
     n: "05",
     category: "ux",
-    title: "Vídeo em autoplay travando a primeira interação",
-    before: "Pill “Ativar o Som” cobre o vídeo de fundo e exige uma decisão antes de deixar continuar, fricção alta pra quem abre em ambiente silencioso ou público.",
-    status: "resolvido",
-    fix: "Vídeo decorativo em loop, mudo por padrão, com um controle discreto de som e tela cheia no canto, sem popup obrigatório.",
-    impact: "Ninguém precisa decidir nada pra continuar lendo. O vídeo apoia a página, não interrompe ela.",
-  },
-  {
-    n: "06",
-    category: "ux",
     title: "Nenhuma captura de lead",
     before: "Depois do preço, só resta comprar ou sair. Sem e-mail, isca de conteúdo ou qualquer caminho pra quem ainda não decidiu.",
     status: "resolvido",
@@ -99,7 +90,7 @@ export const FINDINGS: Finding[] = [
     impact: "Quem fecha a aba sem comprar deixa de ser uma visita perdida, vira um contato pra retomar depois.",
   },
   {
-    n: "07",
+    n: "06",
     category: "estrategia",
     title: "Prova social rasa",
     before: "Só prints de conversa no WhatsApp e comentários do Instagram, nenhum dado concreto de evolução de aluno, o gatilho mais forte pra esse público.",
@@ -108,7 +99,7 @@ export const FINDINGS: Finding[] = [
     impact: "Os highlights do carrossel já são reais, os que você mandou. Nome, rank e depoimento de cada case ainda são exemplo de formato: falta 2 ou 3 casos de aluno de verdade pra trocar.",
   },
   {
-    n: "08",
+    n: "07",
     category: "estrategia",
     title: "Selo “Mais indicado” no plano errado",
     before: "O selo aparece no Veterano, o mais caro. Mas ~80% dos alunos assina o Recruta, e você mesmo aponta o Soldado como o de melhor custo-benefício.",
@@ -117,7 +108,7 @@ export const FINDINGS: Finding[] = [
     impact: "O selo para de empurrar pro plano errado e passa a reforçar a decisão que você mesmo recomendaria.",
   },
   {
-    n: "09",
+    n: "08",
     category: "estrategia",
     title: "Funil não resolve o descompasso aula 1:1 vs. curso",
     before: "A procura de quem chega é por aula individual, que depende da sua agenda. O site não explicava por que o esquadrão resolve o mesmo problema sem esse limite.",
@@ -146,8 +137,8 @@ export const COMPARISONS: Comparison[] = [
     title: "Hero",
     before: { img: "/diagnostico-frog/hero-antes.jpg", label: "esquadraofrog.com" },
     after: { img: "/diagnostico-frog/hero-depois.jpg", label: "Nova versão" },
-    findings: ["01", "03", "04", "05"],
-    body: "A tela que decide se alguém continua lendo ou fecha a aba. Contraste, hierarquia de fonte, CTA e o vídeo de fundo, os quatro problemas mais na cara do site, se concentram aqui.",
+    findings: ["01", "03", "04"],
+    body: "A tela que decide se alguém continua lendo ou fecha a aba. Contraste, hierarquia de fonte e CTA, os três problemas mais na cara do site, se concentram aqui.",
   },
   {
     id: "resultados",
@@ -156,7 +147,7 @@ export const COMPARISONS: Comparison[] = [
     title: "Resultados",
     before: { img: "/diagnostico-frog/resultados-antes.jpg", label: "esquadraofrog.com" },
     after: { img: "/diagnostico-frog/resultados-depois.jpg", label: "Nova versão" },
-    findings: ["07"],
+    findings: ["06"],
     body: "De print de conversa pra progressão de rank com data e número do lado, o formato que mais converte pra quem joga PUBG competitivo.",
   },
   {
@@ -166,7 +157,7 @@ export const COMPARISONS: Comparison[] = [
     title: "Preço & encerramento",
     before: { img: "/diagnostico-frog/precos-antes.jpg", label: "esquadraofrog.com" },
     after: { img: "/diagnostico-frog/precos-depois.jpg", label: "Nova versão" },
-    findings: ["08"],
+    findings: ["07"],
     body: "O selo que recomendava o plano mais caro pra maioria agora recomenda o que o próprio Frog considera o melhor custo-benefício, e a página explica por quê.",
   },
 ];
