@@ -14,7 +14,7 @@ export function Diagnosis() {
 
       <div className="flex flex-col divide-y divide-line border-y border-line">
         {FINDINGS.map((f, i) => (
-          <Reveal key={f.n} delay={i * 0.06} className="bg-sheet py-5">
+          <Reveal key={f.n} delay={i * 0.06} className="bg-sheet px-5 py-5 sm:px-6">
             <div className="grid grid-cols-[auto_1fr] items-start gap-4">
               <span className="serif-accent min-w-6 text-lg text-accent-solid">{f.n}</span>
               <div>

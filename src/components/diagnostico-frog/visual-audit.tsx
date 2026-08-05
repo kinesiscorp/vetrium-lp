@@ -50,7 +50,7 @@ export function VisualAudit() {
 
               <div className="mt-6 flex flex-col divide-y divide-frog-edge border-y border-frog-edge">
                 {items.map((f) => (
-                  <div key={f.n} className="grid grid-cols-[auto_1fr] items-start gap-4 bg-frog-panel py-5">
+                  <div key={f.n} className="grid grid-cols-[auto_1fr] items-start gap-4 bg-frog-panel px-5 py-5 sm:px-6">
                     <span className="tabular font-display min-w-6 text-lg font-bold text-frog-steel">
                       {f.n}
                     </span>
