@@ -63,7 +63,12 @@ export function TopNav() {
   return (
     <header data-no-print className="fixed inset-x-0 top-0 z-50">
       <div className="flex items-center justify-between border-b border-line bg-bg/85 px-5 py-3 backdrop-blur-md sm:px-8">
-        <a href="#capa" className="flex items-center gap-2.5">
+        <a
+          href="/"
+          target="_blank"
+          rel="noreferrer noopener"
+          className="flex items-center gap-2.5"
+        >
           <Image src="/brand-frog/vetrium-icon.png" alt="" aria-hidden width={28} height={28} className="h-7 w-7 rounded-[7px]" />
           <Image src="/brand-frog/vetrium-wordmark.png" alt="Vetrium" width={792} height={153} className="h-[15px] w-auto" />
         </a>

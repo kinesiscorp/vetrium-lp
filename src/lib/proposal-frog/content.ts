@@ -88,7 +88,7 @@ export const TARGETS = [
 ];
 
 export const DEMO_COPY =
-  "Antes de pedir qualquer coisa, construímos a página. Hero com o seu vídeo ao fundo, comparativo entre aula e esquadrão, painel de evolução de rank, seção do mentor, prova social, planos reestruturados, captura de lead e FAQ. Tudo funcionando, no seu verde, com o seu logotipo.";
+  "Antes de pedir qualquer coisa, construímos a página. Hero com o seu vídeo ao fundo, comparativo entre aula e esquadrão, painel de evolução de rank, seção do mentor, prova social, planos reestruturados, captura de lead e FAQ. Tudo funcionando, no seu verde, com o seu logotipo. Preparamos um raio-x comparando cada uma dessas mudanças com o site atual, pra você ver o antes e o depois sem precisar navegar na versão completa antes de aprovar.";
 
 export const SCOPE_ROWS: { label: string; prototipo: boolean; funcional: boolean }[] = [
   { label: "Estratégia e arquitetura da página", prototipo: true, funcional: true },

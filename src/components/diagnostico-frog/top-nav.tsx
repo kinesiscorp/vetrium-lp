@@ -2,24 +2,12 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { NAV_SECTIONS, PROPOSAL_URL, type SectionId } from "@/lib/diagnostico-frog/content";
+import { NAV_SECTIONS, type SectionId } from "@/lib/diagnostico-frog/content";
 
 export function TopNav() {
-  const [progress, setProgress] = useState(0);
   const [active, setActive] = useState<SectionId>(NAV_SECTIONS[0].id);
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const onScroll = () => {
-      const h = document.documentElement;
-      const max = h.scrollHeight - h.clientHeight;
-      setProgress(max > 0 ? Math.min(1, h.scrollTop / max) : 0);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     const els = NAV_SECTIONS.map((s) => document.getElementById(s.id)).filter(
@@ -57,63 +45,56 @@ export function TopNav() {
   }, [open]);
 
   return (
-    <header data-no-print className="fixed inset-x-0 top-0 z-50">
-      <div className="flex items-center justify-between border-b border-line bg-bg/85 px-5 py-3 backdrop-blur-md sm:px-8">
-        <a href="#topo" className="flex items-center gap-2.5">
-          <Image src="/brand-frog/vetrium-icon.png" alt="" aria-hidden width={28} height={28} className="h-7 w-7 rounded-[7px]" />
-          <Image src="/brand-frog/vetrium-wordmark.png" alt="Vetrium" width={792} height={153} className="h-[15px] w-auto" />
+    <header className="sticky top-0 z-50 border-b border-frog-edge bg-frog-void/85 backdrop-blur-md">
+      <div className="wrap flex items-center gap-6 py-3">
+        <a href="#topo" className="flex items-center">
+          <Image
+            src="/diagnostico-frog/frog-logo.png"
+            alt="Esquadrão do Frog"
+            width={900}
+            height={432}
+            priority
+            className="h-10 w-auto drop-shadow-[0_0_24px_rgba(124,255,0,0.3)]"
+          />
         </a>
-        <div className="flex items-center gap-4">
-          <a
-            href={PROPOSAL_URL}
-            className="hidden text-[10.5px] tracking-[0.2em] text-faint uppercase transition-colors hover:text-ink-dim sm:inline"
+
+        <div className="relative ml-auto" ref={menuRef}>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-haspopup="true"
+            className="label flex items-center gap-2 border border-frog-edge-hi px-3 py-2 text-[12px] text-[#cfd4cb] transition-colors hover:border-frog-acid hover:text-frog-acid"
           >
-            Ver a proposta comercial →
-          </a>
-          <div className="relative" ref={menuRef}>
-            <button
-              type="button"
-              onClick={() => setOpen((v) => !v)}
-              aria-expanded={open}
-              aria-haspopup="true"
-              className="flex items-center gap-2 border border-line-strong px-3 py-1.5 text-[12.5px] tracking-wide text-ink-dim transition-colors hover:border-accent-solid hover:text-ink"
-            >
-              Índice
-              <span aria-hidden className={`transition-transform ${open ? "rotate-180" : ""}`}>
-                ▾
-              </span>
-            </button>
-            {open && (
-              <div className="absolute top-[calc(100%+8px)] right-0 w-64 border border-line bg-sheet shadow-2xl shadow-black/40">
-                <ul className="max-h-[70vh] overflow-y-auto py-1.5">
-                  {NAV_SECTIONS.map((s) => (
-                    <li key={s.id}>
-                      <a
-                        href={`#${s.id}`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setOpen(false);
-                          document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-                        }}
-                        className={`block px-4 py-2 text-[13.5px] transition-colors hover:bg-card hover:text-ink ${
-                          active === s.id ? "text-accent-solid" : "text-ink-dim"
-                        }`}
-                      >
-                        {s.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
+            Índice
+            <span aria-hidden className={`transition-transform ${open ? "rotate-180" : ""}`}>
+              ▾
+            </span>
+          </button>
+          {open && (
+            <div className="absolute top-[calc(100%+8px)] right-0 w-64 border border-frog-edge-hi bg-frog-panel shadow-2xl shadow-black/40">
+              <ul className="py-1.5">
+                {NAV_SECTIONS.map((s) => (
+                  <li key={s.id}>
+                    <a
+                      href={`#${s.id}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setOpen(false);
+                        document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+                      }}
+                      className={`block px-4 py-2 text-[13.5px] transition-colors hover:bg-frog-panel-hi hover:text-frog-bone ${
+                        active === s.id ? "text-frog-acid" : "text-[#b6bcb3]"
+                      }`}
+                    >
+                      {s.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
-      </div>
-      <div className="h-[2px] w-full bg-line">
-        <div
-          className="h-full bg-metal transition-[width] duration-150 ease-out"
-          style={{ width: `${progress * 100}%` }}
-        />
       </div>
     </header>
   );

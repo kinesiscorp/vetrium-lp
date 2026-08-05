@@ -2,15 +2,17 @@ import { PROPOSAL_URL } from "@/lib/diagnostico-frog/content";
 
 export function Footer() {
   return (
-    <footer data-no-print className="flex flex-wrap items-center justify-between gap-4 border-t border-line px-6 py-6 text-[10.5px] tracking-[0.16em] text-faint uppercase sm:px-10">
-      <span>Vetrium · Design &amp; Technology</span>
-      <div className="flex items-center gap-6">
-        <a href={PROPOSAL_URL} className="transition-colors hover:text-ink-dim">
-          Proposta comercial
-        </a>
-        <a href="#topo" className="transition-colors hover:text-ink-dim">
-          Voltar ao topo
-        </a>
+    <footer className="border-t border-frog-edge">
+      <div className="wrap flex flex-wrap items-center justify-between gap-x-5 gap-y-2 py-6 text-xs text-[#5c635a]">
+        <span>Diagnóstico preparado por Frogman1 × Vetrium.</span>
+        <div className="flex items-center gap-5">
+          <a href={PROPOSAL_URL} className="transition-colors hover:text-frog-acid">
+            Proposta comercial
+          </a>
+          <a href="#topo" className="transition-colors hover:text-frog-acid">
+            Voltar ao topo
+          </a>
+        </div>
       </div>
     </footer>
   );

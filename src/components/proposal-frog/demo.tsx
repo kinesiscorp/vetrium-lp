@@ -5,7 +5,7 @@ import { Section, SectionHead } from "./section";
 export function Demo() {
   return (
     <Section id="demonstracao">
-      <SectionHead num="04" title="Já existe uma versão navegável" />
+      <SectionHead num="04" title="Já dá pra ver o que mudou" />
 
       <Reveal>
         <a
@@ -27,15 +27,16 @@ export function Demo() {
             )}
           </p>
           <span className="mt-5 inline-flex items-center gap-2.5 border-b border-accent-solid pb-1 text-[15px] transition-[gap] group-hover:gap-4">
-            Abrir a demonstração <span aria-hidden>→</span>
+            Ver o raio-x do antes e depois <span aria-hidden>→</span>
           </span>
         </a>
       </Reveal>
 
       <Reveal delay={0.08}>
         <p className="mt-5 text-[13.5px] text-muted">
-          A demonstração é real, não é imagem: abre no celular, rola, os planos respondem, o FAQ
-          abre. Falta o seu conteúdo — casos de aluno, depoimento e os links de checkout.
+          É comparação real, com prints do site atual lado a lado com o que já construímos —
+          não é maquete. Falta o seu conteúdo pra trocar os exemplos por dados reais: casos de
+          aluno, depoimento e os links de checkout.
         </p>
       </Reveal>
     </Section>

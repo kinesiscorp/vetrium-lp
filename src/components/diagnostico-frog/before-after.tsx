@@ -32,7 +32,7 @@ export function BeforeAfter({
         aria-valuenow={Math.round(pos)}
         aria-valuemin={0}
         aria-valuemax={100}
-        className="relative aspect-[1280/800] w-full cursor-ew-resize touch-none overflow-hidden border border-line-strong bg-sheet outline-none focus-visible:ring-2 focus-visible:ring-accent-solid"
+        className="bracket relative aspect-[1280/800] w-full cursor-ew-resize touch-none overflow-hidden border border-frog-edge-hi bg-frog-panel outline-none focus-visible:ring-2 focus-visible:ring-frog-acid"
         onPointerDown={(e) => {
           dragging.current = true;
           e.currentTarget.setPointerCapture(e.pointerId);
@@ -55,7 +55,7 @@ export function BeforeAfter({
           src={after.img}
           alt={`Depois — ${after.label}`}
           fill
-          sizes="(min-width: 920px) 860px, 100vw"
+          sizes="(min-width: 1160px) 1100px, 100vw"
           className="pointer-events-none object-cover"
         />
 
@@ -63,29 +63,29 @@ export function BeforeAfter({
           src={before.img}
           alt={`Antes — ${before.label}`}
           fill
-          sizes="(min-width: 920px) 860px, 100vw"
+          sizes="(min-width: 1160px) 1100px, 100vw"
           className="pointer-events-none object-cover"
           style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}
         />
 
         <span
-          className="pointer-events-none absolute top-3 left-3 border border-line-strong bg-bg/80 px-2.5 py-1 text-[10.5px] tracking-[0.14em] text-faint uppercase backdrop-blur-sm transition-opacity"
+          className="label pointer-events-none absolute top-3 left-3 border border-frog-edge-hi bg-frog-void/80 px-2.5 py-1 text-[10.5px] text-[#8e958d] backdrop-blur-sm transition-opacity"
           style={{ opacity: pos > 14 ? 1 : 0 }}
         >
           Antes
         </span>
         <span
-          className="pointer-events-none absolute top-3 right-3 border border-frog/40 bg-bg/80 px-2.5 py-1 text-[10.5px] tracking-[0.14em] text-frog uppercase backdrop-blur-sm transition-opacity"
+          className="label pointer-events-none absolute top-3 right-3 border border-frog-acid/40 bg-frog-void/80 px-2.5 py-1 text-[10.5px] text-frog-acid backdrop-blur-sm transition-opacity"
           style={{ opacity: pos < 86 ? 1 : 0 }}
         >
           Depois
         </span>
 
         <div
-          className="pointer-events-none absolute inset-y-0 w-[2px] bg-accent-solid shadow-[0_0_0_1px_rgba(0,0,0,0.3)]"
+          className="pointer-events-none absolute inset-y-0 w-[2px] bg-frog-acid shadow-[0_0_12px_rgba(124,255,0,0.6)]"
           style={{ left: `${pos}%` }}
         >
-          <div className="absolute top-1/2 left-1/2 grid h-9 w-9 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-accent-solid text-accent-ink shadow-lg">
+          <div className="absolute top-1/2 left-1/2 grid h-9 w-9 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-frog-acid text-[#071006] shadow-lg">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
               <path
                 d="M5 3 2 8l3 5M11 3l3 5-3 5"
@@ -99,7 +99,7 @@ export function BeforeAfter({
         </div>
       </div>
 
-      <div className="mt-2 flex items-center justify-between text-[11px] tracking-[0.12em] text-faint uppercase">
+      <div className="label mt-2 flex items-center justify-between text-[10.5px] text-frog-steel">
         <span>{before.label}</span>
         <span>Arraste para comparar</span>
         <span>{after.label}</span>

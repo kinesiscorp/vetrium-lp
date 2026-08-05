@@ -1,5 +1,5 @@
 import type { SectionId } from "@/lib/diagnostico-frog/content";
-import { Reveal } from "../proposal-frog/reveal";
+import { Reveal } from "./reveal";
 
 export function Section({
   id,
@@ -15,35 +15,34 @@ export function Section({
   return (
     <section
       id={id}
-      className={`scroll-mt-24 border-t border-line px-6 py-20 sm:px-10 sm:py-28 ${tint ? "bg-sheet-hi/40" : ""} ${className}`}
+      className={`sec scroll-mt-20 border-t border-frog-edge ${tint ? "bg-frog-panel/40" : ""} ${className}`}
     >
-      <div className="mx-auto max-w-[920px]">{children}</div>
+      <div className="wrap">{children}</div>
     </section>
   );
 }
 
 export function SectionHead({
-  num,
+  tag,
   title,
   lead,
+  strat,
   maxWidth = "58ch",
 }: {
-  num: string;
+  tag: string;
   title: React.ReactNode;
   lead?: React.ReactNode;
+  strat?: boolean;
   maxWidth?: string;
 }) {
   return (
-    <Reveal className="mb-10 flex flex-col gap-3 sm:mb-14">
-      <span className="serif-accent text-[15px] text-accent-solid">{num}</span>
-      <h2 className="text-balance text-[clamp(25px,3.4vw,36px)] leading-[1.1] font-semibold tracking-tight">
-        {title}
-      </h2>
+    <Reveal className="mb-9 max-w-[64ch] sm:mb-13">
+      <p className={`eyebrow mb-4 ${strat ? "eyebrow-strat" : ""}`}>
+        <span className="slash">{"///"}</span> {tag}
+      </p>
+      <h2 className="d h2">{title}</h2>
       {lead && (
-        <p
-          className="text-[clamp(16px,1.9vw,18.5px)] leading-relaxed text-ink-dim"
-          style={{ maxWidth }}
-        >
+        <p className="mt-4 text-lg leading-relaxed text-[#cfd4cb]" style={{ maxWidth }}>
           {lead}
         </p>
       )}

@@ -1,18 +1,37 @@
 import type { Metadata } from "next";
+import { Inter, Rajdhani } from "next/font/google";
+
+const rajdhani = Rajdhani({
+  variable: "--font-rajdhani",
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  display: "swap",
+});
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "Diagnóstico, Esquadrão do Frog | Vetrium",
+  title: "Diagnóstico, Esquadrão do Frog",
   description:
-    "Raio-x da Vetrium comparando o site atual do Esquadrão do Frog com o que já foi construído na demonstração: achados, o que mudou e o impacto de cada mudança.",
+    "O que já mudou no site do Esquadrão do Frog: achados, antes/depois e o que falta pra fechar.",
 };
 
-/** Mesma paleta fixa e escura da proposta comercial (classe `pf-scope`,
- *  ver globals.css): as duas páginas se linkam uma na outra e precisam
- *  abrir com a mesma identidade, sem depender do tema de quem visita. */
+/** Visual do próprio site do Frog (verde ácido, void, Rajdhani), não o
+ *  editorial da Vetrium: quem lê este documento é o Frog, precisa parecer
+ *  a marca dele, não outro PDF interno. Tokens isolados em .df-scope,
+ *  ver globals.css. */
 export default function DiagnosticoFrogmanLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <div className="pf-scope min-h-screen">{children}</div>;
+  return (
+    <div className={`df-scope min-h-screen ${rajdhani.variable} ${inter.variable}`}>
+      {children}
+    </div>
+  );
 }

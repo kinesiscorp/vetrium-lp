@@ -307,3 +307,175 @@ summary:focus-visible {
     print-color-adjust: exact;
   }
 }
+
+/* ============================================================
+   Diagnóstico do Frog (/diagnostico/frogman)
+   Este documento é lido pelo próprio Frog, então usa o mundo
+   visual do site dele (verde ácido, void, Rajdhani em caixa alta)
+   em vez do sistema editorial da Vetrium — precisa parecer familiar
+   pra quem já conhece a marca, não parecer outro documento interno.
+   Tokens isolados sob .df-scope, no mesmo padrão do .pf-scope acima.
+   ============================================================ */
+.df-scope {
+  --df-void: #080a09;
+  --df-panel: #111411;
+  --df-panel-hi: #171b16;
+  --df-bone: #f2f4ef;
+  --df-steel: #8e958d;
+  --df-edge: #232723;
+  --df-edge-hi: #2f352e;
+  --df-acid: #7cff00;
+  --df-acid-deep: #4dd800;
+  --df-strat: #9a42ff;
+  --df-strat-deep: #6e2bb8;
+  --df-warn: #ffc247;
+  --font-display: var(--font-rajdhani), system-ui, sans-serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+  color-scheme: dark;
+  background: var(--df-void);
+  color: var(--df-bone);
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+@theme inline {
+  --color-frog-void: var(--df-void);
+  --color-frog-panel: var(--df-panel);
+  --color-frog-panel-hi: var(--df-panel-hi);
+  --color-frog-bone: var(--df-bone);
+  --color-frog-steel: var(--df-steel);
+  --color-frog-edge: var(--df-edge);
+  --color-frog-edge-hi: var(--df-edge-hi);
+  --color-frog-acid: var(--df-acid);
+  --color-frog-acid-deep: var(--df-acid-deep);
+  --color-frog-strat: var(--df-strat);
+  --color-frog-strat-deep: var(--df-strat-deep);
+  --color-frog-warn: var(--df-warn);
+}
+
+.df-scope .d {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 0.94;
+  letter-spacing: 0.005em;
+  text-wrap: balance;
+  margin: 0;
+}
+.df-scope .h1 { font-size: clamp(38px, 6.6vw, 84px); }
+.df-scope .h2 { font-size: clamp(28px, 4vw, 46px); }
+.df-scope .h3 { font-size: clamp(20px, 2.2vw, 27px); }
+
+.df-scope .eyebrow {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  color: var(--df-acid);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+.df-scope .eyebrow-strat { color: var(--df-strat); }
+.df-scope .slash { color: var(--df-acid); opacity: 0.55; letter-spacing: -0.08em; font-weight: 700; }
+.df-scope .eyebrow-strat .slash { color: var(--df-strat); }
+
+.df-scope .label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 11.5px;
+}
+
+.df-scope .wrap {
+  width: min(100%, 1160px);
+  margin-inline: auto;
+  padding-inline: clamp(18px, 3vw, 40px);
+}
+.df-scope .sec { position: relative; padding-block: clamp(56px, 7vw, 96px); }
+
+.df-scope .grad {
+  background: linear-gradient(135deg, var(--df-acid), var(--df-acid-deep));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.df-scope .grad-strat {
+  background: linear-gradient(135deg, #b47cff, #7d3ad6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.df-scope .crosshair { width: 14px; height: 14px; flex: none; position: relative; opacity: 0.8; }
+.df-scope .crosshair::before,
+.df-scope .crosshair::after { content: ""; position: absolute; background: currentColor; }
+.df-scope .crosshair::before { left: 50%; top: 0; bottom: 0; width: 1px; transform: translateX(-0.5px); }
+.df-scope .crosshair::after { top: 50%; left: 0; right: 0; height: 1px; transform: translateY(-0.5px); }
+
+.df-scope .bracket { position: relative; }
+.df-scope .bracket::before,
+.df-scope .bracket::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+  border-color: var(--df-acid);
+  opacity: 0.55;
+}
+.df-scope .bracket::before { top: -1px; left: -1px; border-top: 1px solid; border-left: 1px solid; }
+.df-scope .bracket::after { bottom: -1px; right: -1px; border-bottom: 1px solid; border-right: 1px solid; }
+
+.df-scope .chev {
+  display: flex;
+  gap: 4px;
+  color: var(--df-acid);
+  opacity: 0.35;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+}
+.df-scope .chev-strat { color: var(--df-strat); opacity: 0.5; }
+
+.df-scope .btn {
+  display: inline-flex;
+  align-items: stretch;
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-size: 15px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: box-shadow 0.22s ease, background 0.22s ease, border-color 0.22s ease, color 0.22s ease;
+}
+.df-scope .btn > .lab { padding: 14px 22px; display: flex; align-items: center; }
+.df-scope .btn > .arw {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  flex: none;
+  border-left: 1px solid rgb(8 10 9 / 0.28);
+  font-size: 16px;
+}
+.df-scope .btn:focus-visible { outline: 2px solid var(--df-acid); outline-offset: 3px; }
+
+.df-scope .btn-pri { background: linear-gradient(135deg, var(--df-acid), var(--df-acid-deep)); color: #071006; }
+.df-scope .btn-pri > .arw { background: rgb(6 20 2 / 0.22); }
+.df-scope .btn-pri:hover { box-shadow: 0 10px 34px -10px rgb(124 255 0 / 0.55); }
+
+.df-scope .btn-sec { background: transparent; border-color: var(--df-acid); color: var(--df-acid); }
+.df-scope .btn-sec > .arw { border-left-color: rgb(124 255 0 / 0.3); }
+.df-scope .btn-sec:hover { background: rgb(124 255 0 / 0.09); }
+
+.df-scope .btn-ghost { background: transparent; border-color: var(--df-edge-hi); color: #cfd4cb; }
+.df-scope .btn-ghost > .arw { border-left-color: var(--df-edge-hi); }
+.df-scope .btn-ghost:hover { border-color: var(--df-steel); color: var(--df-bone); }
+
+.df-scope .tnum { font-variant-numeric: tabular-nums; }

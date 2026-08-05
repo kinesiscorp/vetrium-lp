@@ -1,52 +1,47 @@
 import { PROPOSAL_URL, WHATSAPP_NUMBER } from "@/lib/diagnostico-frog/content";
-import { Reveal } from "../proposal-frog/reveal";
+import { Reveal } from "./reveal";
 
 const MESSAGE =
-  "Olá! Vi o diagnóstico do redesign do site do Esquadrão do Frog e quero conversar sobre os próximos passos.";
+  "Fala! Vi o raio-x do redesign do meu site e quero falar sobre os próximos passos.";
 
 export function Closing() {
   const waHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(MESSAGE)}`;
 
   return (
-    <section className="relative overflow-hidden border-t border-line px-6 py-20 sm:px-10 sm:py-28">
+    <section className="sec relative overflow-hidden border-t border-frog-edge">
       <div
         aria-hidden
-        className="halo pointer-events-none absolute bottom-[-40%] left-1/2 aspect-square w-[min(720px,140%)] -translate-x-1/2"
-        style={{ background: "radial-gradient(circle, rgba(124,108,255,0.2), transparent 66%)" }}
+        className="pointer-events-none absolute bottom-[-30%] left-1/2 aspect-square w-[min(600px,120%)] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(124,255,0,0.12),transparent_68%)]"
       />
-      <div className="relative mx-auto max-w-[920px]">
+      <div className="wrap relative">
         <Reveal>
-          <p className="serif-accent mb-4 text-[15px] text-accent-solid">Em resumo</p>
-          <h2 className="text-balance text-[clamp(25px,3.4vw,36px)] leading-[1.1] font-semibold tracking-tight">
-            A base do redesign já está construída — o que falta é conteúdo real do
-            Frog, não mais decisão de design.
+          <p className="eyebrow mb-4">
+            <span className="slash">{"///"}</span> Em resumo
+          </p>
+          <h2 className="d h2 max-w-[18ch]">
+            Seu site já mudou. Falta fechar com a gente.
           </h2>
         </Reveal>
 
         <Reveal delay={0.1} className="mt-7 flex flex-wrap items-center gap-3">
           <a
-            href={PROPOSAL_URL}
-            className="bg-metal inline-flex items-center gap-3 px-6 py-3.5 text-[15.5px] font-semibold text-accent-ink transition-shadow hover:shadow-[0_14px_40px_-14px_rgba(124,108,255,0.8)]"
-          >
-            Ver a proposta comercial <span aria-hidden>→</span>
-          </a>
-          <a
             href={waHref}
             target="_blank"
             rel="noreferrer noopener"
-            className="border border-line-strong px-6 py-3.5 text-[15.5px] text-ink-dim transition-colors hover:border-accent-solid hover:text-ink"
+            className="btn btn-pri"
           >
-            Chamar no WhatsApp
+            <span className="lab">Chamar no WhatsApp</span>
+            <span className="arw" aria-hidden>
+              →
+            </span>
+          </a>
+          <a href={PROPOSAL_URL} className="btn btn-ghost">
+            <span className="lab">Ver a proposta comercial</span>
+            <span className="arw" aria-hidden>
+              →
+            </span>
           </a>
         </Reveal>
-
-        <div
-          aria-hidden
-          className="mt-10 text-[clamp(48px,13vw,140px)] leading-[0.85] font-semibold tracking-tight text-transparent select-none"
-          style={{ WebkitTextStroke: "1px rgba(255,255,255,0.07)" }}
-        >
-          vetrium
-        </div>
       </div>
     </section>
   );
