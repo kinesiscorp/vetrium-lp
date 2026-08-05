@@ -52,6 +52,11 @@
   --color-card: var(--card);
   --font-sans: var(--font-instrument-sans);
   --font-serif: var(--font-instrument-serif);
+  /* Tokens exclusivos da proposta comercial (ver .pf-scope) */
+  --color-sheet: var(--sheet);
+  --color-sheet-hi: var(--sheet-hi);
+  --color-faint: var(--faint);
+  --color-frog: var(--frog);
 }
 
 html {
@@ -199,5 +204,106 @@ body {
     opacity: 1 !important;
     transform: none !important;
     filter: none !important;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--accent-solid);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================================
+   Proposta comercial (/proposta-comercial/frogman)
+   Paleta fixa e sempre escura, isolada do tema claro/escuro do
+   site: documento comercial precisa abrir igual pra todo mundo,
+   então redefine os tokens compartilhados só dentro deste escopo
+   (o restante do site nunca vê estes valores).
+   ============================================================ */
+.pf-scope {
+  --bg: #030305;
+  --sheet: #08080f;
+  --sheet-hi: #0c0c14;
+  --ink: #f4f3fa;
+  --ink-dim: #c9c7db;
+  --muted: #8b8a9e;
+  --faint: #5b5a70;
+  --accent-from: #7c6cff;
+  --accent-to: #b47cff;
+  --accent-solid: #9a86ff;
+  --accent-ink: #07070c;
+  --line: rgba(255, 255, 255, 0.1);
+  --line-strong: rgba(255, 255, 255, 0.2);
+  --card: rgba(255, 255, 255, 0.04);
+  --halo: rgba(124, 108, 255, 0.28);
+  --frog: #7cff00;
+  color-scheme: dark;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.pf-scope input[type="range"].payback-slider {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--accent-from) 0%,
+    var(--accent-to) var(--fill, 25%),
+    var(--line) var(--fill, 25%),
+    var(--line) 100%
+  );
+  outline: none;
+}
+.pf-scope input[type="range"].payback-slider::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--ink);
+  border: 3px solid var(--accent-solid);
+  box-shadow: 0 4px 14px rgba(124, 108, 255, 0.5);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.pf-scope input[type="range"].payback-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.12);
+}
+.pf-scope input[type="range"].payback-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--ink);
+  border: 3px solid var(--accent-solid);
+  cursor: pointer;
+}
+.pf-scope input[type="range"].payback-slider::-moz-range-track {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--line);
+}
+
+@media print {
+  [data-no-print] {
+    display: none !important;
+  }
+  .pf-scope,
+  .pf-scope * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 }
