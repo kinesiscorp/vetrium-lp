@@ -181,6 +181,21 @@ body {
   animation: spin-slow 26s linear infinite;
 }
 
+@keyframes drift-3d {
+  0%,
+  100% {
+    transform: perspective(1200px) rotateY(-10deg) rotateX(7deg);
+  }
+  50% {
+    transform: perspective(1200px) rotateY(10deg) rotateX(-5deg);
+  }
+}
+
+.drift-3d {
+  animation: drift-3d 11s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
 /* Elements the scroll engine drives start hidden, but ONLY once the boot
    script has proven scripts run (.js-ok). If the engine never reports in, the
    boot script adds .anim-fallback and everything is revealed — content must
@@ -197,7 +212,8 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .marquee-track,
   .float-soft,
-  .spin-slow {
+  .spin-slow,
+  .drift-3d {
     animation: none;
   }
   .js-anim {
@@ -222,6 +238,32 @@ summary:focus-visible {
 
 .tnum {
   font-variant-numeric: tabular-nums;
+}
+
+.calc-select {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0.85rem;
+  border: 1px solid var(--line);
+  background-color: var(--bg-sunken);
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: calc(100% - 22px) calc(50% - 3px), calc(100% - 16px) calc(50% - 3px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  color: var(--muted);
+  padding: 0.9rem 2.75rem 0.9rem 1.1rem;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.calc-select:hover,
+.calc-select:focus-visible {
+  border-color: var(--line-strong);
+  color: var(--ink);
 }
 
 /* ============================================================

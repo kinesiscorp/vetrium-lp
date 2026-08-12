@@ -94,6 +94,55 @@ export function OrbLens({ className = "" }: OrbProps) {
 }
 
 /**
+ * Faceted crystal glyph for the hero — same wireframe language as the other
+ * orbs (currentColor strokes) but built from angular shards with a gradient
+ * fill hint, closer to a floating 3D sculpture than a flat icon.
+ */
+export function OrbShard({ className = "" }: OrbProps) {
+  const gid = "orb-shard-fill";
+  return (
+    <svg viewBox="0 0 100 100" fill="none" className={className} aria-hidden>
+      <defs>
+        <linearGradient id={gid} x1="20" y1="5" x2="82" y2="78" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="var(--accent-from)" />
+          <stop offset="100%" stopColor="var(--accent-to)" />
+        </linearGradient>
+      </defs>
+      <g strokeWidth="0.8" strokeLinejoin="round">
+        <polygon
+          points="34,6 44,9 40,56 28,60"
+          fill={`url(#${gid})`}
+          fillOpacity="0.16"
+          stroke="currentColor"
+          opacity="0.9"
+        />
+        <polygon
+          points="48,3 60,7 52,62 40,57"
+          fill={`url(#${gid})`}
+          fillOpacity="0.1"
+          stroke="currentColor"
+          opacity="0.85"
+        />
+        <polygon
+          points="14,62 46,50 50,60 20,74"
+          fill={`url(#${gid})`}
+          fillOpacity="0.14"
+          stroke="currentColor"
+          opacity="0.85"
+        />
+        <polygon
+          points="54,59 78,49 82,56 58,68"
+          fill={`url(#${gid})`}
+          fillOpacity="0.55"
+          stroke="currentColor"
+          opacity="0.9"
+        />
+      </g>
+    </svg>
+  );
+}
+
+/**
  * Seed-of-life mandala. `pathClass` is applied to every stroke so the scroll
  * engine can grab them and draw the figure in as the section scrubs.
  */
