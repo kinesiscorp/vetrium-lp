@@ -130,6 +130,36 @@ export function IconCode({ className = "", ...rest }: IconProps) {
   );
 }
 
+/* ---------- Manifesto ("Damos forma à ambição do seu negócio") ---------- */
+
+export function IconForm({ className = "", ...rest }: IconProps) {
+  return (
+    <svg {...svgBase} {...rest} className={className} aria-hidden>
+      <rect x="3" y="8" width="11" height="11" rx="2.2" />
+      <circle cx="16.3" cy="8.3" r="5.3" />
+    </svg>
+  );
+}
+
+export function IconAmbition({ className = "", ...rest }: IconProps) {
+  return (
+    <svg {...svgBase} {...rest} className={className} aria-hidden>
+      <path d="M4 17 9.5 11.5 13.5 14.5 20 7" />
+      <path d="M14.5 7h5.5v5.5" />
+    </svg>
+  );
+}
+
+export function IconBusiness({ className = "", ...rest }: IconProps) {
+  return (
+    <svg {...svgBase} {...rest} className={className} aria-hidden>
+      <rect x="3" y="8" width="18" height="12" rx="2.2" />
+      <path d="M8.5 8V6.2a1.8 1.8 0 0 1 1.8-1.8h3.4a1.8 1.8 0 0 1 1.8 1.8V8" />
+      <path d="M3 13.6h18" />
+    </svg>
+  );
+}
+
 export function IconArrowRight({ className = "", ...rest }: IconProps) {
   return (
     <svg {...svgBase} {...rest} className={className} aria-hidden>

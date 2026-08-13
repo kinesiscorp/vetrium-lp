@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { CrystalGlyph } from "./vetrium-mark";
+import { IconAmbition, IconBusiness, IconForm } from "./icons";
 
 /**
  * Bloco de storytelling da marca — dois momentos encadeados que o scroll
@@ -7,10 +7,11 @@ import { CrystalGlyph } from "./vetrium-mark";
  *   1. a headline se montando com pin + scrub   (data-anim="assemble")
  *   2. o parágrafo acendendo palavra a palavra   (data-anim="words")
  *
- * É a parte "experiência" da página; a mecânica não muda. O que mudou são
- * os glifos entre as palavras: as esferas de wireframe da versão anterior
- * viraram cortes do mesmo cristal do símbolo, então a headline passou a
- * falar a língua da marca em vez de geometria genérica.
+ * É a parte "experiência" da página; a mecânica não muda. Os glifos entre
+ * as palavras são literais, um por palavra-chave — formas geométricas
+ * abstratas (cortes de cristal) testaram parecidas demais entre si e não
+ * diziam nada de cara; ícones da mesma família linear do resto da home
+ * (IconForm/IconAmbition/IconBusiness) leem a intenção na primeira olhada.
  */
 const PARAGRAPH =
   "Tudo que sua marca precisa já existe dentro do seu negócio — a Vetrium torna isso visível. Diagnóstico primeiro, design depois: cada decisão visual responde a um problema real de conversão.";
@@ -34,20 +35,14 @@ export function BrandManifesto() {
           <span className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1">
             <span data-piece>Damos</span>
             <span data-piece className={GLYPH_FRAME}>
-              <CrystalGlyph
-                shape="shard"
-                className="h-[0.62em] w-[0.62em] text-accent-solid"
-              />
+              <IconForm className="h-[0.6em] w-[0.6em] text-accent-solid" />
             </span>
             <span data-piece>forma</span>
           </span>
           <span className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1">
             <span data-piece>à</span>
             <span data-piece className={GLYPH_FRAME}>
-              <CrystalGlyph
-                shape="prism"
-                className="h-[0.62em] w-[0.62em] text-accent-solid"
-              />
+              <IconAmbition className="h-[0.6em] w-[0.6em] text-accent-solid" />
             </span>
             <span data-piece className="emph">
               ambição
@@ -56,10 +51,7 @@ export function BrandManifesto() {
           <span className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1">
             <span data-piece>do seu</span>
             <span data-piece className={GLYPH_FRAME}>
-              <CrystalGlyph
-                shape="facet"
-                className="h-[0.62em] w-[0.62em] text-accent-solid"
-              />
+              <IconBusiness className="h-[0.6em] w-[0.6em] text-accent-solid" />
             </span>
             <span data-piece>negócio</span>
           </span>
