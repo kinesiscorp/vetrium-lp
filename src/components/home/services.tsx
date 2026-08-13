@@ -83,7 +83,7 @@ export function Services() {
                 />
 
                 <span className="grid h-11 w-11 flex-none place-items-center rounded-[10px] border border-line text-accent-solid transition-colors duration-500 group-hover:border-accent-solid lg:ml-6">
-                  <Icon data-anim="icon-draw" className="icon-pop h-5 w-5" />
+                  <Icon data-anim="icon-draw" className="icon-anim h-5 w-5" />
                 </span>
 
                 <h3 className="t-h3 text-[clamp(1.15rem,2.2vw,1.4rem)]">

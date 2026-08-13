@@ -28,9 +28,9 @@ const svgBase = {
 export function IconStrategy({ className = "", ...rest }: IconProps) {
   return (
     <svg {...svgBase} {...rest} className={className} aria-hidden>
-      <circle cx="12" cy="12" r="8.2" />
+      <circle className="i-ring" cx="12" cy="12" r="8.2" />
       <circle cx="12" cy="12" r="3.4" />
-      <path d="M12 3.8V1.8M12 22.2v-2M3.8 12h-2M22.2 12h-2" />
+      <path className="i-ticks" d="M12 3.8V1.8M12 22.2v-2M3.8 12h-2M22.2 12h-2" />
     </svg>
   );
 }
@@ -38,9 +38,9 @@ export function IconStrategy({ className = "", ...rest }: IconProps) {
 export function IconBranding({ className = "", ...rest }: IconProps) {
   return (
     <svg {...svgBase} {...rest} className={className} aria-hidden>
-      <path d="M12 3 4.6 8.4 12 21l7.4-12.6L12 3Z" />
+      <path className="i-gem" d="M12 3 4.6 8.4 12 21l7.4-12.6L12 3Z" />
       <path d="M4.6 8.4h14.8" />
-      <path d="m12 3-3.1 5.4L12 21l3.1-12.6L12 3Z" />
+      <path className="i-facet" d="m12 3-3.1 5.4L12 21l3.1-12.6L12 3Z" />
     </svg>
   );
 }
@@ -51,8 +51,10 @@ export function IconWeb({ className = "", ...rest }: IconProps) {
       <rect x="2.8" y="4" width="18.4" height="16" rx="2.6" />
       <path d="M2.8 9h18.4" />
       <path d="M6 6.5h.01M8.6 6.5h.01" />
-      <path d="m10.2 13-1.9 1.9 1.9 1.9" />
-      <path d="m13.8 13 1.9 1.9-1.9 1.9" />
+      <g className="i-swap">
+        <path d="m10.2 13-1.9 1.9 1.9 1.9" />
+        <path d="m13.8 13 1.9 1.9-1.9 1.9" />
+      </g>
     </svg>
   );
 }
@@ -60,9 +62,9 @@ export function IconWeb({ className = "", ...rest }: IconProps) {
 export function IconProduct({ className = "", ...rest }: IconProps) {
   return (
     <svg {...svgBase} {...rest} className={className} aria-hidden>
-      <path d="m12 3 8.6 4.6L12 12.2 3.4 7.6 12 3Z" />
+      <path className="i-layer-top" d="m12 3 8.6 4.6L12 12.2 3.4 7.6 12 3Z" />
       <path d="m3.4 12 8.6 4.6 8.6-4.6" />
-      <path d="m3.4 16.4 8.6 4.6 8.6-4.6" />
+      <path className="i-layer-bottom" d="m3.4 16.4 8.6 4.6 8.6-4.6" />
     </svg>
   );
 }
@@ -72,8 +74,10 @@ export function IconProduct({ className = "", ...rest }: IconProps) {
 export function IconSearch({ className = "", ...rest }: IconProps) {
   return (
     <svg {...svgBase} {...rest} className={className} aria-hidden>
-      <circle cx="10.8" cy="10.8" r="6.6" />
-      <path d="m15.7 15.7 4.6 4.6" />
+      <g className="i-lens">
+        <circle cx="10.8" cy="10.8" r="6.6" />
+        <path d="m15.7 15.7 4.6 4.6" />
+      </g>
     </svg>
   );
 }
@@ -81,8 +85,8 @@ export function IconSearch({ className = "", ...rest }: IconProps) {
 export function IconCompass({ className = "", ...rest }: IconProps) {
   return (
     <svg {...svgBase} {...rest} className={className} aria-hidden>
-      <circle cx="12" cy="12" r="8.6" />
-      <path d="m15.8 8.2-2.1 5.5-5.5 2.1 2.1-5.5 5.5-2.1Z" />
+      <circle className="i-dial" cx="12" cy="12" r="8.6" />
+      <path className="i-needle" d="m15.8 8.2-2.1 5.5-5.5 2.1 2.1-5.5 5.5-2.1Z" />
     </svg>
   );
 }
@@ -91,7 +95,7 @@ export function IconPen({ className = "", ...rest }: IconProps) {
   return (
     <svg {...svgBase} {...rest} className={className} aria-hidden>
       <path d="M12.4 4.2H6a2 2 0 0 0-2 2V18a2 2 0 0 0 2 2h11.8a2 2 0 0 0 2-2v-6.4" />
-      <path d="M18.2 3.4a1.9 1.9 0 0 1 2.7 2.7l-8 8-3.5.8.8-3.5 8-8Z" />
+      <path className="i-nib" d="M18.2 3.4a1.9 1.9 0 0 1 2.7 2.7l-8 8-3.5.8.8-3.5 8-8Z" />
     </svg>
   );
 }
@@ -99,8 +103,8 @@ export function IconPen({ className = "", ...rest }: IconProps) {
 export function IconLaunch({ className = "", ...rest }: IconProps) {
   return (
     <svg {...svgBase} {...rest} className={className} aria-hidden>
-      <path d="M21 3 2.9 9.9l7 2.7 2.7 7L21 3Z" />
-      <path d="m9.9 12.6 4.2-4.2" />
+      <path className="i-rocket" d="M21 3 2.9 9.9l7 2.7 2.7 7L21 3Z" />
+      <path className="i-trail" d="m9.9 12.6 4.2-4.2" />
     </svg>
   );
 }
@@ -119,8 +123,8 @@ export function IconSparkle({ className = "", ...rest }: IconProps) {
 export function IconCode({ className = "", ...rest }: IconProps) {
   return (
     <svg {...svgBase} {...rest} className={className} aria-hidden>
-      <path d="m8.4 8.2-4.2 3.8 4.2 3.8" />
-      <path d="m15.6 8.2 4.2 3.8-4.2 3.8" />
+      <path className="i-lt" d="m8.4 8.2-4.2 3.8 4.2 3.8" />
+      <path className="i-gt" d="m15.6 8.2 4.2 3.8-4.2 3.8" />
       <path d="m13.4 4.6-2.8 14.8" />
     </svg>
   );

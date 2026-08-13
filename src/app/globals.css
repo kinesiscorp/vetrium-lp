@@ -425,16 +425,114 @@ summary:focus-visible {
   transform: translateY(0);
 }
 
-/* Ícones de conteúdo (serviços/processo/abordagem): giram e crescem de leve
-   quando o card/linha em volta (.group) ganha hover. Pode morar no próprio
-   SVG — diferente de .hover-lift/.hover-tilt, o GSAP do icon-draw só escreve
-   strokeDashoffset nos path/circle filhos, nunca transform no elemento, então
-   não há disputa de propriedade com o CSS aqui. */
-.icon-pop {
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+/* Ícones de conteúdo (serviços/processo/abordagem): cada um tem uma pequena
+   coreografia própria no hover do card/linha em volta (.group) — as peças
+   internas do SVG se movem entre si, em vez do ícone inteiro só girar e
+   crescer como bloco único. Pode morar no próprio SVG — diferente de
+   .hover-lift/.hover-tilt, o GSAP do icon-draw só escreve strokeDashoffset
+   nos path/circle, nunca transform, então não há disputa de propriedade. */
+.icon-anim path,
+.icon-anim circle,
+.icon-anim g {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.4s ease;
 }
-.group:hover .icon-pop {
-  transform: scale(1.12) rotate(-6deg);
+
+/* Estratégia: anel "mira" pulsa pra fora, a cruz acompanha */
+.group:hover .i-ring {
+  transform: scale(1.18);
+}
+.group:hover .i-ticks {
+  transform: scale(1.4);
+}
+
+/* Branding: a faceta interna ganha brilho, como luz pegando o corte do
+   vidro, e o corpo do prisma inclina de leve. */
+.i-facet {
+  opacity: 0.5;
+}
+.group:hover .i-facet {
+  opacity: 1;
+  transform: scale(1.05);
+}
+.group:hover .i-gem {
+  transform: rotate(-4deg);
+}
+
+/* Web: as setas de troca giram meia-volta, como um refresh */
+.group:hover .i-swap {
+  transform: rotate(180deg);
+}
+
+/* Produto: as camadas se separam, como uma vista explodida */
+.group:hover .i-layer-top {
+  transform: translateY(-2.5px);
+}
+.group:hover .i-layer-bottom {
+  transform: translateY(2.5px);
+  transition-delay: 0.05s;
+}
+
+/* Busca: a lupa inteira varre a área em dois tempos antes de assentar */
+@keyframes icon-scan {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  35% {
+    transform: translate(-1.5px, 1px);
+  }
+  70% {
+    transform: translate(1.5px, -1px);
+  }
+}
+.group:hover .i-lens {
+  animation: icon-scan 0.9s ease-in-out;
+}
+
+/* Bússola: a agulha gira pra um novo rumo, o mostrador acompanha devagar
+   no sentido oposto — dá profundidade de peça mecânica, não um giro só. */
+.group:hover .i-needle {
+  transform: rotate(52deg);
+}
+.group:hover .i-dial {
+  transform: rotate(-12deg);
+}
+
+/* Caneta: o bico "assina", um rabisco rápido de dois lados */
+@keyframes icon-write {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+}
+.group:hover .i-nib {
+  animation: icon-write 0.6s ease-in-out;
+}
+
+/* Lançamento: acelera na diagonal, o rastro estica atrás */
+.group:hover .i-rocket {
+  transform: translate(2.5px, -2.5px);
+}
+.group:hover .i-trail {
+  transform: scaleX(1.3);
+}
+
+/* Código: os colchetes se afastam, como abrindo espaço pro conteúdo */
+.group:hover .i-lt {
+  transform: translateX(-2px);
+}
+.group:hover .i-gt {
+  transform: translateX(2px);
 }
 
 /* Dot "aceitando projetos" */
@@ -457,8 +555,24 @@ summary:focus-visible {
   }
   .hover-lift:hover,
   .btn-glow:hover,
-  .group:hover .icon-pop {
+  .group:hover .i-ring,
+  .group:hover .i-ticks,
+  .group:hover .i-facet,
+  .group:hover .i-gem,
+  .group:hover .i-swap,
+  .group:hover .i-layer-top,
+  .group:hover .i-layer-bottom,
+  .group:hover .i-needle,
+  .group:hover .i-dial,
+  .group:hover .i-rocket,
+  .group:hover .i-trail,
+  .group:hover .i-lt,
+  .group:hover .i-gt {
     transform: none;
+  }
+  .group:hover .i-lens,
+  .group:hover .i-nib {
+    animation: none;
   }
 }
 

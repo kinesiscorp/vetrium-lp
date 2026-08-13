@@ -71,7 +71,7 @@ export function Approach() {
                 }
               >
                 <span className="grid h-11 w-11 flex-none place-items-center rounded-[10px] border border-line text-accent-solid transition-colors duration-500 group-hover:border-accent-solid">
-                  <Icon data-anim="icon-draw" className="icon-pop h-5 w-5" />
+                  <Icon data-anim="icon-draw" className="icon-anim h-5 w-5" />
                 </span>
 
                 <h3 className="t-h3 mt-8 text-[17px]">{title}</h3>
