@@ -83,6 +83,8 @@ const PRICE_TABLE: Record<
 
 const STYLE_MULT: Record<StyleId, number> = { padrao: 1, autoral: 1.25 };
 const TIMELINE_MULT: Record<TimelineId, number> = { flexivel: 1, urgente: 1.25 };
+// Prioridade na fila também encurta o prazo, não só encarece.
+const TIMELINE_DAY_MULT: Record<TimelineId, number> = { flexivel: 1, urgente: 0.65 };
 const AVISTA_DESCONTO = 0.15; // mesmo desconto já praticado nas propostas Frog/JJL
 const ROUND_TO = 50;
 
@@ -120,7 +122,12 @@ export function PricingCalculator() {
     const max = round(base.max * mult);
     const avistaMin = round(min * (1 - AVISTA_DESCONTO));
     const avistaMax = round(max * (1 - AVISTA_DESCONTO));
-    return { min, max, avistaMin, avistaMax, days: base.days };
+    const dayMult = TIMELINE_DAY_MULT[timeline];
+    const days: [number, number] = [
+      Math.max(1, Math.round(base.days[0] * dayMult)),
+      Math.max(1, Math.round(base.days[1] * dayMult)),
+    ];
+    return { min, max, avistaMin, avistaMax, days };
   }, [category, size, style, timeline]);
 
   const mailBody = `Categoria: ${CATEGORIES.find((c) => c.id === category)?.label}%0ATamanho: ${SIZES.find((s) => s.id === size)?.label}%0AEstilo: ${STYLES.find((s) => s.id === style)?.label}%0APrazo desejado: ${TIMELINES.find((t) => t.id === timeline)?.label}%0AFaixa estimada: ${brl.format(estimate.min)} – ${brl.format(estimate.max)}`;

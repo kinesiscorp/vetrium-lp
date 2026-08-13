@@ -19,6 +19,8 @@ declare global {
  *                         positions while the section is pinned
  *   data-anim="words"     children [data-word] brighten one by one on scrub
  *   data-anim="hero"      hero drifts + dissolves as you leave it
+ *   data-anim="icon-draw" every path/circle inside is stroked in, once,
+ *                         as the icon enters view
  *   data-parallax="0.2"   translate on scroll at the given speed
  */
 export function ScrollEngine() {
@@ -147,6 +149,29 @@ export function ScrollEngine() {
           },
         );
       });
+
+      /* ---------- icon stroke-draw ---------- */
+      gsap.utils.toArray<SVGSVGElement>('[data-anim="icon-draw"]').forEach(
+        (icon) => {
+          const shapes = gsap.utils.toArray<SVGGeometryElement>(
+            "path, circle",
+            icon,
+          );
+          if (!shapes.length) return;
+
+          shapes.forEach((shape) => {
+            const len = shape.getTotalLength?.() ?? 60;
+            gsap.set(shape, { strokeDasharray: len, strokeDashoffset: len });
+          });
+          gsap.to(shapes, {
+            strokeDashoffset: 0,
+            ease: "power2.out",
+            duration: 0.7,
+            stagger: 0.06,
+            scrollTrigger: { trigger: icon, start: "top 90%", once: true },
+          });
+        },
+      );
 
       /* ---------- parallax ---------- */
       gsap.utils.toArray<HTMLElement>("[data-parallax]").forEach((el) => {

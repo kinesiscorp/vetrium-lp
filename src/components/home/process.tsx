@@ -82,7 +82,7 @@ export function Process() {
                 </div>
 
                 <span className="mt-7 grid h-11 w-11 place-items-center rounded-[10px] border border-line bg-bg-elevated/60 text-accent-solid transition-colors duration-500 group-hover:border-accent-solid">
-                  <Icon className="h-5 w-5" />
+                  <Icon data-anim="icon-draw" className="icon-pop h-5 w-5" />
                 </span>
 
                 {/* Reserva duas linhas a partir de sm: os títulos têm

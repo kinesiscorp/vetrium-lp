@@ -425,6 +425,18 @@ summary:focus-visible {
   transform: translateY(0);
 }
 
+/* Ícones de conteúdo (serviços/processo/abordagem): giram e crescem de leve
+   quando o card/linha em volta (.group) ganha hover. Pode morar no próprio
+   SVG — diferente de .hover-lift/.hover-tilt, o GSAP do icon-draw só escreve
+   strokeDashoffset nos path/circle filhos, nunca transform no elemento, então
+   não há disputa de propriedade com o CSS aqui. */
+.icon-pop {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.group:hover .icon-pop {
+  transform: scale(1.12) rotate(-6deg);
+}
+
 /* Dot "aceitando projetos" */
 @keyframes pulse-dot {
   0% {
@@ -444,7 +456,8 @@ summary:focus-visible {
     animation: none;
   }
   .hover-lift:hover,
-  .btn-glow:hover {
+  .btn-glow:hover,
+  .group:hover .icon-pop {
     transform: none;
   }
 }
