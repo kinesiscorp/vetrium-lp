@@ -13,7 +13,7 @@ export function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label="Alternar entre tema claro e escuro"
-      className="flex h-8 w-8 items-center justify-center rounded-full text-ink/70 transition-colors hover:bg-white/10 hover:text-ink"
+      className="flex h-8 w-8 items-center justify-center rounded-full text-ink/70 transition-colors hover:bg-line hover:text-ink"
     >
       <svg
         width="15"

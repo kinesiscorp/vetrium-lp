@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
+import { IconArrowRight } from "@/components/home/icons";
 
 /**
  * Base ranges anchored on real proposals already sent by the Vetrium:
@@ -95,6 +96,16 @@ function round(n: number) {
   return Math.round(n / ROUND_TO) * ROUND_TO;
 }
 
+const MODES: { id: Mode; label: string }[] = [
+  { id: "unico", label: "Projeto único" },
+  { id: "recorrente", label: "Recorrente" },
+];
+
+/* CTA da marca: pílula em bg-metal com a seta em cápsula. Repetida nas duas
+   abas, então mora numa constante em vez de ser copiada. */
+const CTA =
+  "btn-glow group inline-flex items-center justify-center gap-2.5 rounded-full bg-metal py-3.5 pl-6 pr-3 text-sm font-semibold text-accent-ink";
+
 export function PricingCalculator() {
   const [mode, setMode] = useState<Mode>("unico");
   const [category, setCategory] = useState<Category>("redesign");
@@ -115,177 +126,222 @@ export function PricingCalculator() {
   const mailBody = `Categoria: ${CATEGORIES.find((c) => c.id === category)?.label}%0ATamanho: ${SIZES.find((s) => s.id === size)?.label}%0AEstilo: ${STYLES.find((s) => s.id === style)?.label}%0APrazo desejado: ${TIMELINES.find((t) => t.id === timeline)?.label}%0AFaixa estimada: ${brl.format(estimate.min)} – ${brl.format(estimate.max)}`;
 
   return (
-    <div className="grid gap-10 lg:grid-cols-[minmax(0,17rem)_1fr]">
-      <div data-anim="fade" className="js-anim">
-        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-accent-solid">
-          Investimento
-        </p>
-        <h2 className="text-[clamp(2rem,4.5vw,3.25rem)] font-semibold leading-tight tracking-tighter">
-          Orçamento <span className="serif-accent">simples</span>
-        </h2>
-        <p className="mt-5 text-[15px] leading-relaxed text-muted">
-          A maioria dos projetos já sai com faixa de valor e prazo claros
-          aqui. Fora da régua, ajustamos numa conversa rápida.
-        </p>
+    <div>
+      {/* Ação é pílula, superfície é faceta — por isso o seletor de modo
+          continua redondo mesmo com o painel de cantos curtos embaixo. */}
+      <div
+        role="group"
+        aria-label="Tipo de contratação"
+        className="mb-6 inline-flex rounded-full border border-line p-1"
+      >
+        {MODES.map((m) => (
+          <button
+            key={m.id}
+            type="button"
+            onClick={() => setMode(m.id)}
+            aria-pressed={mode === m.id}
+            className={
+              "rounded-full px-5 py-2 text-[13px] font-medium transition-colors duration-300 " +
+              (mode === m.id
+                ? "bg-metal text-accent-ink"
+                : "text-muted hover:text-ink")
+            }
+          >
+            {m.label}
+          </button>
+        ))}
       </div>
 
-      <div data-anim="fade" data-delay={100} className="js-anim">
-        <div className="mb-6 inline-flex rounded-full border border-line p-1">
-          {(
-            [
-              { id: "unico" as const, label: "Projeto único" },
-              { id: "recorrente" as const, label: "Recorrente" },
-            ]
-          ).map((m) => (
-            <button
-              key={m.id}
-              type="button"
-              onClick={() => setMode(m.id)}
-              className={`rounded-full px-4 py-2 text-[13px] font-medium transition-colors ${
-                mode === m.id
-                  ? "bg-metal text-accent-ink"
-                  : "text-muted hover:text-ink"
-              }`}
-            >
-              {m.label}
-            </button>
-          ))}
+      {mode === "recorrente" ? (
+        <div className="crystal-panel p-10 text-center sm:p-14">
+          <h3 className="t-h3 mx-auto max-w-[26ch] text-[clamp(1.15rem,2.4vw,1.5rem)]">
+            Ainda não temos um plano de recorrência fechado
+          </h3>
+          <p className="mx-auto mt-4 max-w-sm text-[15px] leading-relaxed text-muted">
+            Se o seu caso é demanda contínua, não pontual, manda uma mensagem
+            que a gente monta uma proposta sob medida.
+          </p>
+          <a
+            href="mailto:contato@vetrium.com.br?subject=Demanda%20recorrente"
+            className={`${CTA} mt-8`}
+          >
+            Falar com a Vetrium
+            <span className="grid h-7 w-7 place-items-center rounded-full bg-accent-ink/15 transition-transform duration-300 group-hover:translate-x-0.5">
+              <IconArrowRight className="h-3.5 w-3.5" />
+            </span>
+          </a>
         </div>
+      ) : (
+        /* overflow-hidden pra que as duas colunas respeitem o raio do painel;
+           a aresta iluminada de .crystal-panel é absolute e sobrevive a ele. */
+        <div className="crystal-panel overflow-hidden">
+          {/* 24rem na coluna do resultado é o mínimo pra faixa inteira
+              ("R$ 10.000 – R$ 15.000") caber numa linha só — abaixo disso o
+              travessão sobra sozinho no fim da primeira linha. */}
+          <div className="grid lg:grid-cols-[1fr_minmax(0,24rem)]">
+            {/* ---------- Entradas ---------- */}
+            <div className="space-y-6 p-6 sm:p-9">
+              <Row n={1} label="Tipo de projeto">
+                <select
+                  value={category}
+                  onChange={(e) => {
+                    setCategory(e.target.value as Category);
+                    setSize("medio");
+                  }}
+                  className="calc-select"
+                >
+                  {CATEGORIES.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.label}
+                    </option>
+                  ))}
+                </select>
+              </Row>
 
-        {mode === "recorrente" ? (
-          <div className="gradient-frame glass rounded-3xl p-10 text-center">
-            <p className="text-lg font-semibold tracking-tight">
-              Ainda não temos um plano de recorrência fechado
-            </p>
-            <p className="mx-auto mt-3 max-w-sm text-[15px] leading-relaxed text-muted">
-              Se o seu caso é demanda contínua, não pontual, manda uma
-              mensagem que a gente monta uma proposta sob medida.
-            </p>
-            <a
-              href="mailto:contato@vetrium.com.br?subject=Demanda%20recorrente"
-              className="mt-7 inline-block rounded-full bg-metal px-6 py-3 text-sm font-semibold text-accent-ink transition-opacity hover:opacity-90"
-            >
-              Falar com a Vetrium
-            </a>
-          </div>
-        ) : (
-          <div className="gradient-frame glass rounded-3xl p-6 sm:p-8">
-            <Row n={1} label="Tipo de projeto">
-              <select
-                value={category}
-                onChange={(e) => {
-                  setCategory(e.target.value as Category);
-                  setSize("medio");
-                }}
-                className="calc-select"
-              >
-                {CATEGORIES.map((c) => (
-                  <option key={c.id} value={c.id}>
-                    {c.label}
-                  </option>
-                ))}
-              </select>
-            </Row>
+              <Row n={2} label="Tamanho">
+                <select
+                  value={size}
+                  onChange={(e) => setSize(e.target.value as SizeId)}
+                  className="calc-select"
+                >
+                  {SIZES.map((s) => (
+                    <option key={s.id} value={s.id}>
+                      {s.label} — {SIZE_DESC[category][s.id]}
+                    </option>
+                  ))}
+                </select>
+              </Row>
 
-            <Row n={2} label="Tamanho">
-              <select
-                value={size}
-                onChange={(e) => setSize(e.target.value as SizeId)}
-                className="calc-select"
-              >
-                {SIZES.map((s) => (
-                  <option key={s.id} value={s.id}>
-                    {s.label} — {SIZE_DESC[category][s.id]}
-                  </option>
-                ))}
-              </select>
-            </Row>
+              <Row n={3} label="Estilo">
+                <select
+                  value={style}
+                  onChange={(e) => setStyle(e.target.value as StyleId)}
+                  className="calc-select"
+                >
+                  {STYLES.map((s) => (
+                    <option key={s.id} value={s.id}>
+                      {s.label}
+                    </option>
+                  ))}
+                </select>
+              </Row>
 
-            <Row n={3} label="Estilo">
-              <select
-                value={style}
-                onChange={(e) => setStyle(e.target.value as StyleId)}
-                className="calc-select"
-              >
-                {STYLES.map((s) => (
-                  <option key={s.id} value={s.id}>
-                    {s.label}
-                  </option>
-                ))}
-              </select>
-            </Row>
-
-            <Row n={4} label="Prazo" last>
-              <select
-                value={timeline}
-                onChange={(e) => setTimeline(e.target.value as TimelineId)}
-                className="calc-select"
-              >
-                {TIMELINES.map((t) => (
-                  <option key={t.id} value={t.id}>
-                    {t.label}
-                  </option>
-                ))}
-              </select>
-            </Row>
-
-            <div className="mt-8 flex flex-col gap-6 border-t border-line pt-8 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-                  Faixa estimada
-                </p>
-                <p className="tnum mt-2 text-[clamp(1.6rem,3.4vw,2.25rem)] font-semibold tracking-tight">
-                  {brl.format(estimate.min)} – {brl.format(estimate.max)}
-                </p>
-                <p className="tnum mt-1 text-sm text-muted">
-                  À vista: {brl.format(estimate.avistaMin)} –{" "}
-                  {brl.format(estimate.avistaMax)} · {estimate.days[0]}–
-                  {estimate.days[1]} dias úteis
-                </p>
-              </div>
-              <a
-                href={`mailto:contato@vetrium.com.br?subject=Or%C3%A7amento%20estimado&body=${mailBody}`}
-                className="inline-block rounded-full bg-ink px-6 py-3 text-center text-[13px] font-semibold text-bg transition-opacity hover:opacity-85"
-              >
-                Fechar esse orçamento
-              </a>
+              <Row n={4} label="Prazo">
+                <select
+                  value={timeline}
+                  onChange={(e) => setTimeline(e.target.value as TimelineId)}
+                  className="calc-select"
+                >
+                  {TIMELINES.map((t) => (
+                    <option key={t.id} value={t.id}>
+                      {t.label}
+                    </option>
+                  ))}
+                </select>
+              </Row>
             </div>
 
-            <p className="mt-5 text-xs leading-relaxed text-muted">
-              Estimativa de referência — Redesign/Landing page médio e
-              Identidade essencial refletem valores já praticados em
-              propostas reais; as demais faixas ainda não foram testadas com
-              cliente e podem mudar após um diagnóstico.
-            </p>
+            {/* ---------- Resultado ----------
+                aria-live: o número muda sem que nada receba foco, então sem
+                isso a mudança passa em silêncio pra quem usa leitor de tela. */}
+            <div
+              aria-live="polite"
+              className="flex flex-col border-t border-line bg-bg-elevated/70 p-6 sm:p-9 lg:border-l lg:border-t-0"
+            >
+              <p className="t-label text-ink-dim">Faixa estimada</p>
+              {/* Peso e tracking de .t-h2, mas sem o `text-wrap: balance` dela:
+                  numa faixa de dois valores o balance parte a linha no meio de
+                  propósito, e o travessão fica órfão no fim da primeira. */}
+              <p className="font-display tnum mt-3 text-[clamp(1.3rem,2.4vw,1.65rem)] font-semibold leading-tight tracking-[-0.022em]">
+                <span className="whitespace-nowrap">
+                  {brl.format(estimate.min)}
+                </span>
+                <span className="mx-1.5 font-normal text-muted">–</span>
+                <span className="whitespace-nowrap">
+                  {brl.format(estimate.max)}
+                </span>
+              </p>
+
+              <dl className="mt-7 space-y-3.5 border-t border-line pt-6 text-[13.5px]">
+                <div className="flex items-baseline justify-between gap-4">
+                  <dt className="text-muted">
+                    {`À vista (−${Math.round(AVISTA_DESCONTO * 100)}%)`}
+                  </dt>
+                  <dd className="tnum text-right font-medium text-ink-dim">
+                    {brl.format(estimate.avistaMin)} –{" "}
+                    {brl.format(estimate.avistaMax)}
+                  </dd>
+                </div>
+                <div className="flex items-baseline justify-between gap-4">
+                  <dt className="text-muted">Prazo</dt>
+                  <dd className="tnum text-right font-medium text-ink-dim">
+                    {estimate.days[0]}–{estimate.days[1]} dias úteis
+                  </dd>
+                </div>
+              </dl>
+
+              <a
+                href={`mailto:contato@vetrium.com.br?subject=Or%C3%A7amento%20estimado&body=${mailBody}`}
+                className={`${CTA} mt-8 w-full`}
+              >
+                Fechar esse orçamento
+                <span className="grid h-7 w-7 place-items-center rounded-full bg-accent-ink/15 transition-transform duration-300 group-hover:translate-x-0.5">
+                  <IconArrowRight className="h-3.5 w-3.5" />
+                </span>
+              </a>
+
+              {/* mt-auto: a ressalva encosta no rodapé da coluna em vez de
+                  flutuar logo abaixo do botão quando a coluna estica. */}
+              <p className="mt-auto pt-7 text-xs leading-relaxed text-muted">
+                Estimativa de referência — Redesign/Landing page médio e
+                Identidade essencial refletem valores já praticados em propostas
+                reais; as demais faixas ainda não foram testadas com cliente e
+                podem mudar após um diagnóstico.
+              </p>
+            </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
 
+/**
+ * Linha de entrada. O cabeçalho repete o nó facetado + fio + número do
+ * processo (ver components/home/process.tsx): é a mesma ideia de sequência,
+ * então usa o mesmo desenho em vez de inventar outro marcador.
+ *
+ * É um <label> de verdade envolvendo o campo: os quatro seletores não tinham
+ * nome acessível nenhum antes — um leitor de tela anunciava só o valor atual,
+ * sem dizer do que ele era resposta. O número fica aria-hidden pra não entrar
+ * no nome do campo ("Tipo de projeto 01").
+ */
 function Row({
   n,
   label,
-  last,
   children,
 }: {
   n: number;
   label: string;
-  last?: boolean;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
-    <div className={last ? "" : "mb-5"}>
-      <div className="mb-2 flex items-center gap-3">
-        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-bg-sunken text-[10px] font-semibold text-muted">
-          {n}
+    <label className="block">
+      <span className="mb-2.5 flex items-center gap-3">
+        <span
+          aria-hidden
+          className="h-[9px] w-[9px] flex-none rotate-45 border border-accent-solid bg-accent-solid/25"
+        />
+        <span className="t-label text-[10px] text-ink-dim">{label}</span>
+        <span aria-hidden className="h-px flex-1 bg-line" />
+        <span
+          aria-hidden
+          className="t-label tnum text-[10px] text-accent-solid"
+        >
+          {`0${n}`}
         </span>
-        <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted">
-          {label}
-        </span>
-      </div>
+      </span>
       {children}
-    </div>
+    </label>
   );
 }

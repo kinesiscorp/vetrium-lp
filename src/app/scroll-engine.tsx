@@ -18,7 +18,6 @@ declare global {
  *   data-anim="assemble"  children [data-piece] fly in from scattered
  *                         positions while the section is pinned
  *   data-anim="words"     children [data-word] brighten one by one on scrub
- *   data-anim="draw"      strokes inside are drawn in on scrub
  *   data-anim="hero"      hero drifts + dissolves as you leave it
  *   data-parallax="0.2"   translate on scroll at the given speed
  */
@@ -144,48 +143,6 @@ export function ScrollEngine() {
               start: "top 78%",
               end: "bottom 55%",
               scrub: 0.5,
-            },
-          },
-        );
-      });
-
-      /* ---------- stroke drawing ---------- */
-      gsap.utils.toArray<HTMLElement>('[data-anim="draw"]').forEach((holder) => {
-        const shapes = gsap.utils.toArray<SVGGeometryElement>(
-          ".draw-path",
-          holder,
-        );
-        gsap.set(holder, { opacity: 1 });
-        shapes.forEach((shape, i) => {
-          const len = shape.getTotalLength?.() ?? 400;
-          gsap.fromTo(
-            shape,
-            { strokeDasharray: len, strokeDashoffset: len },
-            {
-              strokeDashoffset: 0,
-              ease: "none",
-              scrollTrigger: {
-                trigger: holder,
-                start: "top 85%",
-                end: "bottom 45%",
-                scrub: 0.7,
-              },
-              delay: i * 0.05,
-            },
-          );
-        });
-        gsap.fromTo(
-          holder,
-          { scale: 0.86, rotation: -18 },
-          {
-            scale: 1,
-            rotation: 0,
-            ease: "none",
-            scrollTrigger: {
-              trigger: holder,
-              start: "top 85%",
-              end: "bottom 40%",
-              scrub: 0.7,
             },
           },
         );

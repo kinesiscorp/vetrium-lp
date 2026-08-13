@@ -1,4 +1,16 @@
 import type { Metadata } from "next";
+import { Instrument_Serif } from "next/font/google";
+
+/* A raiz do site passou a carregar Sora + Inter (brandkit novo, sem serifa).
+   Este documento já foi enviado ao cliente com a ênfase em serifa itálica
+   (.serif-accent), então a fonte fica carregada aqui, no escopo dele. */
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  weight: "400",
+  style: "italic",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Proposta comercial, Esquadrão do Frog | Vetrium",
@@ -14,5 +26,9 @@ export default function ProposalFrogmanLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div className="pf-scope min-h-screen">{children}</div>;
+  return (
+    <div className={`pf-scope min-h-screen ${instrumentSerif.variable}`}>
+      {children}
+    </div>
+  );
 }

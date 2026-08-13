@@ -1,21 +1,23 @@
 import type { Metadata } from "next";
-import { Instrument_Sans, Instrument_Serif } from "next/font/google";
+import { Inter, Sora } from "next/font/google";
 import "./globals.css";
 
-const instrumentSans = Instrument_Sans({
-  variable: "--font-instrument-sans",
+/* Brandkit: Sora nos títulos (Bold/SemiBold/Medium), Inter no corpo.
+   As duas são variáveis, então um único arquivo cobre toda a escala. */
+const sora = Sora({
+  variable: "--font-sora",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument-serif",
-  weight: "400",
-  style: "italic",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Vetrium — Design & Technology",
+  title: "Vetrium — Digital Design & Development",
   description:
     "Redesign, branding, landing pages e produtos digitais para negócios que já existem e querem crescer.",
 };
@@ -48,7 +50,7 @@ export default function RootLayout({
     <html
       lang="pt-BR"
       suppressHydrationWarning
-      className={`${instrumentSans.variable} ${instrumentSerif.variable} h-full antialiased`}
+      className={`${sora.variable} ${inter.variable} h-full antialiased`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: BOOT_SCRIPT }} />

@@ -2,40 +2,83 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ============================================================
+   Brand kit Vetrium — cristal/prisma
+   Deep Charcoal #0B0D12 · Graphite #151821 · Steel Gray #6B7280
+   Off-White #F2F3F6 · Electric Violet #6C3BFF · Soft Lilac #DCC8FF
+
+   A marca é dark-first (todos os mockups vivem sobre preto), então o
+   tema escuro é o padrão e o claro é derivado dos mesmos tokens.
+   Onde um hex do kit não passa em AA sobre o fundo daquele tema, ele é
+   deslocado dentro da mesma família (nunca trocado por outra cor) e o
+   valor de origem fica anotado ao lado.
+   ============================================================ */
+
+/* ---------- Tema claro (fallback derivado) ---------- */
 :root {
-  --bg: #f4f3fa;
+  color-scheme: light;
+
+  --bg: #f2f3f6; /* Off-White */
   --bg-elevated: #ffffff;
-  --bg-sunken: #e9e7f5;
-  --ink: #0b0b12;
-  --ink-dim: #3a3850;
-  --muted: #615f7a;
-  --accent-from: #5b3fe0;
-  --accent-to: #8b4fe6;
-  --accent-solid: #5b3fe0;
+  --bg-sunken: #e7e9ef;
+  --ink: #0b0d12; /* Deep Charcoal — 17.5:1 sobre --bg */
+  --ink-dim: #2c3140; /* 11.7:1 */
+  --muted: #5d6575; /* Steel Gray escurecido: #6B7280 dá 4.36:1, este dá 5.4:1 */
+
+  /* Gradientes decorativos (texto display ≥3:1, molduras, halos) */
+  --accent-from: #5a2bf0;
+  --accent-to: #8b57ff;
+  /* Violeta como texto sobre fundo claro: 5.1:1 */
+  --accent-solid: #6c3bff; /* Electric Violet */
+  /* Preenchimento sólido de botão + a cor da tipografia que vai em cima */
+  --accent-fill-from: #6c3bff; /* branco em cima: 5.7:1 */
+  --accent-fill-to: #5121d0; /* branco em cima: 8.6:1 */
   --accent-ink: #ffffff;
-  --line: rgba(11, 11, 18, 0.12);
-  --line-strong: rgba(11, 11, 18, 0.22);
+
+  --line: rgba(11, 13, 18, 0.12);
+  --line-strong: rgba(11, 13, 18, 0.22);
   --card: rgba(255, 255, 255, 0.72);
-  --star: rgba(70, 60, 120, 0.55);
-  --halo: rgba(120, 90, 240, 0.22);
+  --star: rgba(108, 59, 255, 0.4);
+  --halo: rgba(108, 59, 255, 0.16);
+  --ok: #15803d;
+
+  /* Facetas do cristal da marca — o mineral é escuro nos dois temas,
+     como no brandkit; só a intensidade das arestas muda. */
+  --mark-hi: #333a4e;
+  --mark-mid: #1c2131;
+  --mark-lo: #0e1119;
+  --mark-edge: rgba(220, 200, 255, 0.34);
 }
 
+/* ---------- Tema escuro (padrão da marca) ---------- */
 .dark {
-  --bg: #050509;
-  --bg-elevated: #0c0c14;
-  --bg-sunken: #030305;
-  --ink: #f4f3fa;
-  --ink-dim: #c9c7db;
-  --muted: #8b8a9e;
-  --accent-from: #7c6cff;
-  --accent-to: #b47cff;
-  --accent-solid: #9a86ff;
-  --accent-ink: #07070c;
-  --line: rgba(255, 255, 255, 0.12);
-  --line-strong: rgba(255, 255, 255, 0.24);
-  --card: rgba(255, 255, 255, 0.045);
-  --star: rgba(255, 255, 255, 0.85);
-  --halo: rgba(124, 108, 255, 0.3);
+  color-scheme: dark;
+
+  --bg: #0b0d12; /* Deep Charcoal */
+  --bg-elevated: #151821; /* Graphite */
+  --bg-sunken: #07080d;
+  --ink: #f2f3f6; /* Off-White — 17.5:1 */
+  --ink-dim: #c6cbd9; /* 11.9:1 */
+  --muted: #8b93a3; /* Steel Gray clareado: #6B7280 dá 4.0:1, este dá 6.1:1 */
+
+  --accent-from: #7a4bff; /* 4.0:1 — só display/decorativo */
+  --accent-to: #dcc8ff; /* Soft Lilac — 12.8:1 */
+  --accent-solid: #8f6bff; /* Electric Violet clareado: 5.3:1 como texto */
+  --accent-fill-from: #6c3bff; /* Electric Violet puro, ink claro em cima: 5.1:1 */
+  --accent-fill-to: #5326d8; /* 7.2:1 */
+  --accent-ink: #f2f3f6;
+
+  --line: rgba(242, 243, 246, 0.11);
+  --line-strong: rgba(242, 243, 246, 0.22);
+  --card: rgba(242, 243, 246, 0.04);
+  --star: rgba(220, 200, 255, 0.8);
+  --halo: rgba(108, 59, 255, 0.32);
+  --ok: #4ade80;
+
+  --mark-hi: #2f3547;
+  --mark-mid: #1c2131;
+  --mark-lo: #121622; /* acima do --bg pra silhueta não sumir no preto */
+  --mark-edge: rgba(220, 200, 255, 0.44);
 }
 
 @theme inline {
@@ -50,7 +93,9 @@
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
   --color-card: var(--card);
-  --font-sans: var(--font-instrument-sans);
+  --color-ok: var(--ok);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-sora);
   --font-serif: var(--font-instrument-serif);
   /* Tokens exclusivos da proposta comercial (ver .pf-scope) */
   --color-sheet: var(--sheet);
@@ -61,6 +106,13 @@
 
 html {
   background: var(--bg);
+}
+
+/* Rolagem suave é movimento: só quando o usuário não pediu o contrário. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
@@ -76,24 +128,61 @@ body {
   color: var(--accent-ink);
 }
 
+/* ---------- Tipografia da marca ----------
+   Sora nos títulos (Bold/SemiBold/Medium), Inter no corpo. Sistema
+   sem serifa: a ênfase vem de peso + Electric Violet, nunca de um
+   itálico serifado (que aqui leria como sobra da marca antiga). */
+
+.t-display {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.t-h2 {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.022em;
+  text-wrap: balance;
+}
+
+.t-h3 {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 500;
+  line-height: 1.28;
+  letter-spacing: -0.014em;
+}
+
+/* Rótulos técnicos: caixa alta, tracking largo, tamanho pequeno */
+.t-label {
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 1.45;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* Palavra em destaque dentro de um título */
+.emph {
+  color: var(--accent-solid);
+  font-weight: 700;
+}
+
 /* ---------- Brand primitives ---------- */
 
-.text-metal {
-  background: linear-gradient(135deg, var(--accent-from), var(--accent-to));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
+/* Preenchimento sólido da marca. Os tokens --accent-fill-* existem
+   porque o par violeta→lilás dos gradientes decorativos não sustenta
+   texto pequeno em cima; o fallback mantém os documentos de cliente
+   (.pf-scope) funcionando com os tokens antigos. */
 .bg-metal {
-  background: linear-gradient(135deg, var(--accent-from), var(--accent-to));
-}
-
-.serif-accent {
-  font-family: var(--font-serif), Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: -0.01em;
+  background: linear-gradient(
+    135deg,
+    var(--accent-fill-from, var(--accent-from)),
+    var(--accent-fill-to, var(--accent-to))
+  );
 }
 
 /* Giant blurred "ghost" copy of the wordmark sitting behind the real one */
@@ -109,37 +198,74 @@ body {
   pointer-events: none;
 }
 
-/* Gradient hairline border used on the showcase cards */
-.gradient-frame {
-  position: relative;
-  isolation: isolate;
-}
-.gradient-frame::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(
-    140deg,
-    color-mix(in srgb, var(--accent-from) 85%, transparent),
-    transparent 38%,
-    transparent 62%,
-    color-mix(in srgb, var(--accent-to) 70%, transparent)
-  );
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  z-index: 1;
-}
-
-/* Glass surface for floating cards + nav */
+/* Glass surface — reservada pra o que de fato flutua sobre o conteúdo
+   (a pílula da nav, a paginação). Como decoração de card ela virou
+   .crystal-panel, que não custa backdrop-filter em tela cheia. */
 .glass {
   background: var(--card);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--line);
+}
+
+/* ---------- Linguagem de superfície: faceta ----------
+   Toda superfície da marca é uma faceta do cristal: canto vivo (raio
+   curto), aresta superior iluminada e um corte a 45° no canto superior
+   direito. É o mesmo gesto do símbolo, repetido em escala de layout.
+
+   Mora em @layer components de propósito: fora de layer, ela venceria
+   qualquer utilitário do Tailwind (regra sem layer sempre ganha de regra
+   em layer), e um `bg-bg-elevated` num painel opaco — o modal, o card de
+   contato — não teria efeito nenhum. */
+@layer components {
+  .crystal-panel {
+    position: relative;
+    isolation: isolate;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background-color: var(--card);
+    background-image: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--ink) 4%, transparent),
+      transparent 46%
+    );
+    transition: border-color 0.35s ease, background-color 0.35s ease;
+  }
+
+  /* Aresta iluminada no topo — a luz bate na faceta de cima */
+  .crystal-panel::before {
+    content: "";
+    position: absolute;
+    inset-inline: 14px;
+    /* Dentro da borda, não sobre ela: assim a aresta sobrevive ao .facet-cut,
+       que recorta tudo que passa do border-box. */
+    top: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--accent-to) 55%, transparent),
+      transparent
+    );
+    opacity: 0.5;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+  }
+
+  .crystal-panel:hover::before {
+    opacity: 1;
+  }
+}
+
+/* Corte de faceta no canto superior direito */
+.facet-cut {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 22px) 0,
+    100% 22px,
+    100% 100%,
+    0 100%
+  );
 }
 
 /* ---------- Animation ---------- */
@@ -181,21 +307,6 @@ body {
   animation: spin-slow 26s linear infinite;
 }
 
-@keyframes drift-3d {
-  0%,
-  100% {
-    transform: perspective(1200px) rotateY(-10deg) rotateX(7deg);
-  }
-  50% {
-    transform: perspective(1200px) rotateY(10deg) rotateX(-5deg);
-  }
-}
-
-.drift-3d {
-  animation: drift-3d 11s ease-in-out infinite;
-  transform-style: preserve-3d;
-}
-
 /* Elements the scroll engine drives start hidden, but ONLY once the boot
    script has proven scripts run (.js-ok). If the engine never reports in, the
    boot script adds .anim-fallback and everything is revealed — content must
@@ -212,8 +323,7 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .marquee-track,
   .float-soft,
-  .spin-slow,
-  .drift-3d {
+  .spin-slow {
     animation: none;
   }
   .js-anim {
@@ -223,13 +333,12 @@ body {
   }
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
+/* `select` entrou junto com a calculadora de investimento: sem ele, os
+   quatro seletores eram os únicos controles da home sem anel de foco. */
+select:focus-visible,
 summary:focus-visible {
   outline: 2px solid var(--accent-solid);
   outline-offset: 3px;
@@ -240,30 +349,104 @@ summary:focus-visible {
   font-variant-numeric: tabular-nums;
 }
 
+/* ---------- Campos da calculadora de investimento ----------
+   Um <select> nativo não aceita estilo no popup, então só a caixa é nossa:
+   canto curto (é superfície, e superfície é faceta), fundo rebaixado pra ler
+   como campo dentro do painel, e a seta desenhada com dois gradientes.
+   O valor escolhido é dado, não apoio — vai em --ink desde o começo, e o que
+   muda no hover/foco é a aresta. */
 .calc-select {
   width: 100%;
   appearance: none;
   -webkit-appearance: none;
-  border-radius: 0.85rem;
+  border-radius: 10px;
   border: 1px solid var(--line);
   background-color: var(--bg-sunken);
   background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
     linear-gradient(135deg, currentColor 50%, transparent 50%);
-  background-position: calc(100% - 22px) calc(50% - 3px), calc(100% - 16px) calc(50% - 3px);
+  background-position: calc(100% - 22px) calc(50% - 3px),
+    calc(100% - 16px) calc(50% - 3px);
   background-size: 6px 6px, 6px 6px;
   background-repeat: no-repeat;
-  color: var(--muted);
-  padding: 0.9rem 2.75rem 0.9rem 1.1rem;
+  color: var(--ink);
+  padding: 0.85rem 2.75rem 0.85rem 1.05rem;
   font-size: 15px;
   font-weight: 500;
   cursor: pointer;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
 }
 
 .calc-select:hover,
 .calc-select:focus-visible {
-  border-color: var(--line-strong);
+  border-color: var(--accent-solid);
+}
+
+/* O popup nativo herda a cor do sistema, não a nossa — fixar as duas pontas
+   evita texto claro sobre fundo claro no tema escuro do Windows/Linux. */
+.calc-select option {
+  background-color: var(--bg-elevated);
   color: var(--ink);
+}
+
+/* ---------- Microinterações da home ----------
+   Regra de ouro: estas classes NUNCA vão no mesmo elemento que o scroll
+   engine anima. O GSAP escreve `transform` inline, que ganha de qualquer
+   transform vindo do CSS — por isso o elemento com data-anim é sempre um
+   wrapper e o hover mora no filho. */
+
+.hover-lift {
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s ease,
+    border-color 0.3s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-5px);
+  /* Sombra com deslocamento real + difusão: a peça sobe e projeta,
+     em vez de ganhar um halo colorido centrado (que é adesivo, não luz). */
+  box-shadow:
+    0 26px 50px -30px rgba(0, 0, 0, 0.75),
+    0 12px 34px -24px var(--halo);
+}
+
+/* Botões: leve levitação + brilho na cor de acento */
+.btn-glow {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.35s ease,
+    opacity 0.3s ease;
+}
+.btn-glow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px -16px
+    color-mix(in srgb, var(--accent-solid) 75%, transparent);
+}
+.btn-glow:active {
+  transform: translateY(0);
+}
+
+/* Dot "aceitando projetos" */
+@keyframes pulse-dot {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 60%, transparent);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 7px transparent;
+  }
+}
+.pulse-dot {
+  animation: pulse-dot 2.4s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse-dot {
+    animation: none;
+  }
+  .hover-lift:hover,
+  .btn-glow:hover {
+    transform: none;
+  }
 }
 
 /* ============================================================
@@ -273,6 +456,25 @@ summary:focus-visible {
    então redefine os tokens compartilhados só dentro deste escopo
    (o restante do site nunca vê estes valores).
    ============================================================ */
+/* Texto em gradiente e ênfase em serifa itálica: sobras do sistema antigo,
+   hoje vivas só dentro dos documentos de cliente (que já estão publicados e
+   assinados assim). A home não usa nenhuma das duas — no brandkit novo a
+   ênfase é peso + Electric Violet (.emph) e não existe serifa. A fonte
+   itálica é carregada nos layouts desses documentos, não na raiz. */
+.text-metal {
+  background: linear-gradient(135deg, var(--accent-from), var(--accent-to));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.serif-accent {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
 .pf-scope {
   --bg: #030305;
   --sheet: #08080f;
@@ -283,6 +485,11 @@ summary:focus-visible {
   --faint: #5b5a70;
   --accent-from: #7c6cff;
   --accent-to: #b47cff;
+  /* Repetido de propósito: os tokens de preenchimento nasceram no rebrand
+     da home e são herdados da raiz — sem redefinir aqui, os botões destes
+     documentos (que já foram enviados a cliente) mudariam de cor. */
+  --accent-fill-from: #7c6cff;
+  --accent-fill-to: #b47cff;
   --accent-solid: #9a86ff;
   --accent-ink: #07070c;
   --line: rgba(255, 255, 255, 0.1);
