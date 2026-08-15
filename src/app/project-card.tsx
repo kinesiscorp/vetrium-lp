@@ -70,6 +70,17 @@ export function ProjectCard({
         <p className="mt-2 line-clamp-2 text-[13px] leading-relaxed text-muted">
           {project.description}
         </p>
+
+        {/* Badge de LP ao vivo */}
+        {project.href && (
+          <span
+            aria-hidden
+            className="mt-3 inline-flex w-fit items-center gap-1.5 rounded-full border border-accent-solid/40 bg-accent-soft px-2.5 py-1 text-[10.5px] font-semibold text-accent-ink"
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-accent-solid" />
+            Landing page ao vivo
+          </span>
+        )}
       </div>
     </button>
   );

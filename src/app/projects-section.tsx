@@ -6,11 +6,23 @@ import { CATEGORIES, PROJECTS, type Project } from "./projects-data";
 import { ProjectCard } from "./project-card";
 import { ProjectModal } from "./project-modal";
 import { ProjectsPagination } from "./projects-pagination";
+import { IconArrowRight } from "@/components/home/icons";
 
 /**
- * 8 por página = 2 linhas × 4 colunas no breakpoint largo, que é o pedido do
- * cliente. Em telas menores o grid reflui pra 2 ou 1 coluna, mas o tamanho da
- * página continua 8 — só muda quantas linhas isso ocupa.
+ * Galeria do portfólio.
+ *
+ * Hierarquia visual em duas camadas:
+ *
+ * 1. "Destaques" — projetos com `featured: true` (as LPs do ecossistema
+ *    VeTrium: IronStreak, Bbr Flow, Flow Pedidos). Ganham uma faixa própria
+ *    no topo, com card largo (2 colunas), link direto pra LP ao vivo e um
+ *    halo de cor de fundo. São a prova social de "coisa nova no ar".
+ *
+ * 2. "Galeria" — todos os projetos (incluindo os destaques, quando o filtro
+ *    for "Todos") no grid 4×2 com paginação, modal e filtro por categoria.
+ *
+ * A faixa de destaques some quando um filtro está ativo (o filtro limita a
+ * galeria; os destaques são sempre "Todos").
  */
 const PAGE_SIZE = 8;
 
@@ -20,7 +32,6 @@ export function ProjectsSection() {
   const [active, setActive] = useState<Project | null>(null);
 
   const gridRef = useRef<HTMLDivElement>(null);
-  // Guarda o card que abriu o modal pra devolver o foco quando ele fechar.
   const triggerRef = useRef<HTMLElement | null>(null);
   const reduced = useReducedMotion();
 
@@ -32,25 +43,25 @@ export function ProjectsSection() {
     [filter],
   );
 
+  const featured =
+    filter === "Todos" ? PROJECTS.filter((p) => p.featured) : [];
+
   const pageCount = Math.max(1, Math.ceil(visible.length / PAGE_SIZE));
   const current = page > pageCount ? 1 : page;
   const items = visible.slice((current - 1) * PAGE_SIZE, current * PAGE_SIZE);
 
   function changeFilter(cat: (typeof CATEGORIES)[number]) {
     setFilter(cat);
-    setPage(1); // filtro novo, contagem nova — página 1 sempre.
+    setPage(1);
   }
 
   function changePage(next: number) {
     if (next < 1 || next > pageCount || next === current) return;
     setPage(next);
-
-    // Se o topo do grid já saiu da tela (típico no mobile, onde a paginação
-    // fica lá embaixo), traz ele de volta — senão a página nova abre no rodapé.
     const rect = gridRef.current?.getBoundingClientRect();
     if (rect && rect.top < 0) {
       window.scrollTo({
-        top: window.scrollY + rect.top - 110, // 110px = folga da nav flutuante
+        top: window.scrollY + rect.top - 110,
         behavior: reduced ? "auto" : "smooth",
       });
     }
@@ -92,9 +103,68 @@ export function ProjectsSection() {
         ))}
       </div>
 
+      {/* Destaques: as LPs do ecossistema, com link ao vivo */}
+      {featured.length > 0 && (
+        <div className="mt-12">
+          <div className="mb-5 flex items-center gap-3">
+            <span className="t-label text-muted">
+              Recém-lançado no ar
+            </span>
+            <span aria-hidden className="h-px flex-1 bg-line" />
+          </div>
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            {featured.map((project) => (
+              <a
+                key={project.slug}
+                href={project.href ?? "#"}
+                target={project.href?.startsWith("http") ? "_blank" : undefined}
+                rel={
+                  project.href?.startsWith("http") ? "noreferrer" : undefined
+                }
+                className="group relative isolate overflow-hidden rounded-[14px] border border-line bg-card transition-all duration-500 hover:-translate-y-1 hover:border-accent-solid/60 hover:shadow-[0_24px_60px_-20px_rgba(108,59,255,0.35)]"
+              >
+                <div className="absolute inset-0 -z-10 opacity-60 transition-opacity duration-500 group-hover:opacity-100">
+                  <div className="absolute -right-8 -top-8 h-40 w-40 rounded-full bg-accent-solid/30 blur-3xl transition-transform duration-700 group-hover:scale-150" />
+                </div>
+                <div className="relative aspect-[16/10] overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={project.image}
+                    alt={`Prévia da landing page ${project.name}`}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.07]"
+                  />
+                  <div
+                    aria-hidden
+                    className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
+                  />
+                  <span className="t-label absolute left-3.5 top-3.5 rounded-[6px] border border-white/25 bg-black/50 px-2.5 py-1 text-[9.5px] text-white backdrop-blur">
+                    {project.category}
+                  </span>
+                  <span className="absolute bottom-3.5 left-3.5 inline-flex translate-y-2 items-center gap-1.5 rounded-full border border-white/25 bg-black/55 px-3 py-1.5 text-[11px] font-semibold text-white opacity-0 backdrop-blur transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                    Ver ao vivo
+                    <IconArrowRight className="h-3 w-3" />
+                  </span>
+                </div>
+                <div className="p-4">
+                  <div className="flex items-baseline justify-between gap-3">
+                    <h3 className="t-h3 text-[15px] font-semibold">
+                      {project.name}
+                    </h3>
+                    <span className="tnum flex-none text-xs text-muted">
+                      {project.year}
+                    </span>
+                  </div>
+                  <p className="mt-1.5 line-clamp-2 text-[13px] leading-relaxed text-muted">
+                    {project.description}
+                  </p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
       <div ref={gridRef} className="mt-12">
-        {/* A troca de página/filtro é uma transição de conteúdo local: fade +
-            leve y, sem GSAP envolvido (o data-anim fica no wrapper da seção). */}
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={`${filter}-${current}`}
