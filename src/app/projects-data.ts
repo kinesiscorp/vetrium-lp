@@ -20,7 +20,7 @@ export const PROJECTS: Project[] = [
     category: "App",
     year: "2026",
     image: "/portfolio/ironstreak.png",
-    href: "/portfolio/ironstreak",
+    href: "https://kinesiscorp.github.io/ironstreak-lp/",
     featured: true,
   },
   {
@@ -30,8 +30,8 @@ export const PROJECTS: Project[] = [
       "Landing page de SaaS de gestão para barbearias — agenda, agendamento público e financeiro num só lugar.",
     category: "Landing Page",
     year: "2026",
-    image: "/portfolio/bbrflow.jpg",
-    href: "/portfolio/bbrflow",
+    image: "/portfolio/bbrflow.png",
+    href: "https://kinesiscorp.github.io/barberflow-lp/",
     featured: true,
   },
   {
@@ -41,8 +41,8 @@ export const PROJECTS: Project[] = [
       "App white-label de pedidos online para pequenos negócios de alimentação — com landing page própria.",
     category: "App",
     year: "2026",
-    image: "/portfolio/salgados-flow.jpg",
-    href: "/portfolio/salgados-flow",
+    image: "/portfolio/salgados-flow-lp.png",
+    href: "https://kinesiscorp.github.io/salgados-flow-lp/",
     featured: true,
   },
   {
