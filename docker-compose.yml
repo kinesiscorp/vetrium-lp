@@ -1,0 +1,44 @@
+# Stack local completa: PostgreSQL + app.
+# Uso: cp .env.example .env && docker compose up --build
+# O app espera o banco ficar saudável antes de subir (depends_on service_healthy).
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-vetriumcrm}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-vetriumcrm}
+      POSTGRES_DB: ${POSTGRES_DB:-vetriumcrm}
+    ports:
+      - "${POSTGRES_PORT:-5434}:5432"
+    volumes:
+      - vetrium-crm-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-vetriumcrm} -d ${POSTGRES_DB:-vetriumcrm}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build:
+      context: .
+      target: production
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      # Banco local no compose (host "db"); em produção o Coolify injeta a URL interna dele.
+      DATABASE_URL: postgresql://${POSTGRES_USER:-vetriumcrm}:${POSTGRES_PASSWORD:-vetriumcrm}@db:5432/${POSTGRES_DB:-vetriumcrm}?schema=public
+      AUTH_SECRET: ${AUTH_SECRET:-dev-secret-troque-me-antes-de-produzir}
+      UPLOAD_DIR: ${UPLOAD_DIR:-./uploads}
+      RUN_SEED: ${RUN_SEED:-true}
+    volumes:
+      - vetrium-crm-uploads:/app/uploads
+    ports:
+      - "${APP_PORT:-3000}:3000"
+
+volumes:
+  vetrium-crm-db:
+  vetrium-crm-uploads:

@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum EstagioFunil {
+  LEAD
+  CONTATO
+  PROPOSTA
+  NEGOCIACAO
+  FECHADO
+  PERDIDO
+}
+
+model User {
+  id           String      @id @default(cuid())
+  email        String      @unique
+  name         String
+  passwordHash String
+  createdAt    DateTime    @default(now())
+  interacoes   Interacao[]
+}
+
+model Cliente {
+  id           String       @id @default(cuid())
+  nome         String
+  descricao    String?
+  origem       String?
+  estagio      EstagioFunil @default(LEAD)
+  proximoPasso String?
+  bloqueio     String?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  interacoes   Interacao[]
+  materiais    Material[]
+}
+
+model Interacao {
+  id        String   @id @default(cuid())
+  clienteId String
+  cliente   Cliente  @relation(fields: [clienteId], references: [id], onDelete: Cascade)
+  autorId   String
+  autor     User     @relation(fields: [autorId], references: [id])
+  nota      String
+  data      DateTime @default(now())
+
+  @@index([clienteId, data])
+}
+
+model Material {
+  id          String   @id @default(cuid())
+  clienteId   String
+  cliente     Cliente  @relation(fields: [clienteId], references: [id], onDelete: Cascade)
+  nomeArquivo String
+  caminho     String
+  tipo        String?
+  uploadedAt  DateTime @default(now())
+
+  @@index([clienteId])
+}

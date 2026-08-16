@@ -1,0 +1,33 @@
+# Dependências e artefatos
+node_modules
+.next
+out
+build
+*.tsbuildinfo
+
+# Segredos — .env* NUNCA entra na imagem (build stage não pode ver chaves reais)
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Uploads de clientes (volume persistente em produção)
+uploads
+
+# Git / ferramentas de agente
+.git
+.agents
+.claude
+.windsurf
+AGENTS.md
+CLAUDE.md
+skills-lock.json
+
+# Prisma client é regenerado no build (npx prisma generate)
+src/generated
+
+# Outros
+.DS_Store
+*.pem
+npm-debug.log*
+next-env.d.ts
