@@ -4,8 +4,16 @@ RUN apk add --no-cache openssl
 
 FROM base AS deps
 COPY package.json package-lock.json ./
+# O package-lock.json foi gerado no macOS e so registra as variantes darwin-arm64
+# de lightningcss e @tailwindcss/oxide (o npm nao gravou as demais plataformas).
+# Sem isso o `next build` quebra no Alpine com "Cannot find module
+# '../lightningcss.linux-x64-musl.node'". As versoes vem do proprio lockfile,
+# entao nao ha drift quando as deps forem atualizadas.
 RUN --mount=type=cache,target=/root/.npm \
-    npm ci --include=dev
+    npm ci --include=dev \
+ && npm install --no-save --no-package-lock \
+      "lightningcss-linux-$(node -p process.arch)-musl@$(node -p "require('lightningcss/package.json').version")" \
+      "@tailwindcss/oxide-linux-$(node -p process.arch)-musl@$(node -p "require('@tailwindcss/oxide/package.json').version")"
 
 FROM base AS build
 COPY --from=deps /app/node_modules ./node_modules
