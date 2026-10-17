@@ -57,6 +57,31 @@ export function ScrollEngine() {
         );
       });
 
+      /* ---------- hero stage 3d perspective tilt on scroll ---------- */
+      gsap.utils.toArray<HTMLElement>('[data-anim="hero-stage"]').forEach((el) => {
+        gsap.fromTo(
+          el,
+          {
+            rotateX: 16,
+            scale: 0.94,
+            y: 36,
+            transformPerspective: 1200,
+          },
+          {
+            rotateX: 0,
+            scale: 1,
+            y: 0,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 95%",
+              end: "top 50%",
+              scrub: 0.8,
+            },
+          },
+        );
+      });
+
       /* ---------- hero dissolve ---------- */
       gsap.utils.toArray<HTMLElement>('[data-anim="hero"]').forEach((el) => {
         gsap.set(el, { opacity: 1 });
