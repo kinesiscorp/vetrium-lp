@@ -5,21 +5,12 @@ import { ThemeToggle } from "@/app/theme-toggle";
 import { IconClose, IconMenu } from "./icons";
 import { VetriumLockup } from "./vetrium-mark";
 
-/**
- * Barra de navegação flutuante. Só links que existem de fato na página —
- * nada de "Insights" sem blog por trás. O rótulo "Processo" é o mesmo usado
- * no rodapé — ver site-footer.tsx.
- *
- * A pílula virou uma barra de cantos curtos: no sistema novo, superfície é
- * faceta (raio curto) e ação é pílula (raio total) — o contraste entre as
- * duas formas é o que faz o CTA saltar sem precisar de mais cor.
- */
 const LINKS = [
+  ["O Novo Jogo (GEO)", "#sobre-geo"],
   ["Serviços", "#servicos"],
-  ["Projetos", "#projetos"],
+  ["Cases", "#projetos"],
   ["Processo", "#processo"],
-  ["Investimento", "#investimento"],
-  ["Sobre", "#sobre"],
+  ["Valores", "#investimento"],
 ] as const;
 
 export function SiteNav() {
@@ -28,10 +19,6 @@ export function SiteNav() {
   const toggleRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 
-  /* Abaixo do md não existe nenhum outro jeito de alcançar Serviços/Projetos/
-     Processo/Investimento/Sobre — antes deste menu, só o rodapé linkava pra lá
-     no celular. O corte subiu de sm pra md quando "Investimento" entrou na
-     lista: com cinco links, a barra não cabia mais em 640px sem quebrar. */
   useEffect(() => {
     if (!open) return;
 
@@ -57,27 +44,32 @@ export function SiteNav() {
   return (
     <header className="fixed inset-x-0 top-5 z-50 flex justify-center px-4">
       <div className="relative">
-        <nav className="glass flex items-center gap-1 rounded-2xl py-2 pl-3 pr-2 shadow-[0_18px_40px_-24px_rgba(0,0,0,0.85)]">
+        {/* Navbar Chassis com Bezel Industrial */}
+        <nav className="industrial-panel flex items-center gap-1.5 py-2 pl-3.5 pr-2.5 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.9)] backdrop-blur-2xl">
           <a
             href="#top"
             aria-label="Vetrium — início"
             className="flex items-center rounded-xl px-1.5 py-0.5"
           >
             <VetriumLockup
-              markSize={28}
+              markSize={26}
               tagline={false}
               detailsClassName="hidden lg:flex"
             />
           </a>
+
+          {/* Indicador de Status de Hardware (LED) */}
+          <div className="hidden sm:flex items-center gap-2 border-l border-line px-3 ml-2 text-[10px] font-mono text-muted">
+            <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="tech-label text-[9.5px]">SYS.ONLINE</span>
+          </div>
 
           <div className="mx-2 hidden items-center gap-1 md:flex">
             {LINKS.map(([label, href]) => (
               <a
                 key={href}
                 href={href}
-                // bg-line (e não white/10) porque o hover precisa aparecer nos
-                // dois temas — branco translúcido some no tema claro.
-                className="rounded-lg px-3.5 py-1.5 text-[13px] font-medium text-ink-dim transition-colors hover:bg-line hover:text-ink"
+                className="rounded-lg px-3 py-1.5 text-[12.5px] font-medium text-ink-dim transition-colors hover:bg-line hover:text-ink"
               >
                 {label}
               </a>
@@ -85,12 +77,17 @@ export function SiteNav() {
           </div>
 
           <ThemeToggle />
+
           <a
-            href="#contato"
-            className="btn-glow ml-1 rounded-full bg-metal px-4 py-2 text-[13px] font-semibold text-accent-ink"
+            href="https://wa.me/5511941889077?text=Olá!%20Gostaria%20de%20um%20diagnóstico%20gratuito%20para%20minha%20empresa%20com%20a%20Vetrium."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-tactile ml-1 inline-flex items-center gap-2 rounded-lg px-3.5 py-2 text-[11.5px] font-semibold text-ink"
           >
-            Vamos conversar
+            <span className="h-1.5 w-1.5 rounded-full bg-accent-solid" />
+            Iniciar Projeto
           </a>
+
           <button
             ref={toggleRef}
             type="button"
@@ -108,14 +105,18 @@ export function SiteNav() {
           <div
             ref={panelRef}
             id={panelId}
-            className="glass absolute inset-x-0 top-[calc(100%+0.5rem)] rounded-2xl p-2 shadow-[0_18px_40px_-24px_rgba(0,0,0,0.85)] md:hidden"
+            className="industrial-panel absolute inset-x-0 top-[calc(100%+0.5rem)] rounded-xl p-2.5 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.9)] backdrop-blur-2xl md:hidden"
           >
+            <div className="flex items-center justify-between border-b border-line px-3 py-2 text-[10px] font-mono text-muted">
+              <span>NAVEGAÇÃO DO SISTEMA</span>
+              <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
+            </div>
             {LINKS.map(([label, href]) => (
               <a
                 key={href}
                 href={href}
                 onClick={() => setOpen(false)}
-                className="block rounded-xl px-4 py-3 text-[15px] font-medium text-ink-dim transition-colors hover:bg-line hover:text-ink"
+                className="block rounded-lg px-3.5 py-2.5 text-[14px] font-medium text-ink-dim transition-colors hover:bg-line hover:text-ink"
               >
                 {label}
               </a>
