@@ -1,5 +1,5 @@
 import { Starfield } from "@/app/starfield";
-import { HeroCrystal } from "./hero-crystal";
+import { HeroAiSearch } from "./hero-ai-search";
 import { IconArrowRight, IconClock, IconPin } from "./icons";
 
 /**
@@ -84,7 +84,7 @@ export function Hero() {
         </div>
 
         <div className="px-2 sm:px-10 lg:px-0">
-          <HeroCrystal />
+          <HeroAiSearch />
         </div>
       </div>
     </section>
