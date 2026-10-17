@@ -19,7 +19,16 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Vetrium — Digital Design & Development",
   description:
-    "Redesign, branding, landing pages e produtos digitais para negócios que já existem e querem crescer.",
+    "Landing pages de alta conversão, design de autoridade e engenharia digital para negócios locais e empresas que querem crescer.",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/brand/vetrium-emblem.png", type: "image/png" }
+    ],
+    apple: [
+      { url: "/brand/vetrium-emblem-dark.png", sizes: "180x180", type: "image/png" }
+    ]
+  }
 };
 
 const BOOT_SCRIPT = `
