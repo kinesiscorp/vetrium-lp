@@ -56,7 +56,7 @@ export function VetriumMark({
       {...labelled}
     >
       <img
-        src="/brand/vetrium-emblem.png"
+        src="/brand/vetrium-emblem.svg"
         alt={title || "Vetrium"}
         width={size * 2}
         height={size * 2}
