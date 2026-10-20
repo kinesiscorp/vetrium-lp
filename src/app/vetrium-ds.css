@@ -1,0 +1,413 @@
+/* ============================================================
+   Vetrium Design System — Classic Surrealism × Digital Performance
+
+   Base: Marfim #F7F4EE + Obsidiana #18181F (contraste principal)
+   Superfícies: Areia #D8CEC0 · Cinza mármore #A89E93
+   Acentos: Rosa #FF69AD · Violeta #8A5CFF · Azul elétrico #4D80FF (raro)
+
+   Escopo: tudo aqui é prefixado (vds-*, cores ivory/obsidian/...) para não
+   interferir nas páginas de diagnóstico, proposta e no /admin, que usam os
+   tokens antigos de globals.css.
+
+   Contraste (WCAG):
+   - obsidian sobre ivory ............ 16.1:1
+   - stone-ink #645B52 sobre ivory ... 6.0:1  (texto secundário)
+   - marble #A89E93 sobre obsidian ... 6.7:1  (texto secundário no escuro)
+   - rose #FF69AD sobre obsidian ..... 6.6:1  (ok no escuro)
+   - rose-ink #B4245F sobre ivory .... 5.7:1  (rosa como texto no claro)
+   - violet-ink #5B35D5 sobre ivory .. 6.6:1  (violeta como texto no claro)
+   - violet #8A5CFF sobre obsidian ... 4.2:1  (só decorativo/texto grande)
+   ============================================================ */
+
+@theme {
+  --color-ivory: #f7f4ee;
+  --color-ivory-deep: #efe9df;
+  --color-sand: #d8cec0;
+  --color-marble: #a89e93;
+  --color-stone-ink: #645b52;
+  --color-obsidian: #18181f;
+  --color-obsidian-2: #212029;
+  --color-obsidian-3: #2c2b35;
+  --color-rose: #ff69ad;
+  --color-rose-ink: #b4245f;
+  --color-violet: #8a5cff;
+  --color-violet-ink: #5b35d5;
+  --color-electric: #4d80ff;
+
+  --font-editorial: var(--font-playfair), "Times New Roman", serif;
+  --font-code: var(--font-jetbrains), ui-monospace, monospace;
+}
+
+/* Tudo abaixo vive em @layer components: utilitários do Tailwind (hidden,
+   padding, min-h-0…) sempre vencem uma classe do sistema no mesmo elemento. */
+@layer components {
+/* ---------- Superfícies ---------- */
+
+.vds {
+  --vds-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  background: var(--color-ivory);
+  color: var(--color-obsidian);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  /* O boot script ainda marca <html class="dark"> para as páginas antigas;
+     aqui os controles nativos (checkbox, select) seguem a superfície. */
+  color-scheme: light;
+}
+
+.vds-dark {
+  color-scheme: dark;
+  background: var(--color-obsidian);
+  color: var(--color-ivory);
+}
+
+/* Textura mineral discreta: duas manchas de luz quente, sem imagem extra */
+.vds-paper {
+  background:
+    radial-gradient(60rem 30rem at 85% 0%, rgba(216, 206, 192, 0.45), transparent 70%),
+    radial-gradient(40rem 24rem at 0% 100%, rgba(216, 206, 192, 0.35), transparent 70%),
+    var(--color-ivory);
+}
+
+/* Céu noturno do hero/CTA: obsidiana com névoa violeta e rosa */
+.vds-night {
+  background:
+    radial-gradient(42rem 32rem at 72% 38%, rgba(138, 92, 255, 0.22), transparent 70%),
+    radial-gradient(30rem 22rem at 92% 92%, rgba(255, 105, 173, 0.14), transparent 70%),
+    radial-gradient(36rem 30rem at 0% 0%, rgba(77, 128, 255, 0.07), transparent 70%),
+    var(--color-obsidian);
+}
+
+/* ---------- Tipografia ---------- */
+
+.vds-display {
+  font-family: var(--font-editorial);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.vds-h2 {
+  font-family: var(--font-editorial);
+  font-weight: 400;
+  font-size: clamp(2rem, 4.4vw, 3.4rem);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.vds-h3 {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.vds-lead {
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  line-height: 1.6;
+  max-width: 58ch;
+}
+
+/* Etiquetas técnicas: caixa alta, tracking largo, mono */
+.vds-label {
+  font-family: var(--font-code);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.vds-num {
+  font-family: var(--font-code);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Itálico editorial para a palavra de ênfase dentro de um título */
+.vds-em {
+  font-style: italic;
+}
+
+/* ---------- Botões ---------- */
+
+.vds-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 3rem;
+  padding: 0.85rem 1.4rem;
+  font-family: var(--font-code);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  transition:
+    background-color 0.25s var(--vds-ease),
+    color 0.25s var(--vds-ease),
+    border-color 0.25s var(--vds-ease),
+    transform 0.15s var(--vds-ease);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.vds-btn:active {
+  transform: translateY(1px);
+}
+.vds-btn:disabled,
+.vds-btn[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+.vds-btn .vds-btn-arrow {
+  transition: transform 0.25s var(--vds-ease);
+}
+.vds-btn:hover .vds-btn-arrow {
+  transform: translateX(3px);
+}
+
+/* Primário no claro: obsidiana sólida */
+.vds-btn-primary {
+  background: var(--color-obsidian);
+  color: var(--color-ivory);
+}
+.vds-btn-primary:hover {
+  background: var(--color-violet-ink);
+}
+
+/* Primário no escuro: marfim com borda rosa no hover */
+.vds-btn-light {
+  background: var(--color-ivory);
+  color: var(--color-obsidian);
+}
+.vds-btn-light:hover {
+  background: var(--color-rose);
+  color: var(--color-obsidian);
+}
+
+/* Secundário: contorno */
+.vds-btn-outline {
+  border-color: currentColor;
+  background: transparent;
+}
+.vds-btn-outline:hover {
+  border-color: var(--color-rose);
+  color: var(--color-rose);
+}
+.vds .vds-btn-outline:not(.vds-dark *):hover {
+  border-color: var(--color-rose-ink);
+  color: var(--color-rose-ink);
+}
+
+/* Link textual com seta */
+.vds-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  transition: text-decoration-color 0.2s, color 0.2s;
+}
+.vds-link:hover {
+  text-decoration-color: currentColor;
+}
+
+/* ---------- Foco visível ---------- */
+
+.vds :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-violet);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.vds-dark :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline-color: var(--color-rose);
+}
+
+/* ---------- Regras e divisores ---------- */
+
+.vds-rule {
+  border-color: rgba(24, 24, 31, 0.14);
+}
+.vds-dark .vds-rule,
+.vds-rule-dark {
+  border-color: rgba(247, 244, 238, 0.14);
+}
+
+/* ---------- Esfera iridescente (intervenção contemporânea) ---------- */
+
+.vds-sphere {
+  border-radius: 9999px;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.95) 0 6%, rgba(255, 255, 255, 0) 16%),
+    radial-gradient(circle at 70% 78%, rgba(138, 92, 255, 0.55), transparent 55%),
+    radial-gradient(circle at 45% 45%, #ffa6cf 0%, #ff69ad 45%, #d93c8a 78%, #9b2c6b 100%);
+  box-shadow:
+    inset -0.6em -0.8em 1.6em rgba(120, 20, 80, 0.35),
+    inset 0.4em 0.5em 1em rgba(255, 255, 255, 0.35),
+    0 1.2em 3em -0.6em rgba(255, 105, 173, 0.55);
+  opacity: 0.94;
+}
+
+.vds-sphere-violet {
+  background:
+    radial-gradient(circle at 30% 26%, rgba(255, 255, 255, 0.9) 0 5%, rgba(255, 255, 255, 0) 15%),
+    radial-gradient(circle at 72% 76%, rgba(77, 128, 255, 0.6), transparent 55%),
+    radial-gradient(circle at 45% 45%, #c2a6ff 0%, #8a5cff 50%, #5b35d5 85%, #3a1f9a 100%);
+  box-shadow:
+    inset -0.6em -0.8em 1.6em rgba(40, 10, 120, 0.4),
+    inset 0.4em 0.5em 1em rgba(255, 255, 255, 0.3),
+    0 1.2em 3em -0.6em rgba(138, 92, 255, 0.6);
+}
+
+/* Flutuação lenta — só sem preferência por movimento reduzido */
+@media (prefers-reduced-motion: no-preference) {
+  .vds-float {
+    animation: vds-float 7s ease-in-out infinite;
+  }
+  @keyframes vds-float {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    50% { transform: translate3d(0, -6px, 0) scale(1.03); }
+  }
+}
+
+/* ---------- Revelação no scroll ----------
+   Conteúdo nunca depende disto: só esconde quando há JS (.js-ok) e o
+   usuário não pediu movimento reduzido; o boot script revela tudo em 2,5s
+   se o observer não subir (.anim-fallback). */
+
+@media (prefers-reduced-motion: no-preference) {
+  .js-ok [data-reveal]:not(.is-in) {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  [data-reveal] {
+    transition:
+      opacity 0.8s var(--vds-ease, ease),
+      transform 0.8s var(--vds-ease, ease);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+}
+.anim-fallback [data-reveal] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Entrada do hero: acontece no load, sem depender de scroll */
+@media (prefers-reduced-motion: no-preference) {
+  .vds-enter {
+    animation: vds-enter 1s var(--vds-ease, ease) both;
+    animation-delay: var(--enter-delay, 0ms);
+  }
+  @keyframes vds-enter {
+    from { opacity: 0; transform: translate3d(0, 14px, 0); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+/* ---------- FAQ (details/summary nativo) ---------- */
+
+.vds-faq summary {
+  list-style: none;
+  cursor: pointer;
+}
+.vds-faq summary::-webkit-details-marker {
+  display: none;
+}
+.vds-faq .vds-faq-icon {
+  transition: transform 0.3s var(--vds-ease, ease);
+}
+.vds-faq[open] .vds-faq-icon {
+  transform: rotate(45deg);
+}
+
+/* ---------- Formulário ---------- */
+
+.vds-field {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.8rem 0.95rem;
+  background: #fffdf9;
+  color: var(--color-obsidian);
+  border: 1px solid rgba(24, 24, 31, 0.22);
+  border-radius: 2px;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.vds-field::placeholder {
+  color: #8a8178;
+}
+.vds-field:hover {
+  border-color: rgba(24, 24, 31, 0.45);
+}
+.vds-field:focus-visible {
+  outline: none;
+  border-color: var(--color-violet-ink);
+  box-shadow: 0 0 0 3px rgba(138, 92, 255, 0.25);
+}
+.vds-field[aria-invalid="true"] {
+  border-color: var(--color-rose-ink);
+}
+
+/* Cartão de escolha (radio/checkbox) */
+.vds-choice {
+  position: relative;
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(24, 24, 31, 0.18);
+  border-radius: 2px;
+  background: #fffdf9;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+.vds-choice:hover {
+  border-color: rgba(24, 24, 31, 0.45);
+}
+.vds-choice:has(input:checked) {
+  border-color: var(--color-obsidian);
+  background: var(--color-ivory-deep);
+  box-shadow: inset 3px 0 0 var(--color-rose);
+}
+.vds-choice:has(input:focus-visible) {
+  outline: 2px solid var(--color-violet);
+  outline-offset: 2px;
+}
+.vds-choice input {
+  accent-color: var(--color-obsidian);
+  margin-top: 0.2rem;
+  width: 1.05rem;
+  height: 1.05rem;
+  flex: none;
+}
+
+/* Spinner de carregamento */
+.vds-spinner {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 9999px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  animation: vds-spin 0.8s linear infinite;
+}
+@keyframes vds-spin {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vds-spinner {
+    animation-duration: 2.4s;
+  }
+}
+
+/* Âncoras com header fixo */
+.vds section[id],
+.vds [data-anchor] {
+  scroll-margin-top: 5.5rem;
+}
+}

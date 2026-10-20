@@ -1,44 +1,82 @@
-import { ScrollEngine } from "./scroll-engine";
-import { SiteNav } from "@/components/home/site-nav";
-import { Hero } from "@/components/home/hero";
-import { TrustedBy } from "@/components/home/trusted-by";
-import { Approach } from "@/components/home/approach";
-import { BrandManifesto } from "@/components/home/brand-manifesto";
-import { Services } from "@/components/home/services";
-import { Projects } from "@/components/home/projects";
-import { Audiences } from "@/components/home/audiences";
-import { Process } from "@/components/home/process";
-import { Investment } from "@/components/home/investment";
-import { AboutContact } from "@/components/home/about-contact";
-import { SiteFooter } from "@/components/home/site-footer";
+import type { Metadata } from "next";
+import { ClosingCta } from "@/components/site/closing-cta";
+import { Discovery } from "@/components/site/discovery";
+import { Faq } from "@/components/site/faq";
+import { Hero } from "@/components/site/hero";
+import { Process } from "@/components/site/process";
+import { RevealObserver } from "@/components/site/reveal-observer";
+import { Services } from "@/components/site/services";
+import { SiteFooter } from "@/components/site/site-footer";
+import { SiteHeader } from "@/components/site/site-header";
+import { Standards } from "@/components/site/standards";
+import { Value } from "@/components/site/value";
+import { Work } from "@/components/site/work";
+import { CONTACT, FAQ, FEATURED_SERVICE, SERVICE_GROUPS, SITE } from "@/lib/site/content";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 /**
- * Ordem da página: quem somos → em quem confiar → como pensamos → o que
- * fazemos → o que já entregamos → pra quem → como trabalhamos → quanto custa
- * → conversar. O bloco de investimento entra depois do processo de propósito:
- * o número só faz sentido depois de o leitor saber o que está comprando.
+ * Narrativa: o que fazemos (hero) → por que importa (valor) → o que
+ * entregamos (serviços) → prova (projetos) → como (processo) → como você é
+ * encontrado (SEO/GEO) → o que esperar (diferenciais) → dúvidas → ação.
  */
 export default function Home() {
+  const services = [FEATURED_SERVICE, ...SERVICE_GROUPS.flatMap((g) => g.services)];
+
+  // Só dados reais: sem endereço, avaliações ou perfis que não existem.
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "@id": `${SITE.url}/#vetrium`,
+      name: SITE.name,
+      url: SITE.url,
+      logo: `${SITE.url}/brand/vetrium-emblem.png`,
+      description: SITE.description,
+      email: CONTACT.email,
+      areaServed: { "@type": "Country", name: "Brasil" },
+      knowsLanguage: "pt-BR",
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Serviços da Vetrium",
+        itemListElement: services.map((s) => ({
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: s.name, description: s.summary },
+        })),
+      },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: FAQ.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    },
+  ];
+
   return (
-    <div className="flex flex-1 flex-col bg-bg text-ink">
-      {/* Motor único de scroll: lê os data-anim/data-parallax do markup abaixo */}
-      <ScrollEngine />
-
-      <SiteNav />
-
-      <main id="top" className="flex-1">
+    <div className="vds flex flex-1 flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+      />
+      <RevealObserver />
+      <SiteHeader />
+      <main id="conteudo" className="flex-1">
         <Hero />
-        <TrustedBy />
-        <Approach />
-        <BrandManifesto />
+        <Value />
         <Services />
-        <Projects />
-        <Audiences />
+        <Work />
         <Process />
-        <Investment />
-        <AboutContact />
+        <Discovery />
+        <Standards />
+        <Faq />
+        <ClosingCta />
       </main>
-
       <SiteFooter />
     </div>
   );

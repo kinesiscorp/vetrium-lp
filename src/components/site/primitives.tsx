@@ -1,0 +1,257 @@
+import Link from "next/link";
+import type { ComponentProps, ReactNode } from "react";
+
+/* ------------------------------------------------------------------ */
+/* Marca                                                              */
+/* ------------------------------------------------------------------ */
+
+export function Logo({
+  tone = "dark",
+  size = 26,
+  tagline = false,
+}: {
+  /** "dark" = tinta obsidiana (fundo claro); "light" = tinta marfim. */
+  tone?: "dark" | "light";
+  size?: number;
+  tagline?: boolean;
+}) {
+  return (
+    <span className="inline-flex items-center gap-3">
+      {/* eslint-disable-next-line @next/next/no-img-element -- SVG vetorial, sem ganho com next/image */}
+      <img
+        src="/brand/vetrium-emblem.svg"
+        alt=""
+        width={size}
+        height={size}
+        className="flex-none"
+      />
+      <span className="flex flex-col">
+        <span
+          className={
+            "font-editorial text-[1.15rem] leading-none tracking-[0.32em] " +
+            (tone === "light" ? "text-ivory" : "text-obsidian")
+          }
+        >
+          VETRIUM
+        </span>
+        {tagline && (
+          <span
+            className={
+              "vds-label mt-1.5 text-[0.56rem] tracking-[0.24em] " +
+              (tone === "light" ? "text-marble" : "text-stone-ink")
+            }
+          >
+            Landing pages / UX/UI / SEO / GEO
+          </span>
+        )}
+      </span>
+    </span>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Ícones lineares (24×24, stroke currentColor)                        */
+/* ------------------------------------------------------------------ */
+
+type IconProps = ComponentProps<"svg">;
+const base = {
+  viewBox: "0 0 24 24",
+  width: 24,
+  height: 24,
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: 1.5,
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+  "aria-hidden": true,
+} as const;
+
+export const IconArrow = (p: IconProps) => (
+  <svg {...base} {...p}>
+    <path d="M4 12h15M14 6l6 6-6 6" />
+  </svg>
+);
+export const IconArrowUpRight = (p: IconProps) => (
+  <svg {...base} {...p}>
+    <path d="M7 17 17 7M8 7h9v9" />
+  </svg>
+);
+export const IconPlus = (p: IconProps) => (
+  <svg {...base} {...p}>
+    <path d="M12 5v14M5 12h14" />
+  </svg>
+);
+export const IconMenu = (p: IconProps) => (
+  <svg {...base} {...p}>
+    <path d="M4 8h16M4 16h16" />
+  </svg>
+);
+export const IconClose = (p: IconProps) => (
+  <svg {...base} {...p}>
+    <path d="M6 6l12 12M18 6 6 18" />
+  </svg>
+);
+export const IconCheck = (p: IconProps) => (
+  <svg {...base} {...p}>
+    <path d="m5 12.5 4.5 4.5L19 7.5" />
+  </svg>
+);
+export const IconWhatsapp = (p: IconProps) => (
+  <svg {...base} {...p}>
+    <path d="M4.5 19.5 5.6 16A8 8 0 1 1 8.4 18.6Z" />
+    <path d="M9.2 8.6c.2-.4.5-.5.8-.5h.5c.2 0 .4.1.5.4l.7 1.6c.1.2 0 .5-.1.6l-.5.6c.6 1.2 1.6 2.1 2.8 2.7l.6-.6c.2-.2.4-.2.6-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3-.2.6-.5.8-.6.4-1.4.5-2.2.2a8.4 8.4 0 0 1-4.9-4.9c-.3-.8-.2-1.6.2-2.2Z" />
+  </svg>
+);
+export const IconMail = (p: IconProps) => (
+  <svg {...base} {...p}>
+    <rect x="3.5" y="5.5" width="17" height="13" rx="1" />
+    <path d="m4 7 8 6 8-6" />
+  </svg>
+);
+/* Ícones de serviço — mesma família do brandkit */
+export const IconTarget = (p: IconProps) => (
+  <svg {...base} {...p}>
+    <circle cx="12" cy="12" r="7.5" />
+    <circle cx="12" cy="12" r="3" />
+    <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
+  </svg>
+);
+export const IconLayers = (p: IconProps) => (
+  <svg {...base} {...p}>
+    <rect x="4" y="9" width="11" height="11" />
+    <path d="M9 9V4h11v11h-5" />
+  </svg>
+);
+export const IconWire = (p: IconProps) => (
+  <svg {...base} {...p}>
+    <rect x="3.5" y="4" width="17" height="16" />
+    <path d="M3.5 8.5h17M8 12.5h8M8 15.5h5" />
+  </svg>
+);
+export const IconCode = (p: IconProps) => (
+  <svg {...base} {...p}>
+    <path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14" />
+  </svg>
+);
+export const IconBars = (p: IconProps) => (
+  <svg {...base} {...p}>
+    <path d="M4 20h16M6.5 20v-5M10.5 20v-8M14.5 20v-11M18.5 20V5" />
+  </svg>
+);
+export const IconGlobe = (p: IconProps) => (
+  <svg {...base} {...p}>
+    <circle cx="12" cy="12" r="8.5" />
+    <path d="M3.5 12h17M12 3.5c2.5 2.6 3.6 5.4 3.6 8.5s-1.1 5.9-3.6 8.5c-2.5-2.6-3.6-5.4-3.6-8.5s1.1-5.9 3.6-8.5Z" />
+  </svg>
+);
+export const IconSparkle = (p: IconProps) => (
+  <svg viewBox="0 0 24 24" width={24} height={24} fill="currentColor" aria-hidden {...p}>
+    <path d="M12 0c.5 6.2 5.8 11.5 12 12-6.2.5-11.5 5.8-12 12-.5-6.2-5.8-11.5-12-12C6.2 11.5 11.5 6.2 12 0Z" />
+  </svg>
+);
+
+/* ------------------------------------------------------------------ */
+/* Botões                                                              */
+/* ------------------------------------------------------------------ */
+
+type Variant = "primary" | "light" | "outline";
+
+export function ButtonLink({
+  href,
+  variant = "primary",
+  children,
+  arrow = true,
+  className = "",
+  external,
+  ...rest
+}: {
+  href: string;
+  variant?: Variant;
+  children: ReactNode;
+  arrow?: boolean;
+  className?: string;
+  external?: boolean;
+} & Omit<ComponentProps<"a">, "href" | "className" | "children">) {
+  const cls = `vds-btn vds-btn-${variant} ${className}`;
+  const inner = (
+    <>
+      <span>{children}</span>
+      {arrow && <IconArrow className="vds-btn-arrow h-4 w-4" />}
+    </>
+  );
+  if (external) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" className={cls} {...rest}>
+        {inner}
+      </a>
+    );
+  }
+  return (
+    <Link href={href} className={cls} {...rest}>
+      {inner}
+    </Link>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Cabeçalho de seção                                                  */
+/* ------------------------------------------------------------------ */
+
+export function Eyebrow({
+  index,
+  children,
+  tone = "dark",
+}: {
+  index?: string;
+  children: ReactNode;
+  tone?: "dark" | "light";
+}) {
+  return (
+    <p
+      className={
+        "vds-label flex items-center gap-3 " +
+        (tone === "light" ? "text-marble" : "text-stone-ink")
+      }
+    >
+      {index && (
+        <span className={tone === "light" ? "text-rose" : "text-rose-ink"}>{index}</span>
+      )}
+      <span aria-hidden className="h-px w-8 bg-current opacity-40" />
+      <span>{children}</span>
+    </p>
+  );
+}
+
+export function SectionHeader({
+  index,
+  eyebrow,
+  title,
+  lead,
+  tone = "dark",
+  className = "",
+}: {
+  index?: string;
+  eyebrow: string;
+  title: ReactNode;
+  lead?: ReactNode;
+  tone?: "dark" | "light";
+  className?: string;
+}) {
+  return (
+    <header data-reveal className={className}>
+      <Eyebrow index={index} tone={tone}>
+        {eyebrow}
+      </Eyebrow>
+      <h2 className="vds-h2 mt-6 max-w-[20ch]">{title}</h2>
+      {lead && (
+        <p
+          className={
+            "vds-lead mt-6 " + (tone === "light" ? "text-marble" : "text-stone-ink")
+          }
+        >
+          {lead}
+        </p>
+      )}
+    </header>
+  );
+}
