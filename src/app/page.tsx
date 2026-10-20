@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ClosingCta } from "@/components/site/closing-cta";
 import { Faq } from "@/components/site/faq";
 import { Hero } from "@/components/site/hero";
+import { Manifesto } from "@/components/site/manifesto";
 import { Process } from "@/components/site/process";
 import { RevealObserver } from "@/components/site/reveal-observer";
 import { Services } from "@/components/site/services";
@@ -15,8 +16,8 @@ export const metadata: Metadata = {
 };
 
 /**
- * Cinco blocos curtos para quem não lê muito: promessa (hero) → o que
- * fazemos → prova (projetos) → como funciona → dúvidas → ação. O detalhe
+ * Blocos curtos para quem não lê muito: promessa (hero) → manifesto →
+ * o que fazemos → prova (projetos) → como funciona → dúvidas → ação. O detalhe
  * (escopo, SEO/GEO, garantias) mora nas Dúvidas e no formulário.
  */
 export default function Home() {
@@ -63,6 +64,7 @@ export default function Home() {
       <SiteHeader />
       <main id="conteudo" className="flex-1">
         <Hero />
+        <Manifesto />
         <Services />
         <Work />
         <Process />

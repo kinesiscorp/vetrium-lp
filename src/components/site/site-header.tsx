@@ -54,7 +54,7 @@ export function SiteHeader() {
     <header className="fixed inset-x-0 top-3 z-50 px-3 sm:top-4">
       <a
         href="#conteudo"
-        className="sr-only rounded-full bg-marble px-4 py-2 text-nox focus:not-sr-only focus:absolute focus:left-4 focus:top-2"
+        className="sr-only rounded-full bg-umber px-4 py-2 text-paper focus:not-sr-only focus:absolute focus:left-4 focus:top-2"
       >
         Pular para o conteúdo
       </a>
@@ -62,7 +62,7 @@ export function SiteHeader() {
       <div
         className={
           "vds-glass mx-auto max-w-[56rem] rounded-[1.4rem] transition-[background-color] duration-500 " +
-          (scrolled || open ? "bg-nox-2/80" : "")
+          (scrolled || open ? "bg-paper-2/80" : "")
         }
       >
         <div className="flex h-14 items-center justify-between gap-4 pl-4 pr-2">
@@ -81,7 +81,7 @@ export function SiteHeader() {
                       aria-current={isActive ? "location" : undefined}
                       className={
                         "rounded-full px-3.5 py-2 text-[0.88rem] tracking-[-0.01em] transition-colors " +
-                        (isActive ? "bg-white/8 text-marble" : "text-dust hover:text-marble")
+                        (isActive ? "bg-umber/6 text-umber" : "text-clay hover:text-umber")
                       }
                     >
                       {item.label}
@@ -109,7 +109,7 @@ export function SiteHeader() {
               aria-expanded={open}
               aria-controls={panelId}
               aria-label={open ? "Fechar menu" : "Abrir menu"}
-              className="grid h-11 w-11 place-items-center rounded-full text-marble md:hidden"
+              className="grid h-11 w-11 place-items-center rounded-full text-umber md:hidden"
             >
               {open ? <IconClose className="h-5 w-5" /> : <IconMenu className="h-5 w-5" />}
             </button>
@@ -119,13 +119,13 @@ export function SiteHeader() {
         {open && (
           <div id={panelId} className="px-4 pb-5 md:hidden">
             <nav aria-label="Menu">
-              <ul className="border-t border-white/10 pt-2">
+              <ul className="border-t border-umber/10 pt-2">
                 {NAV.map((item) => (
                   <li key={item.href}>
                     <a
                       href={item.href}
                       onClick={() => setOpen(false)}
-                      className="block py-3 text-[1.6rem] tracking-[-0.04em] text-marble"
+                      className="block py-3 text-[1.6rem] tracking-[-0.04em] text-umber"
                     >
                       {item.label}
                     </a>

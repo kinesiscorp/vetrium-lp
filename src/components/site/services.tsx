@@ -8,15 +8,15 @@ function WidgetLanding() {
   return (
     <div className="vds-glass w-full rounded-2xl p-3">
       <div className="flex gap-1" aria-hidden>
-        <span className="h-1.5 w-1.5 rounded-full bg-white/30" />
-        <span className="h-1.5 w-1.5 rounded-full bg-white/30" />
-        <span className="h-1.5 w-1.5 rounded-full bg-white/30" />
+        <span className="h-1.5 w-1.5 rounded-full bg-umber/25" />
+        <span className="h-1.5 w-1.5 rounded-full bg-umber/25" />
+        <span className="h-1.5 w-1.5 rounded-full bg-umber/25" />
       </div>
-      <div className="mt-3 h-2 w-3/4 rounded-full bg-marble/70" />
-      <div className="mt-1.5 h-2 w-1/2 rounded-full bg-marble/40" />
-      <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-marble px-3 py-1.5 text-[0.7rem] font-medium text-nox">
+      <div className="mt-3 h-2 w-3/4 rounded-full bg-umber/70" />
+      <div className="mt-1.5 h-2 w-1/2 rounded-full bg-umber/30" />
+      <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-umber px-3 py-1.5 text-[0.7rem] font-medium text-paper">
         Solicitar orçamento
-        <span className="h-1.5 w-1.5 rounded-full bg-nox" />
+        <span className="h-1.5 w-1.5 rounded-full bg-paper" />
       </div>
     </div>
   );
@@ -24,24 +24,24 @@ function WidgetLanding() {
 function WidgetDesign() {
   return (
     <div className="vds-glass grid w-full grid-cols-3 gap-1.5 rounded-2xl p-3" aria-hidden>
-      <span className="col-span-3 h-8 rounded-md border border-dashed border-marble/40" />
-      <span className="col-span-2 h-12 rounded-md border border-dashed border-marble/40" />
-      <span className="h-12 rounded-md bg-gold/70" />
-      <span className="h-5 rounded-md border border-dashed border-marble/40" />
-      <span className="col-span-2 h-5 rounded-md border border-dashed border-marble/40" />
+      <span className="col-span-3 h-8 rounded-md border border-dashed border-umber/35" />
+      <span className="col-span-2 h-12 rounded-md border border-dashed border-umber/35" />
+      <span className="h-12 rounded-md bg-olive/70" />
+      <span className="h-5 rounded-md border border-dashed border-umber/35" />
+      <span className="col-span-2 h-5 rounded-md border border-dashed border-umber/35" />
     </div>
   );
 }
 function WidgetDev() {
   return (
     <div className="vds-glass flex w-full items-center gap-3 rounded-2xl p-3">
-      <div className="h-16 w-9 flex-none rounded-lg border border-marble/40 p-1" aria-hidden>
-        <div className="h-full rounded bg-gradient-to-b from-gold/80 to-marble/20" />
+      <div className="h-16 w-9 flex-none rounded-lg border border-umber/30 p-1" aria-hidden>
+        <div className="h-full rounded bg-gradient-to-b from-olive/80 to-olive-soft/30" />
       </div>
-      <div className="text-[0.75rem] leading-snug text-marble/85">
+      <div className="text-[0.75rem] leading-snug text-umber">
         Abre rápido no celular
         <br />
-        <span className="text-sand">WhatsApp e formulário funcionando</span>
+        <span className="text-clay">WhatsApp e formulário funcionando</span>
       </div>
     </div>
   );
@@ -49,36 +49,31 @@ function WidgetDev() {
 function WidgetSeo() {
   return (
     <div className="vds-glass w-full rounded-2xl p-3 text-left">
-      <p className="text-[0.66rem] text-sand">www.seunegocio.com.br</p>
-      <p className="mt-0.5 text-[0.82rem] leading-tight text-marble">Seu negócio, encontrado por quem procura</p>
-      <div className="mt-2 h-1.5 w-full rounded-full bg-marble/25" />
-      <div className="mt-1 h-1.5 w-2/3 rounded-full bg-marble/25" />
+      <p className="text-[0.66rem] text-olive">www.seunegocio.com.br</p>
+      <p className="mt-0.5 text-[0.82rem] leading-tight text-umber">Seu negócio, encontrado por quem procura</p>
+      <div className="mt-2 h-1.5 w-full rounded-full bg-umber/15" />
+      <div className="mt-1 h-1.5 w-2/3 rounded-full bg-umber/15" />
     </div>
   );
 }
 
 const CARDS: Record<string, { img: string; alt: string; widget: ReactNode }> = {
-  "landing-pages": { img: "/art/v2/card-landing.webp", alt: "Sol se pondo entre nuvens sobre o mar", widget: <WidgetLanding /> },
-  design: { img: "/art/v2/card-design.webp", alt: "Encosta rochosa com nuvens passando sobre o mar", widget: <WidgetDesign /> },
-  desenvolvimento: { img: "/art/v2/card-dev.webp", alt: "Rochas claras e vegetação baixa iluminadas pelo fim de tarde", widget: <WidgetDev /> },
-  "seo-geo": { img: "/art/v2/card-seo.webp", alt: "Horizonte do mar visto do alto de uma planície", widget: <WidgetSeo /> },
+  "landing-pages": { img: "/art/v3/card-landing.webp", alt: "Busto clássico de mármore em luz suave", widget: <WidgetLanding /> },
+  design: { img: "/art/v3/card-design.webp", alt: "Capitel dórico de mármore visto de baixo", widget: <WidgetDesign /> },
+  desenvolvimento: { img: "/art/v3/card-dev.webp", alt: "Oliveira de tronco retorcido em luz do dia", widget: <WidgetDev /> },
+  "seo-geo": { img: "/art/v3/card-seo.webp", alt: "Horizonte do mar visto do alto de uma planície", widget: <WidgetSeo /> },
 };
 
 /**
- * O que fazemos: título centralizado e quatro cartões-fotografia. No mobile,
- * vira um carrossel com rolagem lateral e encaixe.
+ * O que fazemos: título centralizado e quatro cartões-fotografia de museu
+ * (objetos sobre fundo claro). No mobile, carrossel com encaixe.
  */
 export function Services() {
   return (
-    <section id="servicos" aria-labelledby="servicos-title" className="px-5 pb-28 pt-24 sm:pb-36">
+    <section id="servicos" aria-labelledby="servicos-title" className="px-5 pb-28 pt-8 sm:pb-36">
       <div className="mx-auto max-w-6xl">
         <div className="mx-auto max-w-3xl text-center">
-          <SplitHeading
-            id="servicos-title"
-            lead="Um site que trabalha"
-            it="pelo seu negócio"
-            className="vds-h2"
-          />
+          <SplitHeading id="servicos-title" lead="Um site que trabalha" it="pelo seu negócio" className="vds-h2" />
           <p data-rise className="vds-lead mx-auto mt-5">
             Estratégia, design e tecnologia com o mesmo time — do primeiro
             rascunho ao site no ar.
@@ -93,7 +88,7 @@ export function Services() {
                 key={s.id}
                 data-rise
                 style={{ ["--d" as string]: `${i * 90}ms` }}
-                className="relative aspect-[4/5] w-[78vw] flex-none snap-center overflow-hidden rounded-[1.6rem] bg-nox-2 md:w-auto"
+                className="relative aspect-[4/5] w-[78vw] flex-none snap-center overflow-hidden rounded-[1.6rem] bg-paper-2 ring-1 ring-umber/8 md:w-auto"
               >
                 <Image
                   src={c.img}
@@ -102,11 +97,10 @@ export function Services() {
                   sizes="(min-width: 1024px) 18rem, (min-width: 768px) 45vw, 78vw"
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-nox/10 via-nox/5 to-nox/90" />
-                <div className="absolute inset-x-4 top-4">{c.widget}</div>
-                <div className="absolute inset-x-5 bottom-5">
-                  <h3 className="vds-it text-[1.85rem] leading-none text-marble">{s.name}</h3>
-                  <p className="mt-2.5 text-[0.9rem] leading-snug text-marble/75">{s.line}</p>
+                <div className="absolute inset-x-3 top-3">{c.widget}</div>
+                <div className="vds-glass absolute inset-x-3 bottom-3 rounded-[1.1rem] p-4">
+                  <h3 className="vds-it text-[1.7rem] leading-none text-umber">{s.name}</h3>
+                  <p className="mt-2 text-[0.88rem] leading-snug text-clay">{s.line}</p>
                 </div>
               </li>
             );

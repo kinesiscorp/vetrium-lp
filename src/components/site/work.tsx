@@ -27,7 +27,7 @@ export function Work() {
               data-rise
               style={{ ["--d" as string]: `${i * 100}ms` }}
               className={
-                "group relative overflow-hidden rounded-[1.6rem] bg-nox-2 p-2 ring-1 ring-white/8 transition-[box-shadow] duration-500 hover:ring-gold/40 " +
+                "group relative overflow-hidden rounded-[1.6rem] bg-paper-2 p-2 ring-1 ring-umber/10 transition-[box-shadow] duration-500 hover:ring-olive/40 " +
                 (i === 0 ? "lg:col-span-3 lg:row-span-2" : "lg:col-span-2")
               }
             >
@@ -42,12 +42,12 @@ export function Work() {
               </div>
               <div className="flex items-end justify-between gap-4 px-3 pb-2 pt-4">
                 <div>
-                  <h3 className="text-[1.35rem] tracking-[-0.035em] text-marble">{w.name}</h3>
-                  <p className="mt-1 text-[0.88rem] text-dust">
-                    {w.segment} · <span className="text-sand">{WORK_KIND_LABEL[w.kind]}</span>
+                  <h3 className="text-[1.35rem] tracking-[-0.035em] text-umber">{w.name}</h3>
+                  <p className="mt-1 text-[0.88rem] text-clay">
+                    {w.segment} · <span className="text-clay">{WORK_KIND_LABEL[w.kind]}</span>
                   </p>
                 </div>
-                <span className="vds-pill-dot flex-none bg-white/8 text-marble transition-colors group-hover:bg-marble group-hover:text-nox">
+                <span className="vds-pill-dot flex-none bg-umber/6 text-umber transition-colors group-hover:bg-umber group-hover:text-paper">
                   <IconArrowUpRight className="h-4 w-4" />
                   <span className="sr-only">Abrir {w.name} em nova aba</span>
                 </span>

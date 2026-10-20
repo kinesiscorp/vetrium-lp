@@ -21,7 +21,7 @@ export function Faq() {
               href={whatsappHref("Olá! Tenho uma dúvida sobre os serviços da Vetrium.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="vds-link text-marble"
+              className="vds-link text-umber"
             >
               Pergunte no WhatsApp
             </a>
@@ -38,12 +38,12 @@ export function Faq() {
               className="vds-faq vds-glass rounded-[1.1rem]"
             >
               <summary className="flex items-center justify-between gap-6 px-5 py-4 text-left">
-                <h3 className="text-[1rem] font-medium tracking-[-0.015em] text-marble">{f.q}</h3>
-                <span className="vds-faq-icon grid h-8 w-8 flex-none place-items-center rounded-full bg-white/8 text-marble">
+                <h3 className="text-[1rem] font-medium tracking-[-0.015em] text-umber">{f.q}</h3>
+                <span className="vds-faq-icon grid h-8 w-8 flex-none place-items-center rounded-full bg-umber/6 text-umber">
                   <IconPlus className="h-4 w-4" />
                 </span>
               </summary>
-              <p className="max-w-[60ch] px-5 pb-5 leading-relaxed text-dust">{f.a}</p>
+              <p className="max-w-[60ch] px-5 pb-5 leading-relaxed text-clay">{f.a}</p>
             </details>
           ))}
         </div>

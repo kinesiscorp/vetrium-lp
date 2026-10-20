@@ -27,7 +27,7 @@ type Status = "idle" | "submitting" | "success" | "error";
 function FieldError({ id, msg }: { id: string; msg?: string }) {
   if (!msg) return null;
   return (
-    <p id={id} className="mt-2 text-sm font-medium text-gold">
+    <p id={id} className="mt-2 text-sm font-medium text-olive">
       {msg}
     </p>
   );
@@ -167,22 +167,22 @@ export function QuoteForm({ initialService }: { initialService?: string }) {
   if (status === "success") {
     return (
       <div className="vds-glass rounded-[1.6rem] p-8 sm:p-12" role="status">
-        <span className="grid h-12 w-12 place-items-center bg-gold text-nox">
+        <span className="grid h-12 w-12 place-items-center bg-olive text-paper">
           <IconCheck className="h-6 w-6" />
         </span>
         <h2 ref={headingRef} tabIndex={-1} className="vds-h2 mt-8 outline-none">
           Recebemos sua solicitação, {data.name.split(" ")[0]}.
         </h2>
-        <p className="vds-lead mt-5 text-dust">
+        <p className="vds-lead mt-5 text-clay">
           O próximo passo é nosso: vamos ler o que você escreveu e responder
-          no e-mail <strong className="font-semibold text-marble">{data.email}</strong>{" "}
+          no e-mail <strong className="font-semibold text-umber">{data.email}</strong>{" "}
           para entender os detalhes e preparar uma proposta.
         </p>
-        <ol className="mt-8 space-y-3 text-dust">
+        <ol className="mt-8 space-y-3 text-clay">
           {["Análise da sua solicitação", "Conversa para entender os detalhes", "Proposta com escopo, etapas e investimento"].map(
             (t, i) => (
               <li key={t} className="flex gap-3">
-                <span className="tabular-nums text-gold">{i + 1}.</span>
+                <span className="tabular-nums text-olive">{i + 1}.</span>
                 {t}
               </li>
             ),
@@ -215,7 +215,7 @@ export function QuoteForm({ initialService }: { initialService?: string }) {
 
       {/* ---------- Progresso ---------- */}
       <nav aria-label="Etapas do orçamento">
-        <p id={`${uid}-progresso`} className="text-[0.85rem] text-dust">
+        <p id={`${uid}-progresso`} className="text-[0.85rem] text-clay">
           Etapa {step} de 3
         </p>
         <ol className="mt-4 grid grid-cols-3 gap-2">
@@ -228,13 +228,13 @@ export function QuoteForm({ initialService }: { initialService?: string }) {
                   aria-hidden
                   className={
                     "block h-1 transition-colors duration-300 " +
-                    (state === "todo" ? "bg-white/10" : state === "current" ? "bg-gold" : "bg-marble")
+                    (state === "todo" ? "bg-umber/10" : state === "current" ? "bg-olive" : "bg-umber")
                   }
                 />
                 <span
                   className={
                     "mt-3 block text-[0.8rem] " +
-                    (state === "todo" ? "text-dust/80" : "text-marble")
+                    (state === "todo" ? "text-clay/80" : "text-umber")
                   }
                 >
                   <span className="tabular-nums">{n}.</span> {label}
@@ -254,7 +254,7 @@ export function QuoteForm({ initialService }: { initialService?: string }) {
               <h2 ref={headingRef} tabIndex={-1} className="text-[2rem] leading-tight tracking-[-0.04em] outline-none">
                 O que você precisa?
               </h2>
-              <span className="mt-2 block text-dust">Pode marcar mais de uma opção.</span>
+              <span className="mt-2 block text-clay">Pode marcar mais de uma opção.</span>
             </legend>
             <div className="mt-8 grid gap-3 sm:grid-cols-2">
               {QUOTE_SERVICES.map((s, i) => (
@@ -277,7 +277,7 @@ export function QuoteForm({ initialService }: { initialService?: string }) {
                   />
                   <span>
                     <span className="block font-semibold">{s.label}</span>
-                    <span className="mt-0.5 block text-sm text-dust">{s.hint}</span>
+                    <span className="mt-0.5 block text-sm text-clay">{s.hint}</span>
                   </span>
                 </label>
               ))}
@@ -292,7 +292,7 @@ export function QuoteForm({ initialService }: { initialService?: string }) {
             <h2 ref={headingRef} tabIndex={-1} className="text-[2rem] leading-tight tracking-[-0.04em] outline-none">
               Conte sobre o seu projeto
             </h2>
-            <p className="mt-2 text-dust">Quanto mais contexto, melhor a nossa resposta.</p>
+            <p className="mt-2 text-clay">Quanto mais contexto, melhor a nossa resposta.</p>
 
             <div className="mt-8 space-y-7">
               <div>
@@ -336,7 +336,7 @@ export function QuoteForm({ initialService }: { initialService?: string }) {
 
               <div>
                 <label htmlFor={`${uid}-budget`} className="font-semibold">
-                  Quanto pretende investir? <span className="font-normal text-dust">(opcional)</span>
+                  Quanto pretende investir? <span className="font-normal text-clay">(opcional)</span>
                 </label>
                 <select
                   id={`${uid}-budget`}
@@ -354,14 +354,14 @@ export function QuoteForm({ initialService }: { initialService?: string }) {
                     </option>
                   ))}
                 </select>
-                <p id={`${uid}-budget-hint`} className="mt-2 text-sm text-dust">
+                <p id={`${uid}-budget-hint`} className="mt-2 text-sm text-clay">
                   Ajuda a indicar o escopo mais adequado. Não é um preço fechado.
                 </p>
               </div>
 
               <div>
                 <label htmlFor={`${uid}-message`} className="font-semibold">
-                  Quer contar mais alguma coisa? <span className="font-normal text-dust">(opcional)</span>
+                  Quer contar mais alguma coisa? <span className="font-normal text-clay">(opcional)</span>
                 </label>
                 <textarea
                   id={`${uid}-message`}
@@ -386,7 +386,7 @@ export function QuoteForm({ initialService }: { initialService?: string }) {
             <h2 ref={headingRef} tabIndex={-1} className="text-[2rem] leading-tight tracking-[-0.04em] outline-none">
               Para quem enviamos a resposta?
             </h2>
-            <p className="mt-2 text-dust">Só usamos estes dados para responder à sua solicitação.</p>
+            <p className="mt-2 text-clay">Só usamos estes dados para responder à sua solicitação.</p>
 
             <div className="mt-8 grid gap-7 sm:grid-cols-2">
               <div>
@@ -423,7 +423,7 @@ export function QuoteForm({ initialService }: { initialService?: string }) {
               </div>
               <div className="sm:col-span-2">
                 <label htmlFor={`${uid}-company`} className="font-semibold">
-                  Empresa <span className="font-normal text-dust">(opcional)</span>
+                  Empresa <span className="font-normal text-clay">(opcional)</span>
                 </label>
                 <input
                   id={`${uid}-company`}
@@ -440,10 +440,10 @@ export function QuoteForm({ initialService }: { initialService?: string }) {
               </div>
             </div>
 
-            <p className="mt-8 text-sm leading-relaxed text-dust">
+            <p className="mt-8 text-sm leading-relaxed text-clay">
               Ao enviar, você concorda que a Vetrium use estes dados para
               responder a esta solicitação, conforme a{" "}
-              <Link href="/privacidade" className="vds-link text-marble" target="_blank">
+              <Link href="/privacidade" className="vds-link text-umber" target="_blank">
                 política de privacidade
               </Link>
               .
@@ -455,11 +455,11 @@ export function QuoteForm({ initialService }: { initialService?: string }) {
       {/* ---------- Erro de envio ---------- */}
       <div aria-live="assertive">
         {status === "error" && (
-          <div role="alert" className="mt-8 rounded-2xl bg-white/5 ring-1 ring-[#e38b6d]/50 px-5 py-4">
+          <div role="alert" className="mt-8 rounded-2xl bg-white/60 ring-1 ring-terra/50 px-5 py-4">
             <p className="font-semibold">{serverError}</p>
-            <p className="mt-1 text-sm text-dust">
+            <p className="mt-1 text-sm text-clay">
               Suas respostas continuam aqui. Tente de novo ou{" "}
-              <a href={fallbackWhatsapp} target="_blank" rel="noopener noreferrer" className="vds-link text-marble">
+              <a href={fallbackWhatsapp} target="_blank" rel="noopener noreferrer" className="vds-link text-umber">
                 envie pelo WhatsApp
               </a>
               .
@@ -469,7 +469,7 @@ export function QuoteForm({ initialService }: { initialService?: string }) {
       </div>
 
       {/* ---------- Navegação ---------- */}
-      <div className="mt-12 flex flex-col-reverse gap-3 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-12 flex flex-col-reverse gap-3 border-t border-umber/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
         {step > 1 ? (
           <button type="button" onClick={() => goTo(step - 1)} className="vds-pill vds-pill-ghost" disabled={busy}>
             Voltar
@@ -479,7 +479,7 @@ export function QuoteForm({ initialService }: { initialService?: string }) {
             href={whatsappHref()}
             target="_blank"
             rel="noopener noreferrer"
-            className="vds-link inline-flex items-center justify-center gap-2 text-sm text-dust hover:text-marble"
+            className="vds-link inline-flex items-center justify-center gap-2 text-sm text-clay hover:text-umber"
           >
             <IconWhatsapp className="h-4 w-4" />
             Prefiro falar pelo WhatsApp

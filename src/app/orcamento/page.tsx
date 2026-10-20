@@ -28,30 +28,30 @@ export default async function OrcamentoPage({
           <aside className="lg:col-span-4">
             <div className="lg:sticky lg:top-32">
               <h1 className="vds-display text-[clamp(2.4rem,4.4vw,3.6rem)]">
-                Vamos construir <span className="vds-it text-gold">seu projeto.</span>
+                Vamos construir <span className="vds-it text-olive">seu projeto.</span>
               </h1>
-              <p className="vds-lead mt-6 text-dust">
+              <p className="vds-lead mt-6 text-clay">
                 Três etapas rápidas. Com essas respostas conseguimos entender o
                 que você precisa e preparar uma proposta adequada.
               </p>
 
-              <ul className="mt-10 space-y-4 border-t border-white/10 pt-8 text-[0.95rem]">
+              <ul className="mt-10 space-y-4 border-t border-umber/10 pt-8 text-[0.95rem]">
                 {[
                   "Sem compromisso: é só um pedido de proposta.",
                   "Seus dados são usados apenas para responder você.",
                   "Leva cerca de dois minutos.",
                 ].map((t) => (
                   <li key={t} className="flex gap-3">
-                    <span aria-hidden className="mt-2 h-1.5 w-1.5 flex-none rotate-45 bg-gold" />
+                    <span aria-hidden className="mt-2 h-1.5 w-1.5 flex-none rotate-45 bg-olive" />
                     {t}
                   </li>
                 ))}
               </ul>
 
-              <p className="mt-10 flex items-center gap-2 text-sm text-dust">
+              <p className="mt-10 flex items-center gap-2 text-sm text-clay">
                 <IconMail className="h-4 w-4" />
                 Prefere e-mail?{" "}
-                <a href={`mailto:${CONTACT.email}`} className="vds-link text-marble">
+                <a href={`mailto:${CONTACT.email}`} className="vds-link text-umber">
                   {CONTACT.email}
                 </a>
               </p>
