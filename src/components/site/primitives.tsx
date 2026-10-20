@@ -194,44 +194,17 @@ export function ButtonLink({
 }
 
 /* ------------------------------------------------------------------ */
-/* Cabeçalho de seção                                                  */
+/* Cabeçalho de seção — título + uma frase, sem etiqueta nem numeração */
 /* ------------------------------------------------------------------ */
 
-export function Eyebrow({
-  index,
-  children,
-  tone = "dark",
-}: {
-  index?: string;
-  children: ReactNode;
-  tone?: "dark" | "light";
-}) {
-  return (
-    <p
-      className={
-        "vds-label flex items-center gap-3 " +
-        (tone === "light" ? "text-marble" : "text-stone-ink")
-      }
-    >
-      {index && (
-        <span className={tone === "light" ? "text-rose" : "text-rose-ink"}>{index}</span>
-      )}
-      <span aria-hidden className="h-px w-8 bg-current opacity-40" />
-      <span>{children}</span>
-    </p>
-  );
-}
-
 export function SectionHeader({
-  index,
-  eyebrow,
+  id,
   title,
   lead,
   tone = "dark",
   className = "",
 }: {
-  index?: string;
-  eyebrow: string;
+  id: string;
   title: ReactNode;
   lead?: ReactNode;
   tone?: "dark" | "light";
@@ -239,16 +212,11 @@ export function SectionHeader({
 }) {
   return (
     <header data-reveal className={className}>
-      <Eyebrow index={index} tone={tone}>
-        {eyebrow}
-      </Eyebrow>
-      <h2 className="vds-h2 mt-6 max-w-[20ch]">{title}</h2>
+      <h2 id={id} className="vds-h2 max-w-[18ch]">
+        {title}
+      </h2>
       {lead && (
-        <p
-          className={
-            "vds-lead mt-6 " + (tone === "light" ? "text-marble" : "text-stone-ink")
-          }
-        >
+        <p className={"vds-lead mt-5 " + (tone === "light" ? "text-marble" : "text-stone-ink")}>
           {lead}
         </p>
       )}

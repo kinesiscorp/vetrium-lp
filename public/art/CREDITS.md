@@ -1,13 +1,12 @@
-# Créditos das esculturas
+# Créditos da arte
 
-Todas do The Metropolitan Museum of Art — Open Access, domínio público (CC0).
-Recortadas (remoção de fundo local), tratadas (cor, contraste, luz de borda
-violeta/rosa) e exportadas em WebP pela Vetrium em 19/10/2026.
+Busto 3D: "Marble Bust 01", escaneamento de Rico Cilliers, publicado no
+Poly Haven (https://polyhaven.com/a/marble_bust_01) sob CC0 (domínio público).
+Usado em `bust/` (glTF 2k, texturas recomprimidas para a web em 20/10/2026).
 
-| Arquivo | Obra | Objeto | Original |
-|---|---|---|---|
-| busto-jovem.webp | Marble head of a youth | 248895 | DP-14287-121.jpg |
-| busto-heracles.webp | Marble head of Herakles | 252932 | DP119245.jpg |
-| busto-antinoo.webp | Marble portrait head of Antinoos | 256530 | DP331264.jpg |
+`bust-poster.webp` (pôster do hero = primeiro quadro da animação) e
+`bust-profile.webp` (CTA final) foram renderizados da própria cena 3D
+(src/components/site/hero-bust.tsx) — para regenerar, abrir `/?bust=debug`
+em dev e usar o objeto `window.__bust`.
 
-A página pública `/creditos` lista as mesmas obras.
+A página pública `/creditos` lista a mesma origem.

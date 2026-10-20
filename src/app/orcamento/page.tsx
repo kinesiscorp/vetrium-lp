@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Eyebrow, IconMail } from "@/components/site/primitives";
+import { IconMail } from "@/components/site/primitives";
 import { QuoteForm } from "@/components/site/quote-form";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
@@ -27,8 +27,7 @@ export default async function OrcamentoPage({
         <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-12">
           <aside className="lg:col-span-4">
             <div className="lg:sticky lg:top-32">
-              <Eyebrow index="→">Solicitar orçamento</Eyebrow>
-              <h1 className="vds-display mt-6 text-[clamp(2.4rem,4.4vw,3.6rem)]">
+              <h1 className="vds-display text-[clamp(2.4rem,4.4vw,3.6rem)]">
                 Vamos construir <span className="vds-em text-rose-ink">seu projeto.</span>
               </h1>
               <p className="vds-lead mt-6 text-stone-ink">

@@ -455,7 +455,7 @@ export function QuoteForm({ initialService }: { initialService?: string }) {
       {/* ---------- Erro de envio ---------- */}
       <div aria-live="assertive">
         {status === "error" && (
-          <div role="alert" className="mt-8 border-l-2 border-rose-ink bg-ivory-deep px-5 py-4">
+          <div role="alert" className="mt-8 border border-rose-ink/40 bg-ivory-deep px-5 py-4">
             <p className="font-semibold">{serverError}</p>
             <p className="mt-1 text-sm text-stone-ink">
               Suas respostas continuam aqui. Tente de novo ou{" "}

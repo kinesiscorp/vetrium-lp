@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { ClosingCta } from "@/components/site/closing-cta";
-import { Discovery } from "@/components/site/discovery";
 import { Faq } from "@/components/site/faq";
 import { Hero } from "@/components/site/hero";
 import { Process } from "@/components/site/process";
@@ -8,23 +7,19 @@ import { RevealObserver } from "@/components/site/reveal-observer";
 import { Services } from "@/components/site/services";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
-import { Standards } from "@/components/site/standards";
-import { Value } from "@/components/site/value";
 import { Work } from "@/components/site/work";
-import { CONTACT, FAQ, FEATURED_SERVICE, SERVICE_GROUPS, SITE } from "@/lib/site/content";
+import { CONTACT, FAQ, SERVICES, SITE } from "@/lib/site/content";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
 /**
- * Narrativa: o que fazemos (hero) → por que importa (valor) → o que
- * entregamos (serviços) → prova (projetos) → como (processo) → como você é
- * encontrado (SEO/GEO) → o que esperar (diferenciais) → dúvidas → ação.
+ * Cinco blocos curtos para quem não lê muito: promessa (hero) → o que
+ * fazemos → prova (projetos) → como funciona → dúvidas → ação. O detalhe
+ * (escopo, SEO/GEO, garantias) mora nas Dúvidas e no formulário.
  */
 export default function Home() {
-  const services = [FEATURED_SERVICE, ...SERVICE_GROUPS.flatMap((g) => g.services)];
-
   // Só dados reais: sem endereço, avaliações ou perfis que não existem.
   const jsonLd = [
     {
@@ -41,9 +36,9 @@ export default function Home() {
       hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: "Serviços da Vetrium",
-        itemListElement: services.map((s) => ({
+        itemListElement: SERVICES.map((s) => ({
           "@type": "Offer",
-          itemOffered: { "@type": "Service", name: s.name, description: s.summary },
+          itemOffered: { "@type": "Service", name: s.name, description: s.line },
         })),
       },
     },
@@ -68,12 +63,9 @@ export default function Home() {
       <SiteHeader />
       <main id="conteudo" className="flex-1">
         <Hero />
-        <Value />
         <Services />
         <Work />
         <Process />
-        <Discovery />
-        <Standards />
         <Faq />
         <ClosingCta />
       </main>

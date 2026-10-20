@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 // quando houver. O texto descreve apenas o que o site faz hoje.
 export default function PrivacidadePage() {
   return (
-    <LegalPage eyebrow="Privacidade" title="Política de privacidade" updated="19/10/2026">
+    <LegalPage title="Política de privacidade" updated="19/10/2026">
       <p>
         Esta política explica quais dados pessoais a Vetrium recebe por meio
         deste site, para que eles são usados e quais são os seus direitos, de
