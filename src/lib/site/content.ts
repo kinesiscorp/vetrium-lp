@@ -93,15 +93,27 @@ export type WorkItem = {
 };
 
 /**
- * Projetos exibidos na home. Os nomes antigos do portfólio que vieram do
- * template (Master Crypto, Achievo, Memory it, Cycleit, Gatômetro, Layerio)
- * ficaram de fora até alguém confirmar que são trabalhos reais.
+ * Projetos exibidos na home — escolha do Gabriel (20/10/2026): só o
+ * redesign do Esquadrão do Frog e o Bbr Flow. O redesign do Frog não tem
+ * link público (a demo na Vercel não está no ar), então o card não leva a
+ * lugar nenhum; preencher `href` quando houver.
  *
  * TODO(vetrium): Respawn (public/portfolio/respawn-paintball.jpg) mostra a
  * marca "Impacto Paintball" — confirmar se é cliente e se há autorização
  * antes de voltar com ele para cá (kind: "cliente").
  */
 export const WORK: WorkItem[] = [
+  {
+    slug: "frogman",
+    name: "Esquadrão do Frog",
+    kind: "cliente",
+    segment: "Landing page de curso para jogadores de PUBG",
+    goal: "Redesenhar a página do curso do streamer Frogman para levar o visitante ao plano certo e capturar quem ainda não decidiu.",
+    scope: ["Diagnóstico", "Redesign", "Landing page", "Desenvolvimento"],
+    image: "/diagnostico-frog/hero-depois.jpg",
+    imageAlt: "Primeira dobra da landing page do Esquadrão do Frog: \"Do bronze ao mestre\", em verde neon sobre fundo escuro",
+    year: "2026",
+  },
   {
     slug: "bbrflow",
     name: "Bbr Flow",
@@ -113,30 +125,6 @@ export const WORK: WorkItem[] = [
     imageAlt: "Landing page do Bbr Flow, sistema de agenda e gestão para barbearias",
     year: "2026",
     href: "https://kinesiscorp.github.io/barberflow-lp/",
-  },
-  {
-    slug: "flow-pedidos",
-    name: "Flow Pedidos",
-    kind: "produto-proprio",
-    segment: "Pedidos online para alimentação",
-    goal: "Apresentar um app de pedidos white-label para pequenos negócios de comida.",
-    scope: ["Produto", "Landing page", "Desenvolvimento"],
-    image: "/portfolio/salgados-flow-lp.png",
-    imageAlt: "Landing page do Flow Pedidos, app de pedidos online para negócios de alimentação",
-    year: "2026",
-    href: "https://kinesiscorp.github.io/salgados-flow-lp/",
-  },
-  {
-    slug: "ironstreak",
-    name: "IronStreak",
-    kind: "produto-proprio",
-    segment: "App de treino",
-    goal: "Lançar um app de treino com gamificação e uma página que explica o produto em segundos.",
-    scope: ["Produto", "UX/UI", "PWA", "Landing page"],
-    image: "/portfolio/ironstreak.png",
-    imageAlt: "Telas e landing page do IronStreak, app de treino com sequências e conquistas",
-    year: "2026",
-    href: "https://kinesiscorp.github.io/ironstreak-lp/",
   },
 ];
 
