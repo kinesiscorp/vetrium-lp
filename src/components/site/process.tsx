@@ -3,7 +3,7 @@ import { STEPS } from "@/lib/site/content";
 import { SplitHeading } from "./primitives";
 
 /**
- * Como funciona: painel largo com a duna e as sombras das colunas; os três
+ * Como funciona: painel largo em campo de cor; os três
  * passos em vidro claro por cima, ligados por uma linha que se desenha.
  */
 export function Process() {
@@ -14,10 +14,10 @@ export function Process() {
           <SplitHeading id="processo-title" lead="Simples assim," it="em três passos" className="vds-h2" />
         </div>
 
-        <div data-rise className="relative mt-14 overflow-hidden rounded-[2rem] bg-paper-2 ring-1 ring-umber/8">
+        <div data-rise className="relative mt-14 overflow-hidden rounded-[2rem] bg-paper-2 ring-1 ring-night/8">
           <Image
-            src="/art/v3/process.webp"
-            alt="Duna de areia clara com as sombras longas de quatro colunas"
+            src="/art/v4/process.webp"
+            alt=""
             fill
             sizes="(min-width: 1152px) 72rem, 100vw"
             className="object-cover"
@@ -31,7 +31,7 @@ export function Process() {
               preserveAspectRatio="none"
               className="vds-draw absolute left-[16%] top-[calc(50%-1px)] hidden h-[2px] w-[68%] md:block"
             >
-              <path d="M0 5 H1000" pathLength={1} stroke="rgb(38 35 27 / 0.35)" strokeWidth="2" fill="none" />
+              <path d="M0 5 H1000" pathLength={1} stroke="rgb(16 22 43 / 0.35)" strokeWidth="2" fill="none" />
             </svg>
 
             <ol className="relative grid gap-3 md:grid-cols-3 md:gap-6">
@@ -42,11 +42,11 @@ export function Process() {
                   style={{ ["--d" as string]: `${200 + i * 140}ms` }}
                   className="vds-glass rounded-[1.4rem] p-6"
                 >
-                  <p className="text-[0.85rem] tabular-nums text-olive">
+                  <p className="text-[0.85rem] tabular-nums text-cobalt">
                     {i + 1} de {STEPS.length}
                   </p>
-                  <h3 className="vds-it mt-2 text-[2.3rem] leading-none text-umber">{s.title}</h3>
-                  <p className="mt-3 leading-relaxed text-clay">{s.body}</p>
+                  <h3 className="vds-it mt-2 text-[2.3rem] leading-none text-night">{s.title}</h3>
+                  <p className="mt-3 leading-relaxed text-slate">{s.body}</p>
                 </li>
               ))}
             </ol>

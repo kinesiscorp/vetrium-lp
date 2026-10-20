@@ -11,21 +11,12 @@ export default function CreditosPage() {
   return (
     <LegalPage title="Créditos de imagem">
       <p>
-        O céu e o mar das cenas vêm do conjunto{" "}
+        O céu do topo e da chamada final vem do panorama{" "}
         <a href="https://polyhaven.com/a/cape_hill" target="_blank" rel="noopener noreferrer">
           Cape Hill
         </a>
-        ; o busto é o{" "}
-        <a href="https://polyhaven.com/a/marble_bust_01" target="_blank" rel="noopener noreferrer">
-          Marble Bust 01
-        </a>{" "}
-        (Rico Cilliers) e as oliveiras são o modelo{" "}
-        <a href="https://polyhaven.com/a/island_tree_01" target="_blank" rel="noopener noreferrer">
-          Island Tree 01
-        </a>
-        , todos do Poly Haven em domínio público (CC0). As ruínas do templo, as
-        colunas, a duna, o mármore e o tratamento de cor são criações da
-        Vetrium, feitas em 3D.
+        , publicado no Poly Haven em domínio público (CC0). Os campos de cor e o
+        tratamento das imagens são criações da Vetrium.
       </p>
       <p>
         As imagens de projetos do portfólio são capturas de tela de produtos

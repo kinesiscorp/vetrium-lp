@@ -10,8 +10,8 @@ const GRASS: { src: string; side: "left" | "right" }[] = [];
 
 function HeroBackdrop() {
   const common = { alt: "", sizes: "100vw", priority: true } as const;
-  const { props: desk } = getImageProps({ ...common, src: "/art/v3/hero.webp", width: 2560, height: 1440 });
-  const { props: mob } = getImageProps({ ...common, src: "/art/v3/hero-m.webp", width: 1080, height: 1920 });
+  const { props: desk } = getImageProps({ ...common, src: "/art/v4/hero.webp", width: 2560, height: 1440 });
+  const { props: mob } = getImageProps({ ...common, src: "/art/v4/hero-m.webp", width: 1080, height: 1920 });
   return (
     <picture>
       <source media="(min-width: 768px)" srcSet={desk.srcSet} />
@@ -23,9 +23,8 @@ function HeroBackdrop() {
 }
 
 /**
- * Primeira dobra: ruínas de um templo dórico entre oliveiras, sobre o mar,
- * em luz do dia. Título no céu claro, palavra a palavra; a base da cena se
- * dissolve no mármore da página.
+ * Primeira dobra: céu aberto em tela cheia, título palavra a palavra e a
+ * base da cena se dissolvendo no branco da página.
  */
 export function Hero() {
   return (
@@ -40,12 +39,12 @@ export function Hero() {
         />
         <div
           aria-hidden
-          className="vds-haze pointer-events-none absolute inset-x-[-10%] top-[38%] h-[22%] bg-[radial-gradient(ellipse_at_center,rgb(244_241_234/0.55),transparent_70%)] blur-2xl"
+          className="vds-haze pointer-events-none absolute inset-x-[-10%] top-[38%] h-[22%] bg-[radial-gradient(ellipse_at_center,rgb(255_255_255/0.55),transparent_70%)] blur-2xl"
         />
         {/* Leitura: clareia o céu atrás do título e funde a base no mármore */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgb(244_241_234/0.55)_0%,rgb(244_241_234/0.35)_35%,rgb(244_241_234/0)_58%,rgb(244_241_234/0.2)_80%,var(--color-paper)_100%)]"
+          className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgb(255_255_255/0.55)_0%,rgb(255_255_255/0.35)_35%,rgb(255_255_255/0)_58%,rgb(255_255_255/0.2)_80%,var(--color-paper)_100%)]"
         />
 
         {GRASS.map((g) => (
@@ -69,12 +68,12 @@ export function Hero() {
             lead="Seu site não precisa apenas impressionar."
             it="Precisa gerar oportunidades."
             delay={150}
-            className="vds-display text-[clamp(2.6rem,6.4vw,5.6rem)] text-umber"
+            className="vds-display text-[clamp(2.6rem,6.4vw,5.6rem)] text-night"
           />
           <p
             data-rise
             style={{ ["--d" as string]: "650ms" }}
-            className="vds-lead mt-6 text-[1.06rem] text-umber/75"
+            className="vds-lead mt-6 text-[1.06rem] text-night/75"
           >
             Criamos landing pages que explicam seu negócio em segundos, aparecem
             nas buscas e levam o visitante até o contato.
@@ -91,7 +90,7 @@ export function Hero() {
               rel="noopener noreferrer"
               className="vds-pill vds-pill-ghost gap-2"
             >
-              <IconWhatsapp className="h-4 w-4 text-olive" />
+              <IconWhatsapp className="h-4 w-4 text-cobalt" />
               <span>Conversar no WhatsApp</span>
             </a>
           </div>

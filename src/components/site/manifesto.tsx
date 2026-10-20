@@ -130,29 +130,29 @@ export function Manifesto() {
       >
         <div
           aria-hidden
-          className="pointer-events-none absolute left-1/2 top-1/2 h-[38rem] w-[38rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgb(167_176_127/0.28),transparent_65%)]"
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[38rem] w-[38rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgb(43_70_255/0.12),transparent_65%)]"
         />
-        <h2 className="vds-display relative mx-auto max-w-5xl text-center text-[clamp(2.6rem,7.6vw,6rem)] font-medium leading-[1.08] text-umber">
+        <h2 className="vds-display relative mx-auto max-w-5xl text-center text-[clamp(2.6rem,7.6vw,6rem)] font-medium leading-[1.08] text-night">
           <span className="flex flex-wrap items-center justify-center gap-x-[0.22em]">
             <span data-piece>Damos</span>
             <span data-piece className={GLYPH}>
-              <IconForm className="h-[0.56em] w-[0.56em] text-olive" />
+              <IconForm className="h-[0.56em] w-[0.56em] text-cobalt" />
             </span>
             <span data-piece>forma</span>
           </span>
           <span className="flex flex-wrap items-center justify-center gap-x-[0.22em]">
             <span data-piece>à</span>
             <span data-piece className={GLYPH}>
-              <IconAmbition className="h-[0.56em] w-[0.56em] text-olive" />
+              <IconAmbition className="h-[0.56em] w-[0.56em] text-cobalt" />
             </span>
-            <span data-piece className="vds-it font-normal text-olive">
+            <span data-piece className="vds-it font-normal text-cobalt">
               ambição
             </span>
           </span>
           <span className="flex flex-wrap items-center justify-center gap-x-[0.22em]">
             <span data-piece>do seu</span>
             <span data-piece className={GLYPH}>
-              <IconBusiness className="h-[0.56em] w-[0.56em] text-olive" />
+              <IconBusiness className="h-[0.56em] w-[0.56em] text-cobalt" />
             </span>
             <span data-piece>negócio</span>
           </span>
@@ -162,7 +162,7 @@ export function Manifesto() {
       <section aria-label="Nossa abordagem" className="px-5 pb-28 pt-8 sm:pb-36">
         <p
           ref={paraRef}
-          className="mx-auto max-w-4xl text-center text-[clamp(1.35rem,3vw,2.2rem)] font-medium leading-[1.4] tracking-[-0.025em] text-umber"
+          className="mx-auto max-w-4xl text-center text-[clamp(1.35rem,3vw,2.2rem)] font-medium leading-[1.4] tracking-[-0.025em] text-night"
         >
           {/* O espaço fica FORA do span: dentro de inline-block ele some no fim da linha */}
           {PARAGRAPH.split(" ").map((w, i) => (
