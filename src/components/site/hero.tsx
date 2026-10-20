@@ -1,74 +1,112 @@
-import Image from "next/image";
+import { getImageProps } from "next/image";
 import { whatsappHref } from "@/lib/site/content";
-import { HeroBust } from "./hero-bust";
-import { ButtonLink, IconWhatsapp } from "./primitives";
+import { IconWhatsapp, PillLink, SplitHeading } from "./primitives";
+import { StoryCard } from "./story-card";
 
 /**
- * Primeira dobra. A mensagem comercial vem antes da arte: quem não "lê" o
- * busto entende o negócio pelo texto. O busto 3D entra depois do texto,
- * sobre um pôster estático do mesmo enquadramento (sem salto de layout e
- * sem tela vazia se o WebGL não carregar).
+ * Capim do primeiro plano (PNGs transparentes) — balançam nos cantos como na
+ * referência. Vazio até as artes finais chegarem; a camada só aparece quando
+ * houver arquivo aqui.
+ */
+const GRASS: { src: string; side: "left" | "right" }[] = [];
+
+function HeroBackdrop() {
+  const common = { alt: "", sizes: "100vw", priority: true } as const;
+  const { props: desk } = getImageProps({ ...common, src: "/art/v2/hero.webp", width: 2560, height: 1440 });
+  const { props: mob } = getImageProps({ ...common, src: "/art/v2/hero-m.webp", width: 1080, height: 1920 });
+  return (
+    <picture>
+      <source media="(min-width: 768px)" srcSet={desk.srcSet} />
+      <source media="(max-width: 767px)" srcSet={mob.srcSet} />
+      {/* eslint-disable-next-line jsx-a11y/alt-text -- decorativa: alt vem vazio de common */}
+      <img {...mob} className="vds-kenburns absolute inset-0 h-full w-full object-cover object-center" />
+    </picture>
+  );
+}
+
+/**
+ * Primeira dobra: ruínas de mármore sobre o mar ao entardecer, em tela
+ * cheia. Título centralizado no céu, palavra a palavra; o card de stories
+ * com projetos reais sobe da base da cena, como na referência.
  */
 export function Hero() {
   return (
-    <section
-      aria-labelledby="hero-title"
-      className="vds-dark vds-night relative isolate overflow-hidden"
-    >
-      <div className="mx-auto grid max-w-7xl px-4 pt-28 sm:px-8 lg:min-h-[100svh] lg:grid-cols-12 lg:pt-0">
-        <div className="relative z-10 flex flex-col justify-center lg:col-span-6 lg:pb-16 lg:pt-28">
-          <h1
-            id="hero-title"
-            className="vds-display vds-enter text-[clamp(2.6rem,6vw,5.4rem)]"
-          >
-            Seu site não precisa apenas impressionar.{" "}
-            <span className="vds-em text-rose">Precisa gerar oportunidades.</span>
-          </h1>
+    <section aria-labelledby="hero-title" className="relative isolate">
+      <div className="relative h-[100svh] min-h-[46rem] overflow-hidden">
+        <HeroBackdrop />
 
+        {/* Atmosfera: brilho do sol e névoa respirando */}
+        <div
+          aria-hidden
+          className="vds-glow pointer-events-none absolute left-1/2 top-[30%] h-[42rem] w-[42rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgb(255_196_120/0.35),transparent_62%)] mix-blend-screen"
+        />
+        <div
+          aria-hidden
+          className="vds-haze pointer-events-none absolute inset-x-[-10%] bottom-[18%] h-[40%] bg-[radial-gradient(ellipse_at_center,rgb(214_176_130/0.28),transparent_70%)] blur-2xl"
+        />
+        {/* Leitura: escurece topo e base, mantém o centro luminoso */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgb(18_13_8/0.55)_0%,rgb(18_13_8/0.1)_30%,rgb(18_13_8/0.15)_60%,rgb(18_13_8/0.95)_100%)]"
+        />
+
+        {GRASS.map((g) => (
+          // eslint-disable-next-line @next/next/no-img-element -- camada decorativa animada
+          <img
+            key={g.src}
+            src={g.src}
+            alt=""
+            aria-hidden
+            className={
+              "vds-sway pointer-events-none absolute bottom-0 h-[55%] w-auto " +
+              (g.side === "left" ? "-left-8" : "-right-8 [animation-delay:-3s]")
+            }
+          />
+        ))}
+
+        <div className="relative z-10 mx-auto flex h-full max-w-5xl flex-col items-center px-5 pt-[19vh] text-center sm:pt-[20vh]">
+          <SplitHeading
+            as="h1"
+            id="hero-title"
+            lead="Seu site não precisa apenas impressionar."
+            it="Precisa gerar oportunidades."
+            delay={150}
+            className="vds-display text-[clamp(2.6rem,6.4vw,5.6rem)] text-marble [text-shadow:0_2px_30px_rgb(18_13_8/0.35)]"
+          />
           <p
-            className="vds-lead vds-enter mt-7 max-w-[44ch] text-marble"
-            style={{ ["--enter-delay" as string]: "120ms" }}
+            data-rise
+            style={{ ["--d" as string]: "650ms" }}
+            className="vds-lead mt-6 text-[1.06rem] text-marble/80"
           >
             Criamos landing pages que explicam seu negócio em segundos, aparecem
             nas buscas e levam o visitante até o contato.
           </p>
-
           <div
-            className="vds-enter mt-10 flex flex-col gap-3 sm:flex-row sm:items-center"
-            style={{ ["--enter-delay" as string]: "220ms" }}
+            data-rise
+            style={{ ["--d" as string]: "800ms" }}
+            className="mt-9 flex flex-col items-center gap-3 sm:flex-row"
           >
-            <ButtonLink href="/orcamento" variant="light">
-              Solicitar orçamento
-            </ButtonLink>
-            <ButtonLink href="#projetos" variant="outline" arrow={false}>
-              Ver projetos
-            </ButtonLink>
+            <PillLink href="/orcamento">Solicitar orçamento</PillLink>
+            <a
+              href={whatsappHref()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="vds-pill vds-pill-ghost gap-2"
+            >
+              <IconWhatsapp className="h-4 w-4 text-gold" />
+              <span>Conversar no WhatsApp</span>
+            </a>
           </div>
-
-          <a
-            href={whatsappHref()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="vds-link vds-enter mt-7 self-start text-sm text-marble hover:text-ivory"
-            style={{ ["--enter-delay" as string]: "300ms" }}
-          >
-            <IconWhatsapp className="h-4 w-4 text-rose" />
-            Prefere conversar? Chame no WhatsApp
-          </a>
         </div>
+      </div>
 
-        {/* Arte: pôster + cena 3D no mesmo quadro */}
-        <div className="relative -mx-4 mt-6 aspect-[4/5] sm:mx-auto sm:w-[30rem] lg:absolute lg:inset-y-0 lg:right-0 lg:mx-0 lg:mt-0 lg:aspect-auto lg:w-[56%] [&:has(.bust-ready)>img]:opacity-0">
-          <Image
-            src="/art/bust-poster.webp"
-            alt="Busto clássico de mármore iluminado em violeta e rosa, com uma bola de chiclete rosa saindo dos lábios"
-            fill
-            priority
-            sizes="(min-width: 1024px) 56vw, 100vw"
-            className="object-cover object-center transition-opacity duration-700"
-          />
-          <HeroBust className="absolute inset-0" />
-        </div>
+      {/* Card de stories sobe da base do hero para a próxima seção */}
+      <div
+        data-rise
+        style={{ ["--d" as string]: "1000ms" }}
+        className="relative z-20 -mt-[9.5rem] flex justify-center px-5 sm:-mt-[11rem]"
+      >
+        <StoryCard />
       </div>
     </section>
   );

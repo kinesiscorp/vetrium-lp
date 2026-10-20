@@ -5,46 +5,12 @@ import type { ComponentProps, ReactNode } from "react";
 /* Marca                                                              */
 /* ------------------------------------------------------------------ */
 
-export function Logo({
-  tone = "dark",
-  size = 26,
-  tagline = false,
-}: {
-  /** "dark" = tinta obsidiana (fundo claro); "light" = tinta marfim. */
-  tone?: "dark" | "light";
-  size?: number;
-  tagline?: boolean;
-}) {
+export function Logo({ size = 22 }: { size?: number }) {
   return (
-    <span className="inline-flex items-center gap-3">
+    <span className="inline-flex items-center gap-2.5">
       {/* eslint-disable-next-line @next/next/no-img-element -- SVG vetorial, sem ganho com next/image */}
-      <img
-        src="/brand/vetrium-emblem.svg"
-        alt=""
-        width={size}
-        height={size}
-        className="flex-none"
-      />
-      <span className="flex flex-col">
-        <span
-          className={
-            "font-editorial text-[1.15rem] leading-none tracking-[0.32em] " +
-            (tone === "light" ? "text-ivory" : "text-obsidian")
-          }
-        >
-          VETRIUM
-        </span>
-        {tagline && (
-          <span
-            className={
-              "vds-label mt-1.5 text-[0.56rem] tracking-[0.24em] " +
-              (tone === "light" ? "text-marble" : "text-stone-ink")
-            }
-          >
-            Landing pages / UX/UI / SEO / GEO
-          </span>
-        )}
-      </span>
+      <img src="/brand/vetrium-emblem.svg" alt="" width={size} height={size} className="flex-none" />
+      <span className="text-[1.05rem] font-medium tracking-[-0.03em] text-marble">Vetrium</span>
     </span>
   );
 }
@@ -151,32 +117,36 @@ export const IconSparkle = (p: IconProps) => (
 );
 
 /* ------------------------------------------------------------------ */
-/* Botões                                                              */
+/* Botão pílula (com círculo de seta, como na referência)              */
 /* ------------------------------------------------------------------ */
 
-type Variant = "primary" | "light" | "outline";
+type Variant = "light" | "ghost";
 
-export function ButtonLink({
+export function PillLink({
   href,
-  variant = "primary",
+  variant = "light",
   children,
-  arrow = true,
   className = "",
   external,
+  dot = variant === "light",
   ...rest
 }: {
   href: string;
   variant?: Variant;
   children: ReactNode;
-  arrow?: boolean;
   className?: string;
   external?: boolean;
+  dot?: boolean;
 } & Omit<ComponentProps<"a">, "href" | "className" | "children">) {
-  const cls = `vds-btn vds-btn-${variant} ${className}`;
+  const cls = `vds-pill vds-pill-${variant} ${className}`;
   const inner = (
     <>
       <span>{children}</span>
-      {arrow && <IconArrow className="vds-btn-arrow h-4 w-4" />}
+      {dot && (
+        <span className="vds-pill-dot" aria-hidden>
+          <IconArrowUpRight className="h-4 w-4" />
+        </span>
+      )}
     </>
   );
   if (external) {
@@ -194,32 +164,62 @@ export function ButtonLink({
 }
 
 /* ------------------------------------------------------------------ */
-/* Cabeçalho de seção — título + uma frase, sem etiqueta nem numeração */
+/* Título revelado palavra a palavra                                   */
 /* ------------------------------------------------------------------ */
 
-export function SectionHeader({
+/**
+ * `lead` em Inter Tight, `it` em Instrument Serif itálica (quebra de linha
+ * entre as duas partes no desktop). Cada palavra vira um span com índice,
+ * e o CSS (vds-split) faz a entrada com desfoque quando o título entra na
+ * tela. Leitores de tela recebem a frase inteira via aria-label.
+ */
+export function SplitHeading({
+  as: Tag = "h2",
   id,
-  title,
   lead,
-  tone = "dark",
+  it,
   className = "",
+  delay = 0,
+  breakLine = true,
 }: {
-  id: string;
-  title: ReactNode;
-  lead?: ReactNode;
-  tone?: "dark" | "light";
+  as?: "h1" | "h2";
+  id?: string;
+  lead: string;
+  it?: string;
   className?: string;
+  delay?: number;
+  breakLine?: boolean;
 }) {
+  let i = 0;
+  const words = (text: string, italic: boolean) =>
+    text.split(" ").map((w, k, arr) => (
+      <span
+        key={`${italic}-${k}`}
+        className={"w " + (italic ? "vds-it" : "")}
+        style={{ ["--i" as string]: i++ }}
+      >
+        {w}
+        {k < arr.length - 1 ? " " : ""}
+      </span>
+    ));
   return (
-    <header data-reveal className={className}>
-      <h2 id={id} className="vds-h2 max-w-[18ch]">
-        {title}
-      </h2>
-      {lead && (
-        <p className={"vds-lead mt-5 " + (tone === "light" ? "text-marble" : "text-stone-ink")}>
-          {lead}
-        </p>
-      )}
-    </header>
+    <Tag
+      id={id}
+      aria-label={it ? `${lead} ${it}` : lead}
+      className={`vds-split ${className}`}
+      style={{ ["--d" as string]: `${delay}ms` }}
+      data-split
+    >
+      <span aria-hidden>
+        {words(lead, false)}
+        {it && (
+          <>
+            {breakLine ? <br className="hidden sm:block" /> : " "}
+            <span className="sm:hidden"> </span>
+            {words(it, true)}
+          </>
+        )}
+      </span>
+    </Tag>
   );
 }

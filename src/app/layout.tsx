@@ -1,28 +1,35 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, JetBrains_Mono, Playfair_Display, Sora } from "next/font/google";
+import { Geist_Mono, Inter, Inter_Tight, Instrument_Serif, Sora } from "next/font/google";
 import { SITE } from "@/lib/site/content";
 import "./globals.css";
 
-/* Design system Vetrium (home, orçamento, privacidade):
-   Playfair Display nos títulos editoriais, Inter no corpo e na interface,
-   JetBrains Mono em etiquetas e números. */
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+/* Design system v2 (mesma tipografia da referência Verdane):
+   Inter Tight nos títulos e no texto, Instrument Serif itálica na
+   segunda metade dos títulos, Geist Mono só para números. */
+const interTight = Inter_Tight({
+  variable: "--font-inter-tight",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  subsets: ["latin"],
+  weight: "400",
   style: ["normal", "italic"],
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
   subsets: ["latin"],
   display: "swap",
 });
 
-const jetbrains = JetBrains_Mono({
-  variable: "--font-jetbrains",
+/* Inter segue como fonte de corpo das páginas antigas (globals.css). */
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -67,7 +74,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#18181F",
+  themeColor: "#120D08",
 };
 
 const BOOT_SCRIPT = `
@@ -98,7 +105,7 @@ export default function RootLayout({
     <html
       lang="pt-BR"
       suppressHydrationWarning
-      className={`${playfair.variable} ${inter.variable} ${jetbrains.variable} ${sora.variable} h-full antialiased`}
+      className={`${interTight.variable} ${instrumentSerif.variable} ${geistMono.variable} ${inter.variable} ${sora.variable} h-full antialiased`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: BOOT_SCRIPT }} />

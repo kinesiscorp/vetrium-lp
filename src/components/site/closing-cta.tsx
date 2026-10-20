@@ -1,52 +1,43 @@
 import Image from "next/image";
 import { CONTACT, whatsappHref } from "@/lib/site/content";
-import { ButtonLink, IconWhatsapp } from "./primitives";
+import { IconWhatsapp, PillLink, SplitHeading } from "./primitives";
 
-/** Fecho: o mesmo busto do hero, agora de perfil — a página termina onde começou. */
+/** Fecho em tela cheia, de volta à paisagem do hero (como na referência). */
 export function ClosingCta() {
   return (
-    <section
-      id="contato"
-      aria-labelledby="contato-title"
-      className="vds-dark vds-night relative isolate overflow-hidden px-4 pt-24 sm:px-8 lg:pt-0"
-    >
-      <div className="mx-auto grid max-w-7xl lg:min-h-[40rem] lg:grid-cols-12 lg:gap-10">
-        <div className="relative z-10 flex flex-col justify-center pb-12 lg:col-span-7 lg:py-32">
-          <h2 id="contato-title" data-reveal className="vds-display text-[clamp(2.4rem,5vw,4.4rem)]">
-            Vamos construir o seu <span className="vds-em text-rose">próximo site?</span>
-          </h2>
-          <p data-reveal className="vds-lead mt-6 max-w-[40ch] text-marble">
-            Conte o que você precisa. Respondemos com os próximos passos e uma
-            proposta.
-          </p>
-          <div data-reveal className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <ButtonLink href="/orcamento" variant="light">
-              Solicitar orçamento
-            </ButtonLink>
-            <ButtonLink href={whatsappHref()} external variant="outline" arrow={false}>
-              <span className="inline-flex items-center gap-2">
-                <IconWhatsapp className="h-4 w-4" /> WhatsApp
-              </span>
-            </ButtonLink>
-          </div>
-          <p data-reveal className="mt-8 text-sm text-marble">
-            ou{" "}
-            <a href={`mailto:${CONTACT.email}`} className="vds-link text-ivory">
-              {CONTACT.email}
-            </a>
-          </p>
-        </div>
+    <section id="contato" aria-labelledby="contato-title" className="relative isolate overflow-hidden">
+      <Image
+        src="/art/v2/cta.webp"
+        alt=""
+        fill
+        sizes="100vw"
+        className="vds-kenburns -z-10 object-cover"
+      />
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,var(--color-nox)_0%,rgb(18_13_8/0.35)_30%,rgb(18_13_8/0.45)_70%,var(--color-nox)_100%)]" />
 
-        <div className="relative -mx-4 aspect-square sm:mx-auto sm:w-[28rem] lg:col-span-5 lg:mx-0 lg:aspect-auto lg:w-auto">
-          <Image
-            src="/art/bust-profile.webp"
-            alt="O mesmo busto de mármore visto de perfil, iluminado em rosa"
-            fill
-            loading="lazy"
-            sizes="(min-width: 1024px) 40vw, 100vw"
-            className="object-cover object-center"
-          />
+      <div className="mx-auto flex min-h-[44rem] max-w-3xl flex-col items-center justify-center px-5 py-32 text-center">
+        <SplitHeading
+          id="contato-title"
+          lead="Vamos construir"
+          it="o seu próximo site?"
+          className="vds-display text-[clamp(2.6rem,6vw,5rem)]"
+        />
+        <p data-rise className="vds-lead mx-auto mt-6 text-marble/80">
+          Conte o que você precisa. Respondemos com os próximos passos e uma proposta.
+        </p>
+        <div data-rise style={{ ["--d" as string]: "150ms" }} className="mt-9 flex flex-col items-center gap-3 sm:flex-row">
+          <PillLink href="/orcamento">Solicitar orçamento</PillLink>
+          <a href={whatsappHref()} target="_blank" rel="noopener noreferrer" className="vds-pill vds-pill-ghost gap-2">
+            <IconWhatsapp className="h-4 w-4 text-gold" />
+            <span>WhatsApp</span>
+          </a>
         </div>
+        <p data-rise style={{ ["--d" as string]: "250ms" }} className="mt-6 text-sm text-dust">
+          ou escreva para{" "}
+          <a href={`mailto:${CONTACT.email}`} className="vds-link text-marble">
+            {CONTACT.email}
+          </a>
+        </p>
       </div>
     </section>
   );

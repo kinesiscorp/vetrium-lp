@@ -1,113 +1,59 @@
 import Image from "next/image";
-import { WORK, WORK_KIND_LABEL, type WorkItem } from "@/lib/site/content";
-import { IconArrowUpRight, SectionHeader } from "./primitives";
-
-function WorkCard({ w, large, index }: { w: WorkItem; large: boolean; index: number }) {
-  const media = (
-    <div className="relative overflow-hidden bg-obsidian-2 ring-1 ring-white/10">
-      <Image
-        src={w.image}
-        alt={w.imageAlt}
-        width={1280}
-        height={800}
-        loading="lazy"
-        sizes={large ? "(min-width: 1024px) 56vw, 100vw" : "(min-width: 1024px) 40vw, 100vw"}
-        className="aspect-[16/10] w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-      />
-    </div>
-  );
-
-  return (
-    <article
-      data-reveal
-      style={{ ["--reveal-delay" as string]: `${(index % 2) * 120}ms` }}
-      aria-labelledby={`work-${w.slug}`}
-      className="group"
-    >
-      {w.href ? (
-        <a href={w.href} target="_blank" rel="noopener noreferrer" tabIndex={-1} aria-hidden>
-          {media}
-        </a>
-      ) : (
-        media
-      )}
-
-      <div className="mt-6 flex items-start justify-between gap-6">
-        <div>
-          <h3 id={`work-${w.slug}`} className="font-editorial text-[2rem] leading-tight">
-            {w.name}
-          </h3>
-          <p className="mt-2 text-marble">
-            {w.segment} · <span className="text-rose">{WORK_KIND_LABEL[w.kind]}</span>
-          </p>
-          {w.result && (
-            <p className="mt-4 text-ivory">
-              <span className="font-editorial text-2xl">{w.result.value}</span>{" "}
-              <span className="text-sm text-marble">{w.result.context}</span>
-            </p>
-          )}
-        </div>
-        {w.href && (
-          <a
-            href={w.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="vds-link mt-2 flex-none text-sm text-ivory hover:text-rose"
-          >
-            Ver ao vivo
-            <IconArrowUpRight className="h-4 w-4" />
-            <span className="sr-only">(abre {w.name} em nova aba)</span>
-          </a>
-        )}
-      </div>
-    </article>
-  );
-}
+import { WORK, WORK_KIND_LABEL } from "@/lib/site/content";
+import { IconArrowUpRight, SplitHeading } from "./primitives";
 
 /**
- * Portfólio assimétrico (largo + estreito). Só projetos reais, cada um com
- * o tipo declarado; número de resultado só com dado medido em `result`.
+ * Projetos: cards de vidro com a tela real de cada produto, em mosaico
+ * (um grande, dois menores). Só projetos reais, com o tipo declarado.
  */
 export function Work() {
   return (
-    <section
-      id="projetos"
-      aria-labelledby="projetos-title"
-      className="vds-dark bg-obsidian px-4 py-24 sm:px-8 lg:py-36"
-    >
-      <div className="mx-auto max-w-7xl">
-        <SectionHeader
-          id="projetos-title"
-          tone="light"
-          title={
-            <>
-              Trabalho real, <span className="vds-em text-rose">no ar.</span>
-            </>
-          }
-          lead="Produtos que criamos do zero, da estratégia ao código."
-        />
+    <section id="projetos" aria-labelledby="projetos-title" className="px-5 pb-28 sm:pb-36">
+      <div className="mx-auto max-w-6xl">
+        <div className="mx-auto max-w-3xl text-center">
+          <SplitHeading id="projetos-title" lead="Trabalho real," it="no ar" className="vds-h2" breakLine={false} />
+          <p data-rise className="vds-lead mx-auto mt-5">
+            Produtos que criamos do zero, da estratégia ao código.
+          </p>
+        </div>
 
-        <div className="mt-16 grid gap-x-10 gap-y-16 lg:grid-cols-12">
-          {WORK.map((w, i) => {
-            const row = Math.floor(i / 2);
-            const first = i % 2 === 0;
-            const lonely = i === WORK.length - 1 && first;
-            const large = lonely || (row % 2 === 0 ? first : !first);
-            return (
-              <div
-                key={w.slug}
-                className={
-                  lonely
-                    ? "lg:col-span-7 lg:col-start-6"
-                    : large
-                      ? "lg:col-span-7"
-                      : "lg:col-span-5 lg:mt-24"
-                }
-              >
-                <WorkCard w={w} large={large} index={i} />
+        <div className="mt-14 grid gap-4 lg:grid-cols-5">
+          {WORK.map((w, i) => (
+            <a
+              key={w.slug}
+              href={w.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-rise
+              style={{ ["--d" as string]: `${i * 100}ms` }}
+              className={
+                "group relative overflow-hidden rounded-[1.6rem] bg-nox-2 p-2 ring-1 ring-white/8 transition-[box-shadow] duration-500 hover:ring-gold/40 " +
+                (i === 0 ? "lg:col-span-3 lg:row-span-2" : "lg:col-span-2")
+              }
+            >
+              <div className={"relative overflow-hidden rounded-[1.2rem] " + (i === 0 ? "aspect-[16/11]" : "aspect-[16/9]")}>
+                <Image
+                  src={w.image}
+                  alt={w.imageAlt}
+                  fill
+                  sizes={i === 0 ? "(min-width: 1024px) 40rem, 100vw" : "(min-width: 1024px) 26rem, 100vw"}
+                  className="object-cover object-top transition-transform duration-[1200ms] ease-[var(--ease-cinema)] group-hover:scale-[1.04]"
+                />
               </div>
-            );
-          })}
+              <div className="flex items-end justify-between gap-4 px-3 pb-2 pt-4">
+                <div>
+                  <h3 className="text-[1.35rem] tracking-[-0.035em] text-marble">{w.name}</h3>
+                  <p className="mt-1 text-[0.88rem] text-dust">
+                    {w.segment} · <span className="text-sand">{WORK_KIND_LABEL[w.kind]}</span>
+                  </p>
+                </div>
+                <span className="vds-pill-dot flex-none bg-white/8 text-marble transition-colors group-hover:bg-marble group-hover:text-nox">
+                  <IconArrowUpRight className="h-4 w-4" />
+                  <span className="sr-only">Abrir {w.name} em nova aba</span>
+                </span>
+              </div>
+            </a>
+          ))}
         </div>
       </div>
     </section>

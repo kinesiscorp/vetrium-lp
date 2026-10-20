@@ -1,38 +1,49 @@
 import { FAQ, whatsappHref } from "@/lib/site/content";
-import { IconPlus } from "./primitives";
+import { IconPlus, SplitHeading } from "./primitives";
 
 /**
- * Dúvidas: aqui mora o detalhe que saiu da página (escopo, SEO/GEO,
- * garantias). <details>/<summary> nativos — teclado e leitor de tela de
- * graça. As mesmas perguntas alimentam o JSON-LD FAQPage.
+ * Dúvidas em fileiras arredondadas de vidro (como na referência).
+ * <details>/<summary> nativos: teclado e leitor de tela sem JavaScript.
  */
 export function Faq() {
   return (
-    <section id="duvidas" aria-labelledby="duvidas-title" className="vds-paper px-4 py-24 sm:px-8 lg:py-36">
-      <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-12">
-        <div data-reveal className="lg:col-span-4">
-          <h2 id="duvidas-title" className="vds-h2">Dúvidas comuns.</h2>
-          <p className="mt-5 text-stone-ink">
+    <section id="duvidas" aria-labelledby="duvidas-title" className="relative px-5 pb-28 sm:pb-36">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-24 -z-10 h-[30rem] w-[60rem] max-w-full -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse,rgb(94_65_40/0.35),transparent_65%)] blur-2xl"
+      />
+      <div className="mx-auto max-w-2xl">
+        <div className="text-center">
+          <SplitHeading id="duvidas-title" lead="Antes de começar," it="algumas respostas" className="vds-h2" />
+          <p data-rise className="vds-lead mx-auto mt-5">
             Não achou a sua?{" "}
             <a
               href={whatsappHref("Olá! Tenho uma dúvida sobre os serviços da Vetrium.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="vds-link text-obsidian"
+              className="vds-link text-marble"
             >
               Pergunte no WhatsApp
             </a>
+            .
           </p>
         </div>
 
-        <div className="border-t vds-rule lg:col-span-8">
-          {FAQ.map((f) => (
-            <details key={f.q} className="vds-faq border-b vds-rule">
-              <summary className="flex items-start justify-between gap-6 py-6 text-left">
-                <h3 className="font-editorial text-[1.35rem] leading-snug sm:text-[1.5rem]">{f.q}</h3>
-                <IconPlus className="vds-faq-icon mt-1.5 h-5 w-5 flex-none text-rose-ink" />
+        <div className="mt-12 space-y-2.5">
+          {FAQ.map((f, i) => (
+            <details
+              key={f.q}
+              data-rise
+              style={{ ["--d" as string]: `${i * 60}ms` }}
+              className="vds-faq vds-glass rounded-[1.1rem]"
+            >
+              <summary className="flex items-center justify-between gap-6 px-5 py-4 text-left">
+                <h3 className="text-[1rem] font-medium tracking-[-0.015em] text-marble">{f.q}</h3>
+                <span className="vds-faq-icon grid h-8 w-8 flex-none place-items-center rounded-full bg-white/8 text-marble">
+                  <IconPlus className="h-4 w-4" />
+                </span>
               </summary>
-              <p className="max-w-[64ch] pb-7 pr-10 leading-relaxed text-stone-ink">{f.a}</p>
+              <p className="max-w-[60ch] px-5 pb-5 leading-relaxed text-dust">{f.a}</p>
             </details>
           ))}
         </div>
