@@ -94,9 +94,7 @@ export type WorkItem = {
 
 /**
  * Projetos exibidos na home — escolha do Gabriel (20/10/2026): só o
- * redesign do Esquadrão do Frog e o Bbr Flow. O redesign do Frog não tem
- * link público (a demo na Vercel não está no ar), então o card não leva a
- * lugar nenhum; preencher `href` quando houver.
+ * redesign do Esquadrão do Frog (no ar na Vercel desde 20/10/2026) e o Bbr Flow.
  *
  * TODO(vetrium): Respawn (public/portfolio/respawn-paintball.jpg) mostra a
  * marca "Impacto Paintball" — confirmar se é cliente e se há autorização
@@ -113,6 +111,7 @@ export const WORK: WorkItem[] = [
     image: "/diagnostico-frog/hero-depois.jpg",
     imageAlt: "Primeira dobra da landing page do Esquadrão do Frog: \"Do bronze ao mestre\", em verde neon sobre fundo escuro",
     year: "2026",
+    href: "https://esquadrao-do-frog.vercel.app/",
   },
   {
     slug: "bbrflow",
