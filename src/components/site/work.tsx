@@ -21,13 +21,13 @@ export function Work() {
           {WORK.map((w, i) => {
             const body = (
               <>
-                <div className="relative aspect-[16/10] overflow-hidden rounded-[1.2rem]">
+                <div className="relative aspect-[16/9] overflow-hidden rounded-[1.2rem]">
                   <Image
                     src={w.image}
                     alt={w.imageAlt}
                     fill
                     sizes="(min-width: 768px) 36rem, 100vw"
-                    className="object-cover object-top transition-transform duration-[1200ms] ease-[var(--ease-cinema)] group-hover:scale-[1.04]"
+                    className="object-cover transition-transform duration-[1200ms] ease-[var(--ease-cinema)] group-hover:scale-[1.04]"
                   />
                 </div>
                 <div className="flex items-end justify-between gap-4 px-3 pb-2 pt-4">
