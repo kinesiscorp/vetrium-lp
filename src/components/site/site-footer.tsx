@@ -8,7 +8,7 @@ export function SiteFooter() {
       <div className="mx-auto max-w-6xl">
         <div className="vds-glass grid gap-10 rounded-[1.6rem] p-8 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr]">
           <div>
-            <Logo size={24} />
+            <Logo height={26} />
             <p className="mt-4 max-w-[34ch] leading-relaxed text-fg-2">
               Estúdio de estratégia, design e tecnologia. Landing pages que
               explicam, aparecem nas buscas e geram contato.

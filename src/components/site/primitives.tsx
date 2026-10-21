@@ -1,17 +1,38 @@
 import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
+import { ICON_PILL, ICON_V, WORDMARK_REST, WORDMARK_V, WORDMARK_VIEWBOX } from "./brand-paths";
 
 /* ------------------------------------------------------------------ */
 /* Marca                                                              */
 /* ------------------------------------------------------------------ */
 
-export function Logo({ size = 22 }: { size?: number }) {
+/**
+ * Logo oficial: "vetrium" em sans com o "v" em serifa itálica violeta.
+ * SVG inline, então segue o tema (texto em --ink, v em --accent-solid).
+ */
+export function Logo({ height = 20, className = "" }: { height?: number; className?: string }) {
   return (
-    <span className="inline-flex items-center gap-2.5">
-      {/* eslint-disable-next-line @next/next/no-img-element -- SVG vetorial, sem ganho com next/image */}
-      <img src="/brand/vetrium-emblem.svg" alt="" width={size} height={size} className="flex-none" />
-      <span className="text-[1.05rem] font-medium tracking-[-0.03em] text-fg">Vetrium</span>
-    </span>
+    <svg
+      viewBox={WORDMARK_VIEWBOX}
+      height={height}
+      role="img"
+      aria-label="Vetrium"
+      className={`w-auto ${className}`}
+      style={{ height }}
+    >
+      <path d={WORDMARK_V} fill="var(--accent-solid)" />
+      <path d={WORDMARK_REST} fill="var(--ink)" />
+    </svg>
+  );
+}
+
+/** Logo resumida (só ícone): v + pílula violeta. Para avatar, favicon, espaços pequenos. */
+export function LogoIcon({ size = 28, className = "" }: { size?: number; className?: string }) {
+  return (
+    <svg viewBox="0 0 100 100" width={size} height={size} role="img" aria-label="Vetrium" className={className}>
+      <line x1={ICON_PILL.x1} y1={ICON_PILL.y1} x2={ICON_PILL.x2} y2={ICON_PILL.y2} strokeWidth={ICON_PILL.width} stroke="var(--accent-solid)" strokeLinecap="round" />
+      <path d={ICON_V} fill="var(--ink)" stroke="var(--ink)" strokeWidth={2.4} strokeLinejoin="round" />
+    </svg>
   );
 }
 

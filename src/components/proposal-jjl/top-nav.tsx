@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { NAV_SECTIONS, type SectionId } from "@/lib/proposal-jjl/content";
 
@@ -65,8 +64,8 @@ export function TopNav() {
           rel="noreferrer noopener"
           className="flex items-center gap-2.5"
         >
-          <Image src="/brand-frog/vetrium-icon.png" alt="" aria-hidden width={28} height={28} className="h-7 w-7 rounded-[7px]" />
-          <Image src="/brand-frog/vetrium-wordmark.png" alt="Vetrium" width={792} height={153} className="h-[15px] w-auto" />
+          {/* eslint-disable-next-line @next/next/no-img-element -- logo vetorial */}
+          <img src="/brand/vetrium-logo-dark.svg" alt="Vetrium" width={93} height={27} className="h-[22px] w-auto" />
         </a>
         <div className="flex items-center gap-4">
           <span className="hidden text-[10.5px] tracking-[0.2em] text-faint uppercase sm:inline">

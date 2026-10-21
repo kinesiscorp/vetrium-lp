@@ -29,7 +29,7 @@ export default function Home() {
       "@id": `${SITE.url}/#vetrium`,
       name: SITE.name,
       url: SITE.url,
-      logo: `${SITE.url}/brand/vetrium-emblem.png`,
+      logo: `${SITE.url}/brand/vetrium-icon-512.png`,
       description: SITE.description,
       email: CONTACT.email,
       areaServed: { "@type": "Country", name: "Brasil" },

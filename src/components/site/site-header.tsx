@@ -68,7 +68,7 @@ export function SiteHeader() {
       >
         <div className="flex h-14 items-center justify-between gap-4 pl-4 pr-2">
           <Link href="/" aria-label="Vetrium — página inicial" className="rounded-full py-1">
-            <Logo />
+            <Logo height={21} />
           </Link>
 
           <nav aria-label="Principal" className="hidden md:block">

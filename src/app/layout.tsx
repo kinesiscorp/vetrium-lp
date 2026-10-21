@@ -64,13 +64,6 @@ export const metadata: Metadata = {
     description: SITE.description,
     images: ["/og.jpg"],
   },
-  icons: {
-    icon: [
-      { url: "/icon.svg", type: "image/svg+xml" },
-      { url: "/brand/vetrium-emblem.png", type: "image/png" },
-    ],
-    apple: [{ url: "/brand/vetrium-emblem-dark.png", sizes: "180x180", type: "image/png" }],
-  },
 };
 
 export const viewport: Viewport = {
