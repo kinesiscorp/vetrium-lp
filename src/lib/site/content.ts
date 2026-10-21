@@ -18,8 +18,8 @@ export const CONTACT = {
   // TODO(vetrium): confirmar que a caixa contato@vetrium.com.br recebe e-mail
   // (o domínio do site é vetrium.space).
   email: "contato@vetrium.com.br",
-  whatsappNumber: "5511941889077",
-  whatsappDisplay: "(11) 94188-9077",
+  whatsappNumber: "5517936309413",
+  whatsappDisplay: "(17) 93630-9413",
   whatsappMessage:
     "Olá! Vim pelo site da Vetrium e gostaria de conversar sobre um projeto.",
   area: "Atendimento remoto em todo o Brasil",
