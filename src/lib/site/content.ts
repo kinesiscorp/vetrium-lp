@@ -15,9 +15,8 @@ export const SITE = {
 } as const;
 
 export const CONTACT = {
-  // TODO(vetrium): confirmar que a caixa contato@vetrium.com.br recebe e-mail
-  // (o domínio do site é vetrium.space).
-  email: "contato@vetrium.com.br",
+  // E-mail provisório: a Vetrium ainda não tem e-mail corporativo.
+  email: "gabrielcarlos1023@gmail.com",
   whatsappNumber: "5517936309413",
   whatsappDisplay: "(17) 93630-9413",
   whatsappMessage:
