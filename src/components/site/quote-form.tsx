@@ -17,12 +17,12 @@ import {
   type QuoteErrors,
   type QuoteInput,
 } from "@/lib/site/quote";
-import { IconArrow, IconCheck, IconWhatsapp } from "./primitives";
+import { IconArrow, IconWhatsapp } from "./primitives";
 
 const STEPS = ["Serviço", "Seu projeto", "Contato"] as const;
 const DRAFT_KEY = "vetrium:orcamento:rascunho";
 
-type Status = "idle" | "submitting" | "success" | "error";
+type Status = "idle" | "submitting" | "success";
 
 function FieldError({ id, msg }: { id: string; msg?: string }) {
   if (!msg) return null;
@@ -43,7 +43,6 @@ export function QuoteForm({ initialService }: { initialService?: string }) {
   }));
   const [errors, setErrors] = useState<QuoteErrors>({});
   const [status, setStatus] = useState<Status>("idle");
-  const [serverError, setServerError] = useState("");
   const startedAt = useRef<number>(0);
   const submitting = useRef(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -113,53 +112,48 @@ export function QuoteForm({ initialService }: { initialService?: string }) {
 
     submitting.current = true;
     setStatus("submitting");
-    setServerError("");
     track("quote_submit", { services: data.services.join(",") });
 
+    // O WhatsApp é o canal principal: abre na hora do toque (antes de qualquer
+    // await, senão o iOS bloqueia a janela) com a mensagem completa pronta.
+    const opened = window.open(whatsappLink, "_blank", "noopener,noreferrer");
+    track("quote_whatsapp", { opened: opened ? 1 : 0 });
+
+    // Registro no CRM é "melhor esforço": se o banco estiver fora, o cliente
+    // não vê erro nenhum — a solicitação já foi pelo WhatsApp.
     const form = new FormData(ev.currentTarget);
+    fetch("/api/orcamento", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      keepalive: true,
+      body: JSON.stringify({
+        ...data,
+        website: form.get("website") ?? "",
+        startedAt: startedAt.current,
+      }),
+    }).catch(() => {});
+
+    setStatus("success");
     try {
-      const res = await fetch("/api/orcamento", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...data,
-          website: form.get("website") ?? "",
-          startedAt: startedAt.current,
-        }),
-      });
-      const body = (await res.json().catch(() => ({}))) as { error?: string; errors?: QuoteErrors };
-      if (!res.ok) {
-        if (body.errors && Object.keys(body.errors).length) {
-          setErrors(body.errors);
-          const keys = Object.keys(body.errors);
-          const backTo = keys.some((k) => k === "services") ? 1 : keys.some((k) => ["business", "goal", "budget", "message"].includes(k)) ? 2 : 3;
-          if (backTo !== 3) goTo(backTo);
-        }
-        throw new Error(body.error || "Não foi possível enviar.");
-      }
-      setStatus("success");
-      track("quote_success");
-      try {
-        sessionStorage.removeItem(DRAFT_KEY);
-      } catch {}
-      requestAnimationFrame(() => headingRef.current?.focus());
-    } catch (err) {
-      setStatus("error");
-      setServerError(err instanceof Error ? err.message : "Não foi possível enviar.");
-      track("quote_error");
-    } finally {
-      submitting.current = false;
-    }
+      sessionStorage.removeItem(DRAFT_KEY);
+    } catch {}
+    requestAnimationFrame(() => headingRef.current?.focus());
+    submitting.current = false;
   };
 
-  const fallbackWhatsapp = whatsappHref(
+  const whatsappLink = whatsappHref(
     [
-      "Olá! Tentei pedir um orçamento pelo site.",
-      data.services.length ? `Serviço: ${serviceLabels(data.services).join(", ")}` : "",
-      data.business ? `Negócio: ${data.business}` : "",
-      data.goal ? `Objetivo: ${data.goal}` : "",
+      `Olá! Sou ${data.name}${data.company ? ` (${data.company})` : ""} e vim pelo site da Vetrium pedir um orçamento.`,
+      "",
+      `Serviço: ${serviceLabels(data.services).join(", ")}`,
+      `Negócio: ${data.business}`,
+      `Objetivo: ${data.goal}`,
+      `Investimento previsto: ${data.budget || "não informado"}`,
+      data.message ? `\nDescrição: ${data.message}` : "",
+      "",
+      `E-mail: ${data.email}`,
     ]
-      .filter(Boolean)
+      .filter((l, i, arr) => l !== "" || (arr[i - 1] !== "" && i !== arr.length - 1))
       .join("\n"),
   );
 
@@ -168,18 +162,29 @@ export function QuoteForm({ initialService }: { initialService?: string }) {
     return (
       <div className="vds-glass rounded-[1.6rem] p-8 sm:p-12" role="status">
         <span className="grid h-12 w-12 place-items-center bg-accent text-canvas">
-          <IconCheck className="h-6 w-6" />
+          <IconWhatsapp className="h-6 w-6" />
         </span>
         <h2 ref={headingRef} tabIndex={-1} className="vds-h2 mt-8 outline-none">
-          Recebemos sua solicitação, {data.name.split(" ")[0]}.
+          Falta só enviar no WhatsApp, {data.name.split(" ")[0]}.
         </h2>
         <p className="vds-lead mt-5 text-fg-2">
-          O próximo passo é nosso: vamos ler o que você escreveu e responder
-          no e-mail <strong className="font-semibold text-fg">{data.email}</strong>{" "}
-          para entender os detalhes e preparar uma proposta.
+          Abrimos o WhatsApp com a sua solicitação já escrita. É só tocar em
+          enviar. Se a conversa não abriu, use o botão abaixo.
         </p>
-        <ol className="mt-8 space-y-3 text-fg-2">
-          {["Análise da sua solicitação", "Conversa para entender os detalhes", "Proposta com escopo, etapas e investimento"].map(
+        <div className="mt-8">
+          <a
+            href={whatsappLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="vds-pill vds-pill-light pr-5"
+            onClick={() => track("quote_whatsapp_again")}
+          >
+            <IconWhatsapp className="h-4 w-4" />
+            Abrir WhatsApp
+          </a>
+        </div>
+        <ol className="mt-10 space-y-3 text-fg-2">
+          {["Você envia a mensagem pronta", "Respondemos e entendemos os detalhes", "Proposta com escopo, etapas e investimento"].map(
             (t, i) => (
               <li key={t} className="flex gap-3">
                 <span className="tabular-nums text-accent">{i + 1}.</span>
@@ -189,7 +194,7 @@ export function QuoteForm({ initialService }: { initialService?: string }) {
           )}
         </ol>
         <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-          <Link href="/#projetos" className="vds-pill vds-pill-light pr-5">
+          <Link href="/#projetos" className="vds-pill vds-pill-ghost">
             Ver projetos enquanto isso
           </Link>
           <Link href="/" className="vds-pill vds-pill-ghost">
@@ -441,27 +446,12 @@ export function QuoteForm({ initialService }: { initialService?: string }) {
             </div>
 
             <p className="mt-8 text-sm leading-relaxed text-fg-2">
-              Ao enviar, você concorda que a Vetrium use estes dados para
-              responder a esta solicitação, conforme a{" "}
+              Ao enviar, o WhatsApp abre com a sua solicitação pronta. Você
+              concorda que a Vetrium use estes dados para responder a ela,
+              conforme a{" "}
               <Link href="/privacidade" className="vds-link text-fg" target="_blank">
                 política de privacidade
               </Link>
-              .
-            </p>
-          </div>
-        )}
-      </div>
-
-      {/* ---------- Erro de envio ---------- */}
-      <div aria-live="assertive">
-        {status === "error" && (
-          <div role="alert" className="mt-8 rounded-2xl bg-white/60 ring-1 ring-accent-deep/50 px-5 py-4">
-            <p className="font-semibold">{serverError}</p>
-            <p className="mt-1 text-sm text-fg-2">
-              Suas respostas continuam aqui. Tente de novo ou{" "}
-              <a href={fallbackWhatsapp} target="_blank" rel="noopener noreferrer" className="vds-link text-fg">
-                envie pelo WhatsApp
-              </a>
               .
             </p>
           </div>
@@ -499,8 +489,8 @@ export function QuoteForm({ initialService }: { initialService?: string }) {
             </>
           ) : (
             <>
-              Solicitar orçamento
-              <IconArrow className="h-4 w-4" />
+              <IconWhatsapp className="h-4 w-4" />
+              Enviar pelo WhatsApp
             </>
           )}
         </button>

@@ -11,6 +11,8 @@ export type QuoteEvent =
   | "quote_step"
   | "quote_submit"
   | "quote_success"
+  | "quote_whatsapp"
+  | "quote_whatsapp_again"
   | "quote_error";
 
 type AnalyticsWindow = Window & {
