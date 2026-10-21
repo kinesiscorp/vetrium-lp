@@ -14,8 +14,8 @@ export default function NotFound() {
       <SiteHeader />
       <main id="conteudo" className="flex flex-1 items-center px-4 py-40 sm:px-8">
         <div className="mx-auto w-full max-w-3xl">
-          <p className="font-num text-sm text-slate">
-            <span className="text-cobalt">404</span> — Página não encontrada
+          <p className="font-num text-sm text-fg-2">
+            <span className="text-accent">404</span> — Página não encontrada
           </p>
           <h1 className="vds-display mt-6 text-[clamp(2.4rem,5vw,4rem)]">
             Este endereço não existe <span className="vds-it">— ou mudou de lugar.</span>

@@ -32,13 +32,13 @@ export function Work() {
                 </div>
                 <div className="flex items-end justify-between gap-4 px-3 pb-2 pt-4">
                   <div>
-                    <h3 className="text-[1.35rem] tracking-[-0.035em] text-night">{w.name}</h3>
-                    <p className="mt-1 text-[0.88rem] text-slate">
-                      {w.segment} · <span className="text-cobalt">{WORK_KIND_LABEL[w.kind]}</span>
+                    <h3 className="text-[1.35rem] tracking-[-0.035em] text-fg">{w.name}</h3>
+                    <p className="mt-1 text-[0.88rem] text-fg-2">
+                      {w.segment} · <span className="text-accent">{WORK_KIND_LABEL[w.kind]}</span>
                     </p>
                   </div>
                   {w.href && (
-                    <span className="vds-pill-dot flex-none bg-night/6 text-night transition-colors group-hover:bg-night group-hover:text-paper">
+                    <span className="vds-pill-dot flex-none bg-fg/6 text-fg transition-colors group-hover:bg-fg group-hover:text-canvas">
                       <IconArrowUpRight className="h-4 w-4" />
                       <span className="sr-only">Abrir {w.name} em nova aba</span>
                     </span>
@@ -47,8 +47,8 @@ export function Work() {
               </>
             );
             const cls =
-              "group relative overflow-hidden rounded-[1.6rem] bg-paper-2 p-2 ring-1 ring-night/10 transition-[box-shadow] duration-500 " +
-              (w.href ? "hover:ring-cobalt/40" : "");
+              "group relative overflow-hidden rounded-[1.6rem] bg-raised p-2 ring-1 ring-fg/10 transition-[box-shadow] duration-500 " +
+              (w.href ? "hover:ring-accent/40" : "");
             const style = { ["--d" as string]: `${i * 100}ms` };
             return w.href ? (
               <a key={w.slug} href={w.href} target="_blank" rel="noopener noreferrer" data-rise style={style} className={cls}>

@@ -10,7 +10,7 @@ export function Logo({ size = 22 }: { size?: number }) {
     <span className="inline-flex items-center gap-2.5">
       {/* eslint-disable-next-line @next/next/no-img-element -- SVG vetorial, sem ganho com next/image */}
       <img src="/brand/vetrium-emblem.svg" alt="" width={size} height={size} className="flex-none" />
-      <span className="text-[1.05rem] font-medium tracking-[-0.03em] text-night">Vetrium</span>
+      <span className="text-[1.05rem] font-medium tracking-[-0.03em] text-fg">Vetrium</span>
     </span>
   );
 }

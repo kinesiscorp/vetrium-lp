@@ -1,29 +1,30 @@
 /* ============================================================
-   Vetrium DS v4 — paleta "Antes e depois" × linguagem Verdane
+   Vetrium DS v5 — paleta de produção (claro/escuro) × linguagem Verdane
 
-   Branco e névoa de base, texto em tinta azul-noite, cobalto como
-   destaque (botões e links) e laranja-sinal só em preenchimentos
-   pequenos (selos, chips) com texto escuro por cima.
+   As cores NÃO são definidas aqui: os tokens abaixo apontam para a
+   paleta oficial em globals.css (Deep Charcoal, Graphite, Off-White,
+   Electric Violet, Soft Lilac), que já troca entre claro e escuro pela
+   classe .dark no <html>. O site começa no escuro; o seletor no menu
+   grava a escolha em localStorage("theme").
 
-   Contraste sobre branco: night 17.9 · slate 7.7 · cobalt 6.1 ·
-   mist 4.7 · branco sobre cobalto 6.1 · night sobre laranja 6.9.
-   Laranja NUNCA como texto sobre fundo claro (2.6).
-
-   Escopo: classes vds-* e tokens próprios. Diagnóstico/proposta e
-   /admin seguem nos tokens antigos de globals.css.
+   canvas = fundo · raised/sunken = superfícies · fg/fg-2/fg-3 = texto
+   (principal, secundário, apagado) · accent = violeta (texto AA nos dois
+   temas) · accent-soft = lilás/violeta claro decorativo.
    ============================================================ */
 
-@theme {
-  --color-paper: #ffffff;
-  --color-paper-2: #eef0f6;
-  --color-paper-3: #dde1ec;
-  --color-night: #10162b;
-  --color-slate: #4a5270;
-  --color-mist: #6b7390;
-  --color-cobalt: #2b46ff;
-  --color-cobalt-soft: #a9b4ff;
-  --color-signal: #ff7a1a;
+@theme inline {
+  --color-canvas: var(--bg);
+  --color-raised: var(--bg-elevated);
+  --color-sunken: var(--bg-sunken);
+  --color-fg: var(--ink);
+  --color-fg-2: var(--ink-dim);
+  --color-fg-3: var(--muted);
+  --color-accent: var(--accent-solid);
+  --color-accent-soft: var(--accent-to);
+  --color-accent-deep: var(--accent-fill-to);
+}
 
+@theme {
   --font-tight: var(--font-inter-tight), "Inter", system-ui, sans-serif;
   --font-serif-it: var(--font-instrument-serif), Georgia, serif;
   --font-num: var(--font-geist-mono), ui-monospace, monospace;
@@ -35,10 +36,9 @@
 @layer components {
   /* ---------- Base ---------- */
   .vds {
-    background: var(--color-paper);
-    color: var(--color-night);
+    background: var(--bg);
+    color: var(--ink);
     font-family: var(--font-tight);
-    color-scheme: light;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -65,20 +65,20 @@
   .vds-lead {
     font-size: clamp(1rem, 1.25vw, 1.125rem);
     line-height: 1.6;
-    color: var(--color-slate);
+    color: var(--ink-dim);
     max-width: 52ch;
     text-wrap: pretty;
   }
 
   /* ---------- Vidro ---------- */
   .vds-glass {
-    background: rgb(255 255 255 / 0.72);
+    background: color-mix(in srgb, var(--bg-elevated) 72%, transparent);
     backdrop-filter: blur(18px) saturate(1.15);
     -webkit-backdrop-filter: blur(18px) saturate(1.15);
     box-shadow:
-      inset 0 1px 0 rgb(255 255 255 / 0.7),
-      0 0 0 1px rgb(16 22 43 / 0.07),
-      0 24px 50px -28px rgb(16 22 43 / 0.16);
+      inset 0 1px 0 color-mix(in srgb, var(--bg-elevated) 70%, transparent),
+      0 0 0 1px color-mix(in srgb, var(--ink) 7%, transparent),
+      0 24px 50px -28px color-mix(in srgb, var(--ink) 16%, transparent);
   }
 
   /* ---------- Botão pílula com círculo de seta ---------- */
@@ -113,27 +113,27 @@
   .vds-pill:active {
     transform: scale(0.98);
   }
-  /* Primário: sépia escura com círculo claro */
+  /* Primário: pílula na cor do texto, círculo na cor do fundo (inverte com o tema) */
   .vds-pill-light {
-    background: var(--color-night);
-    color: var(--color-paper);
+    background: var(--ink);
+    color: var(--bg);
   }
   .vds-pill-light .vds-pill-dot {
-    background: var(--color-paper);
-    color: var(--color-night);
+    background: var(--bg);
+    color: var(--ink);
   }
   .vds-pill-light:hover {
-    background: #1d2747;
-    box-shadow: 0 0 0 6px rgb(43 70 255 / 0.16);
+    background: color-mix(in srgb, var(--ink) 82%, var(--accent-solid));
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent-solid) 16%, transparent);
   }
   .vds-pill-ghost {
-    color: var(--color-night);
+    color: var(--ink);
     padding-right: 1.35rem;
-    background: rgb(255 255 255 / 0.6);
-    box-shadow: inset 0 0 0 1px rgb(16 22 43 / 0.18);
+    background: color-mix(in srgb, var(--bg-elevated) 60%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 18%, transparent);
   }
   .vds-pill-ghost:hover {
-    box-shadow: inset 0 0 0 1px rgb(16 22 43 / 0.45);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 45%, transparent);
   }
   .vds-pill:disabled {
     opacity: 0.5;
@@ -153,7 +153,7 @@
 
   /* ---------- Foco ---------- */
   .vds :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
-    outline: 2px solid var(--color-cobalt);
+    outline: 2px solid var(--accent-solid);
     outline-offset: 3px;
     border-radius: 8px;
   }
@@ -265,6 +265,53 @@
     }
   }
 
+
+  /* ---------- Padrões gráficos (substituem as imagens de fundo) ----------
+     Todos usam --line/--ink/--halo da paleta, então mudam com o tema.
+     A máscara radial apaga as bordas para o padrão "respirar" no fundo. */
+  .vds-pattern {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    -webkit-mask-image: radial-gradient(ellipse 70% 65% at 50% 45%, #000 25%, transparent 80%);
+    mask-image: radial-gradient(ellipse 70% 65% at 50% 45%, #000 25%, transparent 80%);
+  }
+  .vds-grid {
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 64px 64px;
+    background-position: center top;
+  }
+  .vds-grid-fine {
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  .vds-dots {
+    background-image: radial-gradient(color-mix(in srgb, var(--ink) 22%, transparent) 1.1px, transparent 1.6px);
+    background-size: 20px 20px;
+  }
+  .vds-diag {
+    background-image: repeating-linear-gradient(135deg, var(--line) 0 1px, transparent 1px 13px);
+  }
+  .vds-rings {
+    background-image: repeating-radial-gradient(circle at 50% 115%, transparent 0 21px, var(--line-strong) 21px 22px);
+  }
+  .vds-halo {
+    background: radial-gradient(circle, var(--halo), transparent 65%);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .vds-grid-drift {
+      animation: vds-grid-drift 40s linear infinite;
+    }
+  }
+  @keyframes vds-grid-drift {
+    from { background-position: 0 0; }
+    to { background-position: 0 64px; }
+  }
+
   /* ---------- FAQ ---------- */
   .vds-faq summary {
     list-style: none;
@@ -278,8 +325,8 @@
   }
   .vds-faq[open] .vds-faq-icon {
     transform: rotate(45deg);
-    background: var(--color-cobalt);
-    color: var(--color-paper);
+    background: var(--accent-solid);
+    color: var(--bg);
   }
 
   /* ---------- Formulário (vidro escuro) ---------- */
@@ -287,30 +334,30 @@
     width: 100%;
     min-height: 3.1rem;
     padding: 0.85rem 1rem;
-    background: rgb(255 255 255 / 0.7);
-    color: var(--color-night);
+    background: color-mix(in srgb, var(--bg-elevated) 70%, transparent);
+    color: var(--ink);
     border-radius: 0.875rem;
-    box-shadow: inset 0 0 0 1px rgb(16 22 43 / 0.16);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 16%, transparent);
     font-size: 1rem;
     transition: box-shadow 0.2s, background-color 0.2s;
   }
   .vds-field::placeholder {
-    color: #6b7390;
+    color: var(--muted);
   }
   .vds-field:hover {
-    box-shadow: inset 0 0 0 1px rgb(16 22 43 / 0.35);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 35%, transparent);
   }
   .vds-field:focus-visible {
     outline: none;
-    background: #fff;
-    box-shadow: inset 0 0 0 1px var(--color-cobalt), 0 0 0 4px rgb(43 70 255 / 0.16);
+    background: var(--bg-elevated);
+    box-shadow: inset 0 0 0 1px var(--accent-solid), 0 0 0 4px color-mix(in srgb, var(--accent-solid) 16%, transparent);
   }
   .vds-field[aria-invalid="true"] {
-    box-shadow: inset 0 0 0 1px var(--color-signal);
+    box-shadow: inset 0 0 0 1px #e5484d;
   }
   .vds-field option {
-    background: #fff;
-    color: var(--color-night);
+    background: var(--bg-elevated);
+    color: var(--ink);
   }
 
   .vds-choice {
@@ -319,24 +366,24 @@
     align-items: flex-start;
     padding: 1rem 1.1rem;
     border-radius: 0.875rem;
-    background: rgb(255 255 255 / 0.6);
-    box-shadow: inset 0 0 0 1px rgb(16 22 43 / 0.12);
+    background: color-mix(in srgb, var(--bg-elevated) 60%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 12%, transparent);
     cursor: pointer;
     transition: box-shadow 0.2s, background-color 0.2s;
   }
   .vds-choice:hover {
-    box-shadow: inset 0 0 0 1px rgb(16 22 43 / 0.3);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 30%, transparent);
   }
   .vds-choice:has(input:checked) {
-    background: rgb(43 70 255 / 0.08);
-    box-shadow: inset 0 0 0 1px var(--color-cobalt);
+    background: color-mix(in srgb, var(--accent-solid) 8%, transparent);
+    box-shadow: inset 0 0 0 1px var(--accent-solid);
   }
   .vds-choice:has(input:focus-visible) {
-    outline: 2px solid var(--color-cobalt);
+    outline: 2px solid var(--accent-solid);
     outline-offset: 2px;
   }
   .vds-choice input {
-    accent-color: var(--color-cobalt);
+    accent-color: var(--accent-solid);
     margin-top: 0.2rem;
     width: 1.05rem;
     height: 1.05rem;

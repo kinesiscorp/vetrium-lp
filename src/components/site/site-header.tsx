@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 import { NAV } from "@/lib/site/content";
 import { IconArrowUpRight, IconClose, IconMenu, Logo } from "./primitives";
+import { ThemeToggle } from "./theme-toggle";
 
 /**
  * Navegação em pílula de vidro flutuante (linguagem da referência). O vidro
@@ -54,7 +55,7 @@ export function SiteHeader() {
     <header className="fixed inset-x-0 top-3 z-50 px-3 sm:top-4">
       <a
         href="#conteudo"
-        className="sr-only rounded-full bg-night px-4 py-2 text-paper focus:not-sr-only focus:absolute focus:left-4 focus:top-2"
+        className="sr-only rounded-full bg-fg px-4 py-2 text-canvas focus:not-sr-only focus:absolute focus:left-4 focus:top-2"
       >
         Pular para o conteúdo
       </a>
@@ -62,7 +63,7 @@ export function SiteHeader() {
       <div
         className={
           "vds-glass mx-auto max-w-[56rem] rounded-[1.4rem] transition-[background-color] duration-500 " +
-          (scrolled || open ? "bg-paper-2/80" : "")
+          (scrolled || open ? "bg-raised/80" : "")
         }
       >
         <div className="flex h-14 items-center justify-between gap-4 pl-4 pr-2">
@@ -81,7 +82,7 @@ export function SiteHeader() {
                       aria-current={isActive ? "location" : undefined}
                       className={
                         "rounded-full px-3.5 py-2 text-[0.88rem] tracking-[-0.01em] transition-colors " +
-                        (isActive ? "bg-night/6 text-night" : "text-slate hover:text-night")
+                        (isActive ? "bg-fg/6 text-fg" : "text-fg-2 hover:text-fg")
                       }
                     >
                       {item.label}
@@ -93,6 +94,7 @@ export function SiteHeader() {
           </nav>
 
           <div className="flex items-center gap-1">
+            <ThemeToggle />
             <Link
               href="/orcamento"
               className="vds-pill vds-pill-light hidden min-h-0 py-1 pl-4 pr-1 text-[0.86rem] sm:inline-flex"
@@ -109,7 +111,7 @@ export function SiteHeader() {
               aria-expanded={open}
               aria-controls={panelId}
               aria-label={open ? "Fechar menu" : "Abrir menu"}
-              className="grid h-11 w-11 place-items-center rounded-full text-night md:hidden"
+              className="grid h-11 w-11 place-items-center rounded-full text-fg md:hidden"
             >
               {open ? <IconClose className="h-5 w-5" /> : <IconMenu className="h-5 w-5" />}
             </button>
@@ -119,13 +121,13 @@ export function SiteHeader() {
         {open && (
           <div id={panelId} className="px-4 pb-5 md:hidden">
             <nav aria-label="Menu">
-              <ul className="border-t border-night/10 pt-2">
+              <ul className="border-t border-fg/10 pt-2">
                 {NAV.map((item) => (
                   <li key={item.href}>
                     <a
                       href={item.href}
                       onClick={() => setOpen(false)}
-                      className="block py-3 text-[1.6rem] tracking-[-0.04em] text-night"
+                      className="block py-3 text-[1.6rem] tracking-[-0.04em] text-fg"
                     >
                       {item.label}
                     </a>

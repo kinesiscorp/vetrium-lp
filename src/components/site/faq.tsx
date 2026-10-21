@@ -10,7 +10,7 @@ export function Faq() {
     <section id="duvidas" aria-labelledby="duvidas-title" className="relative px-5 pb-28 sm:pb-36">
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-24 -z-10 h-[30rem] w-[60rem] max-w-full -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse,rgb(94_65_40/0.35),transparent_65%)] blur-2xl"
+        className="pointer-events-none absolute left-1/2 top-24 -z-10 h-[30rem] w-[60rem] max-w-full -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse,var(--halo),transparent_65%)] blur-2xl"
       />
       <div className="mx-auto max-w-2xl">
         <div className="text-center">
@@ -21,7 +21,7 @@ export function Faq() {
               href={whatsappHref("Olá! Tenho uma dúvida sobre os serviços da Vetrium.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="vds-link text-night"
+              className="vds-link text-fg"
             >
               Pergunte no WhatsApp
             </a>
@@ -38,12 +38,12 @@ export function Faq() {
               className="vds-faq vds-glass rounded-[1.1rem]"
             >
               <summary className="flex items-center justify-between gap-6 px-5 py-4 text-left">
-                <h3 className="text-[1rem] font-medium tracking-[-0.015em] text-night">{f.q}</h3>
-                <span className="vds-faq-icon grid h-8 w-8 flex-none place-items-center rounded-full bg-night/6 text-night">
+                <h3 className="text-[1rem] font-medium tracking-[-0.015em] text-fg">{f.q}</h3>
+                <span className="vds-faq-icon grid h-8 w-8 flex-none place-items-center rounded-full bg-fg/6 text-fg">
                   <IconPlus className="h-4 w-4" />
                 </span>
               </summary>
-              <p className="max-w-[60ch] px-5 pb-5 leading-relaxed text-slate">{f.a}</p>
+              <p className="max-w-[60ch] px-5 pb-5 leading-relaxed text-fg-2">{f.a}</p>
             </details>
           ))}
         </div>
