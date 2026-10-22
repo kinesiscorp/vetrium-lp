@@ -93,7 +93,7 @@ export type WorkItem = {
 
 /**
  * Projetos exibidos na home — escolha do Gabriel (20/10/2026): só o
- * landing de streamer de PUBG (Pelotão Lince, projeto conceitual com marca fictícia) e o Bbr Flow.
+ * landing de streamer de PUBG (Lynx Platoon, projeto conceitual com marca fictícia) e o Bbr Flow.
  *
  * TODO(vetrium): Respawn (public/portfolio/respawn-paintball.jpg) mostra a
  * marca "Impacto Paintball" — confirmar se é cliente e se há autorização
@@ -101,14 +101,14 @@ export type WorkItem = {
  */
 export const WORK: WorkItem[] = [
   {
-    slug: "pelotao-lince",
-    name: "Pelotão Lince",
+    slug: "lynx-platoon",
+    name: "Lynx Platoon",
     kind: "conceito",
     segment: "Landing page de curso para jogadores de PUBG",
     goal: "Conceito de landing para streamer que vende curso: leva o visitante ao plano certo e captura quem ainda não decidiu. Marca e dados fictícios.",
     scope: ["Brandkit", "Redesign", "Landing page", "Desenvolvimento"],
-    image: "/portfolio/pelotao-lince-case.jpg",
-    imageAlt: "Case Pelotão Lince: landing \"Do bronze ao mestre\" em verde tático, com mira e escudo de rank sobre mapa topográfico",
+    image: "/portfolio/lynx-platoon-case.jpg",
+    imageAlt: "Case Lynx Platoon: landing \"From Bronze to Master\" em verde tático, com mira e escudo de rank sobre mapa topográfico",
     year: "2026",
     href: "https://pelotao-lince.vercel.app/",
   },
