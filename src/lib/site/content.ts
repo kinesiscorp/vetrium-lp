@@ -93,7 +93,7 @@ export type WorkItem = {
 
 /**
  * Projetos exibidos na home — escolha do Gabriel (20/10/2026): só o
- * redesign do Esquadrão do Frog (no ar na Vercel desde 20/10/2026) e o Bbr Flow.
+ * landing de streamer de PUBG (Pelotão Lince, projeto conceitual com marca fictícia) e o Bbr Flow.
  *
  * TODO(vetrium): Respawn (public/portfolio/respawn-paintball.jpg) mostra a
  * marca "Impacto Paintball" — confirmar se é cliente e se há autorização
@@ -101,16 +101,16 @@ export type WorkItem = {
  */
 export const WORK: WorkItem[] = [
   {
-    slug: "frogman",
-    name: "Esquadrão do Frog",
-    kind: "cliente",
+    slug: "pelotao-lince",
+    name: "Pelotão Lince",
+    kind: "conceito",
     segment: "Landing page de curso para jogadores de PUBG",
-    goal: "Redesenhar a página do curso do streamer Frogman para levar o visitante ao plano certo e capturar quem ainda não decidiu.",
-    scope: ["Diagnóstico", "Redesign", "Landing page", "Desenvolvimento"],
-    image: "/portfolio/frog-case.jpg",
-    imageAlt: "Case Esquadrão do Frog: logo em pincelada verde neon ao lado da landing \"Do bronze ao mestre\" em perspectiva, sobre fundo escuro",
+    goal: "Conceito de landing para streamer que vende curso: leva o visitante ao plano certo e captura quem ainda não decidiu. Marca e dados fictícios.",
+    scope: ["Brandkit", "Redesign", "Landing page", "Desenvolvimento"],
+    image: "/portfolio/pelotao-lince-case.jpg",
+    imageAlt: "Case Pelotão Lince: landing \"Do bronze ao mestre\" em verde tático, com mira e escudo de rank sobre mapa topográfico",
     year: "2026",
-    href: "https://esquadrao-do-frog.vercel.app/",
+    href: "https://pelotao-lince.vercel.app/",
   },
   {
     slug: "bbrflow",
