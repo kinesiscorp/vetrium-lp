@@ -110,7 +110,7 @@ export const WORK: WorkItem[] = [
     image: "/portfolio/lynx-platoon-case.jpg",
     imageAlt: "Case Lynx Platoon: landing \"From Bronze to Master\" em verde tático, com mira e escudo de rank sobre mapa topográfico",
     year: "2026",
-    href: "https://pelotao-lince.vercel.app/",
+    href: "https://lynx-platoon.vercel.app/",
   },
   {
     slug: "bbrflow",

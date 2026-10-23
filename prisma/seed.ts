@@ -47,7 +47,7 @@ const CLIENTES_SEED: ClienteSeed[] = [
   {
     nome: "Frog",
     descricao:
-      "Projeto desenvolvido pela Vetrium para o streamer Frog — código em esquadrao-do-frog (submodule), assets de marca em frog/. Migrado de clientes/frog.md.",
+      "Projeto desenvolvido pela Vetrium para o streamer Frog — código em lynx-platoon (submodule, ex-demo do Frog), assets de marca em frog/. Migrado de clientes/frog.md.",
     estagio: "FECHADO",
     proximoPasso: "Aguardando resposta da proposta comercial; avaliar próximos passos caso ele não responda.",
     notaInicial:
